@@ -7,7 +7,7 @@
 </h1>
 
 <h4 align="center">
-  Java implementation of the <a href="https://tron.network">Tron Protocol</a>
+  Java implementation of the <a href="https://tron.network">ICH Protocol</a>
 </h4>
 
 
@@ -52,17 +52,17 @@
 
 ## What's TRON?
 
-TRON is a project dedicated to building the infrastructure for a truly decentralized Internet.
+ICH is a project dedicated to building the infrastructure for a truly decentralized Internet.
 
-* Tron Protocol, one of the largest blockchain-based operating systems in the world, offers scalable, high-availability and high-throughput support that underlies all the decentralized applications in the TRON ecosystem.
+* ICH Protocol, one of the largest blockchain-based operating systems in the world, offers scalable, high-availability and high-throughput support that underlies all the decentralized applications in the ICH ecosystem.
 
-* Tron Virtual Machine (TVM) allows anyone to develop decentralized applications (DAPPs) for themselves or their communities with smart contracts thereby making decentralized crowdfunding and token issuance easier than ever.
+* ICH Virtual Machine (TVM) allows anyone to develop decentralized applications (DAPPs) for themselves or their communities with smart contracts thereby making decentralized crowdfunding and token issuance easier than ever.
 
-TRON enables large-scale development and engagement. With over 2000 transactions per second (TPS), high concurrency, low latency, and massive data transmission. It is ideal for building decentralized entertainment applications. Free features and incentive systems allow developers to create premium app experiences for users.
+ICH enables large-scale development and engagement. With over 2000 transactions per second (TPS), high concurrency, low latency, and massive data transmission. It is ideal for building decentralized entertainment applications. Free features and incentive systems allow developers to create premium app experiences for users.
 
 # Quick Start
-This guide walks the user through the TRON Quickstart (v2.0.0) image setup.
-[TRON Quick Start](./quickstart.md)
+This guide walks the user through the ICH Quickstart (v2.0.0) image setup.
+[ICH Quick Start](./quickstart.md)
 
 # Deploy
 * [Build](./build.md) Please build java-ich after cloning the project
@@ -73,7 +73,7 @@ This guide walks the user through the TRON Quickstart (v2.0.0) image setup.
  walks the user through how to deploy a FullNode and an SR node.
 
 # Channel
-[Tron Developers & SRs](https://discord.gg/hqKvyAM) is Tron's official Discord channel. Feel free to join this channel if you have any questions.
+[ICH Developers & SRs](https://discord.gg/hqKvyAM) is Tron's official Discord channel. Feel free to join this channel if you have any questions.
 
 [Core Devs Community](https://t.me/troncoredevscommunity) is the Telegram channel for java-ich community developers. If you want to contribute to java-ich, please join this channel.
 
@@ -88,12 +88,12 @@ If you'd like to contribute to java-ich, please read the following instructions.
 # Resources
 * [Medium](https://medium.com/@coredevs) java-ich's official technical articles are published there.
 * [Documentation](https://ich-project.github.io/documentation-en/introduction/) java-ich's official technical documentation website.
-* [Test network](http://nileex.io/) A stable test network of TRON contributed by TRON community.
-* [Tronscan](https://tronscan.org/#/) TRON network blockchain browser.
-* [Wallet-cli](https://github.com/ich-project/wallet-cli) TRON network wallet using command line.
-* [TIP](https://github.com/ich-project/tips) TRON Improvement Proposal (TIP) describes standards for the TRON network.
-* [TP](https://github.com/ich-project/tips/tree/master/tp) TRON Protocol (TP) describes standards already implemented in TRON network but not published as a TIP.
-* [White Paper](https://tron.network/resources?lng=&name=1) White paper of TRON network.
+* [Test network](http://nileex.io/) A stable test network of ICH contributed by ICH community.
+* [Tronscan](https://tronscan.org/#/) ICH network blockchain browser.
+* [Wallet-cli](https://github.com/ich-project/wallet-cli) ICH network wallet using command line.
+* [TIP](https://github.com/ich-project/tips) ICH Improvement Proposal (TIP) describes standards for the ICH network.
+* [TP](https://github.com/ich-project/tips/tree/master/tp) ICH Protocol (TP) describes standards already implemented in ICH network but not published as a TIP.
+* [White Paper](https://tron.network/resources?lng=&name=1) White paper of ICH network.
 
 # License
 java-ich is released under the [LGPLv3 license](https://github.com/ich-project/java-ich/blob/master/LICENSE).
