@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img width=20% src="https://github.com/ich-project/wiki/blob/master/images/java-ich.jpg?raw=true">
+  <img width=20% src="https://s2.coinmarketcap.com/static/img/coins/64x64/5560.png?raw=true">
   <br>
   java-ich
   <br>
@@ -50,7 +50,7 @@
   <a href="#Resources">Resources</a>
 </p>
 
-## What's TRON?
+## What's ICH?
 
 ICH is a project dedicated to building the infrastructure for a truly decentralized Internet.
 
