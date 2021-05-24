@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img width=20% src="https://s2.coinmarketcap.com/static/img/coins/64x64/5560.png?raw=true">
+  <img width=20% src="https://ideachaincoin.com/wp-content/uploads/elementor/thumbs/logo-p1zcid2ww1p9ule2pgf04s43e4aj4mjvb7lyne9qak.png?raw=true">
   <br>
   java-ich
   <br>
