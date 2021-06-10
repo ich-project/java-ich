@@ -5,12 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.ich.common.common.utils.Sha256Hash;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.Inventory;
-import org.ich.protos.Protocol.Inventory.InventoryType;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.Inventory;
+import org.ich.core.Protocol.Inventory.InventoryType;
 
 
-public class InventoryMessage extends TronMessage {
+public class InventoryMessage extends IchMessage {
 
   protected Inventory inv;
 

@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.ich.core.capsule.WitnessCapsule;
-import org.ich.core.db.TronStoreWithRevoking;
+import org.ich.core.db.IchStoreWithRevoking;
 
 @Slf4j(topic = "DB")
 @Component
-public class WitnessStore extends TronStoreWithRevoking<WitnessCapsule> {
+public class WitnessStore extends IchStoreWithRevoking<WitnessCapsule> {
 
   @Autowired
   protected WitnessStore(@Value("witness") String dbName) {

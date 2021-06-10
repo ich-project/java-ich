@@ -10,7 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.runtime.RuntimeImpl;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
@@ -27,11 +27,11 @@ import org.ich.core.exception.AccountResourceInsufficientException;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.exception.TooBigTransactionResultException;
 import org.ich.core.store.StoreFactory;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
-import org.ich.protos.contract.AssetIssueContractOuterClass.TransferAssetContract;
-import org.ich.protos.contract.BalanceContract.TransferContract;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.contract.AssetIssueContractOuterClass.TransferAssetContract;
+import org.ich.core.contract.BalanceContract.TransferContract;
 
 @Slf4j
 public class BandwidthProcessorTest {
@@ -51,14 +51,14 @@ public class BandwidthProcessorTest {
   private static final String URL = "https://tron.network";
   private static Manager dbManager;
   private static ChainBaseManager chainBaseManager;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static long START_TIME;
   private static long END_TIME;
 
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     ASSET_NAME = "test_token";
     ASSET_NAME_V2 = "2";
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a1abc";
@@ -238,8 +238,8 @@ public class BandwidthProcessorTest {
     transferAssetContract = transferAssetContract.toBuilder()
         .setToAddress(ByteString.copyFrom(ByteArray.fromHexString(NOT_EXISTS_ADDRESS))).build();
 
-    org.ich.protos.Protocol.Transaction.Contract contract =
-        org.ich.protos.Protocol.Transaction.Contract
+    org.ich.core.Protocol.Transaction.Contract contract =
+        org.ich.core.Protocol.Transaction.Contract
             .newBuilder()
             .setType(Protocol.Transaction.Contract.ContractType.TransferAssetContract).setParameter(
             Any.pack(transferAssetContract)).build();

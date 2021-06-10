@@ -17,7 +17,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.crypto.ECKey;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
@@ -62,13 +62,13 @@ import org.ich.core.store.DynamicPropertiesStore;
 import org.ich.core.store.ExchangeStore;
 import org.ich.core.store.ExchangeV2Store;
 import org.ich.core.store.IncrementalMerkleTreeStore;
-import org.ich.protos.Protocol.Account;
-import org.ich.protos.Protocol.Block;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.contract.AssetIssueContractOuterClass;
-import org.ich.protos.contract.BalanceContract.TransferContract;
-import org.ich.protos.contract.ShieldContract;
+import org.ich.core.Protocol.Account;
+import org.ich.core.Protocol.Block;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.contract.AssetIssueContractOuterClass;
+import org.ich.core.contract.BalanceContract.TransferContract;
+import org.ich.core.contract.ShieldContract;
 
 
 @Slf4j
@@ -79,7 +79,7 @@ public class ManagerTest extends BlockGenerate {
   private static ChainBaseManager chainManager;
   private static ConsensusService consensusService;
   private static DposSlot dposSlot;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static BlockCapsule blockCapsule2;
   private static String dbPath = "output_manager_test";
   private static AtomicInteger port = new AtomicInteger(0);
@@ -90,7 +90,7 @@ public class ManagerTest extends BlockGenerate {
   public void init() {
     Args.setParam(new String[]{"-d", dbPath, "-w"}, Constant.TEST_CONF);
     Args.getInstance().setNodeListenPort(10000 + port.incrementAndGet());
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
 
     dbManager = context.getBean(Manager.class);
     setManager(dbManager);

@@ -10,9 +10,9 @@ import org.ich.core.capsule.TransactionResultCapsule;
 import org.ich.core.exception.ContractExeException;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.utils.TransactionUtil;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.AccountContract.AccountUpdateContract;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.AccountContract.AccountUpdateContract;
 
 @Slf4j(topic = "actuator")
 public class UpdateAccountActuator extends AbstractActuator {

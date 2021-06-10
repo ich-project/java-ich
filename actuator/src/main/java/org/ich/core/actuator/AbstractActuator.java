@@ -5,8 +5,8 @@ import com.google.protobuf.GeneratedMessageV3;
 import org.ich.common.common.utils.ForkController;
 import org.ich.core.ChainBaseManager;
 import org.ich.core.capsule.TransactionCapsule;
-import org.ich.protos.Protocol.Transaction.Contract;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Contract;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
 
 
 public abstract class AbstractActuator implements Actuator {

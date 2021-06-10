@@ -1,6 +1,6 @@
 package org.ich.core.exception;
 
-public class HighFreqException extends TronException {
+public class HighFreqException extends IchException {
 
   public HighFreqException() {
     super();

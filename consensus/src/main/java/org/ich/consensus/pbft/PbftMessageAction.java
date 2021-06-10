@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.ich.consensus.pbft.message.PbftMessage;
 import org.ich.core.ChainBaseManager;
 import org.ich.core.capsule.PbftSignCapsule;
-import org.ich.protos.Protocol.PBFTMessage.Raw;
+import org.ich.core.Protocol.PBFTMessage.Raw;
 
 @Slf4j(topic = "pbft")
 @Component

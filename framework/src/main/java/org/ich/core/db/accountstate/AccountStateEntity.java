@@ -2,7 +2,7 @@ package org.ich.core.db.accountstate;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ich.common.common.utils.StringUtil;
-import org.ich.protos.Protocol.Account;
+import org.ich.core.Protocol.Account;
 
 @Slf4j(topic = "AccountState")
 public class AccountStateEntity {

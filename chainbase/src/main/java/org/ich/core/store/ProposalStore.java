@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.ich.core.capsule.ProposalCapsule;
-import org.ich.core.db.TronStoreWithRevoking;
+import org.ich.core.db.IchStoreWithRevoking;
 import org.ich.core.exception.ItemNotFoundException;
 
 @Component
-public class ProposalStore extends TronStoreWithRevoking<ProposalCapsule> {
+public class ProposalStore extends IchStoreWithRevoking<ProposalCapsule> {
 
   @Autowired
   public ProposalStore(@Value("proposal") String dbName) {

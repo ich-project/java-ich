@@ -2,7 +2,7 @@ package org.ich.core.net.message;
 
 import java.util.List;
 import org.ich.core.capsule.BlockCapsule.BlockId;
-import org.ich.protos.Protocol.BlockInventory.Type;
+import org.ich.core.Protocol.BlockInventory.Type;
 
 public class SyncBlockChainMessage extends BlockInventoryMessage {
 

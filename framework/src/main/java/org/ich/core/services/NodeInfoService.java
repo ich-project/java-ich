@@ -29,7 +29,7 @@ import org.ich.core.db.Manager;
 import org.ich.core.net.peer.PeerConnection;
 import org.ich.core.services.WitnessProductBlockService.CheatWitnessInfo;
 import org.ich.program.Version;
-import org.ich.protos.Protocol.ReasonCode;
+import org.ich.core.Protocol.ReasonCode;
 
 @Component
 public class NodeInfoService {
@@ -142,9 +142,9 @@ public class NodeInfoService {
       peerInfo.setLastSyncBlock(peerConnection.getLastSyncBlockId() == null ? ""
           : peerConnection.getLastSyncBlockId().getString());
       ReasonCode reasonCode = peerConnection.getNodeStatistics()
-          .getTronLastLocalDisconnectReason();
+          .getIchLastLocalDisconnectReason();
       peerInfo.setLocalDisconnectReason(reasonCode == null ? "" : reasonCode.toString());
-      reasonCode = peerConnection.getNodeStatistics().getTronLastRemoteDisconnectReason();
+      reasonCode = peerConnection.getNodeStatistics().getIchLastRemoteDisconnectReason();
       peerInfo.setRemoteDisconnectReason(reasonCode == null ? "" : reasonCode.toString());
       peerInfo.setNeedSyncFromPeer(peerConnection.isNeedSyncFromPeer());
       peerInfo.setNeedSyncFromUs(peerConnection.isNeedSyncFromUs());

@@ -1,6 +1,6 @@
 package org.ich.core.exception;
 
-public class ValidateSignatureException extends TronException {
+public class ValidateSignatureException extends IchException {
 
   public ValidateSignatureException() {
     super();

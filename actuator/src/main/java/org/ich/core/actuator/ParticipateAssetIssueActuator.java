@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-ich is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-ich is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -32,10 +32,10 @@ import org.ich.core.store.AccountStore;
 import org.ich.core.store.AssetIssueStore;
 import org.ich.core.store.AssetIssueV2Store;
 import org.ich.core.store.DynamicPropertiesStore;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.AssetIssueContractOuterClass.ParticipateAssetIssueContract;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.AssetIssueContractOuterClass.ParticipateAssetIssueContract;
 
 @Slf4j(topic = "actuator")
 public class ParticipateAssetIssueActuator extends AbstractActuator {

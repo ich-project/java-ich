@@ -20,7 +20,7 @@ import org.ich.common.common.logsfilter.trigger.ContractTrigger;
 import org.ich.common.common.runtime.vm.DataWord;
 import org.ich.common.common.runtime.vm.LogInfo;
 import org.ich.core.config.args.Args;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract.ABI;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract.ABI;
 
 @Slf4j(topic = "DB")
 public class ContractTriggerCapsule extends TriggerCapsule {

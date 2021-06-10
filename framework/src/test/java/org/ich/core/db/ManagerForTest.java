@@ -14,7 +14,7 @@ import org.ich.core.ChainBaseManager;
 import org.ich.core.capsule.AccountCapsule;
 import org.ich.core.capsule.BlockCapsule;
 import org.ich.core.capsule.WitnessCapsule;
-import org.ich.protos.Protocol.Account;
+import org.ich.core.Protocol.Account;
 
 public class ManagerForTest {
 

@@ -1,6 +1,6 @@
 package org.ich.core.exception;
 
-public class ValidateScheduleException extends TronException {
+public class ValidateScheduleException extends IchException {
 
   public ValidateScheduleException() {
     super();

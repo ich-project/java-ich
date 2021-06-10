@@ -1,6 +1,6 @@
 package org.ich.core.vm.nativecontract.param;
 
-import org.ich.protos.contract.Common;
+import org.ich.core.contract.Common;
 
 public class UnfreezeBalanceParam {
 

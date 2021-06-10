@@ -1,6 +1,6 @@
 package org.ich.core.exception;
 
-public class TooBigTransactionResultException extends TronException {
+public class TooBigTransactionResultException extends IchException {
 
   public TooBigTransactionResultException() {
     super("too big transaction result");

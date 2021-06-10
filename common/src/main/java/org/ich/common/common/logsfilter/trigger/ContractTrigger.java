@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.ich.common.common.logsfilter.capsule.RawData;
 import org.ich.common.common.runtime.vm.LogInfo;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract.ABI;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract.ABI;
 
 public class ContractTrigger extends Trigger {
 

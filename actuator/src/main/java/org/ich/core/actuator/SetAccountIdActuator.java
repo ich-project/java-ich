@@ -12,9 +12,9 @@ import org.ich.core.exception.ContractValidateException;
 import org.ich.core.store.AccountIdIndexStore;
 import org.ich.core.store.AccountStore;
 import org.ich.core.utils.TransactionUtil;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.AccountContract.SetAccountIdContract;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.AccountContract.SetAccountIdContract;
 
 @Slf4j(topic = "actuator")
 public class SetAccountIdActuator extends AbstractActuator {

@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.Pair;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.ByteUtil;
 import org.ich.common.common.utils.FileUtil;
@@ -41,7 +41,7 @@ import org.ich.core.zen.address.PaymentAddress;
 import org.ich.core.zen.address.SpendingKey;
 import org.ich.core.zen.note.Note;
 import org.ich.keystore.Wallet;
-import org.ich.protos.contract.ShieldContract;
+import org.ich.core.contract.ShieldContract;
 import stest.ich.wallet.common.client.WalletClient;
 
 @Slf4j
@@ -53,12 +53,12 @@ public class PrecompiledContractsVerifyProofTest {
   private static final String PUBLIC_TO_ADDRESS_STR = "TBaBXpRAeBhs75TZT751LwyhrcR25XeUot";
   private static final byte[] PUBLIC_TO_ADDRESS;
   private static final byte[] DEFAULT_OVK;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static Manager dbManager;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, "config-test.conf");
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     DEFAULT_OVK = ByteArray
         .fromHexString("030c8c2bc59fb3eb8afb047a8ea4b028743d23e7d38c6fa30908358431e2314d");
     SHIELDED_CONTRACT_ADDRESS = WalletClient.decodeFromBase58Check(SHIELDED_CONTRACT_ADDRESS_STR);

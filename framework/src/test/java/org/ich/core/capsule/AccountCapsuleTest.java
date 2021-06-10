@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.Constant;
@@ -19,18 +19,18 @@ import org.ich.core.Wallet;
 import org.ich.core.config.DefaultConfig;
 import org.ich.core.config.args.Args;
 import org.ich.core.db.Manager;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Key;
-import org.ich.protos.Protocol.Permission;
-import org.ich.protos.Protocol.Vote;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Key;
+import org.ich.core.Protocol.Permission;
+import org.ich.core.Protocol.Vote;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
 
 @Ignore
 public class AccountCapsuleTest {
 
   private static final String dbPath = "output_accountCapsule_test";
   private static final Manager dbManager;
-  private static final TronApplicationContext context;
+  private static final IchApplicationContext context;
   private static final String OWNER_ADDRESS;
   private static final String ASSET_NAME = "trx";
   private static final long TOTAL_SUPPLY = 10000L;
@@ -48,7 +48,7 @@ public class AccountCapsuleTest {
 
   static {
     Args.setParam(new String[]{"-d", dbPath, "-w"}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     dbManager = context.getBean(Manager.class);
 
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "a06a17a49648a8ad32055c06f60fa14ae46df91234";

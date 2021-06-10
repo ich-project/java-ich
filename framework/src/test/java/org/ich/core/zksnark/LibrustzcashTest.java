@@ -24,7 +24,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.ByteUtil;
 import org.ich.common.common.utils.FileUtil;
@@ -62,7 +62,7 @@ import org.ich.core.zen.address.SpendingKey;
 import org.ich.core.zen.note.Note;
 import org.ich.core.zen.note.Note.NotePlaintextEncryptionResult;
 import org.ich.core.zen.note.NoteEncryption;
-import org.ich.protos.contract.ShieldContract.PedersenHash;
+import org.ich.core.contract.ShieldContract.PedersenHash;
 
 @Slf4j
 public class LibrustzcashTest {
@@ -85,7 +85,7 @@ public class LibrustzcashTest {
         "config-test-mainnet.conf"
     );
 
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
   }
 
   @BeforeClass

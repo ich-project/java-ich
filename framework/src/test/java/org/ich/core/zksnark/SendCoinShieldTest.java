@@ -19,7 +19,7 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.collections.Lists;
 import org.ich.api.GrpcAPI;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.parameter.CommonParameter;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.ByteUtil;
@@ -81,14 +81,14 @@ import org.ich.core.zen.note.Note.NotePlaintextEncryptionResult;
 import org.ich.core.zen.note.NoteEncryption;
 import org.ich.core.zen.note.NoteEncryption.Encryption;
 import org.ich.core.zen.note.OutgoingPlaintext;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
-import org.ich.protos.contract.ShieldContract.PedersenHash;
-import org.ich.protos.contract.ShieldContract.ReceiveDescription;
-import org.ich.protos.contract.ShieldContract.ShieldedTransferContract;
-import org.ich.protos.contract.ShieldContract.SpendDescription;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.contract.ShieldContract.PedersenHash;
+import org.ich.core.contract.ShieldContract.ReceiveDescription;
+import org.ich.core.contract.ShieldContract.ShieldedTransferContract;
+import org.ich.core.contract.ShieldContract.SpendDescription;
 
 public class SendCoinShieldTest {
 
@@ -114,7 +114,7 @@ public class SendCoinShieldTest {
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, "config-test-mainnet.conf");
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     PUBLIC_ADDRESS_ONE =
         Wallet.getAddressPreFixString() + "a7d8a35b260395c14aa456297662092ba3b76fc0";
     DEFAULT_OVK = ByteArray
@@ -498,7 +498,7 @@ public class SendCoinShieldTest {
     byte[] ivk = incomingViewingKey.getValue();
     Protocol.Transaction t = transactionCap.getInstance();
 
-    for (org.ich.protos.Protocol.Transaction.Contract c : t.getRawData().getContractList()) {
+    for (org.ich.core.Protocol.Transaction.Contract c : t.getRawData().getContractList()) {
       if (c.getType() != ContractType.ShieldedTransferContract) {
         continue;
       }
@@ -582,7 +582,7 @@ public class SendCoinShieldTest {
 
     // add here
     Protocol.Transaction t = transactionCap.getInstance();
-    for (org.ich.protos.Protocol.Transaction.Contract c : t.getRawData().getContractList()) {
+    for (org.ich.core.Protocol.Transaction.Contract c : t.getRawData().getContractList()) {
       if (c.getType() != Protocol.Transaction.Contract.ContractType.ShieldedTransferContract) {
         continue;
       }

@@ -4,11 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.ich.common.common.utils.ByteUtil;
 import org.ich.core.capsule.PbftSignCapsule;
-import org.ich.protos.Protocol.PBFTMessage.DataType;
+import org.ich.core.Protocol.PBFTMessage.DataType;
 
 @Slf4j
 @Component
-public class PbftSignDataStore extends TronDatabase<PbftSignCapsule> {
+public class PbftSignDataStore extends IchDatabase<PbftSignCapsule> {
 
   public PbftSignDataStore() {
     super("pbft-sign-data");

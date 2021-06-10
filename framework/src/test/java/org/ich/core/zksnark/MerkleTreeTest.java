@@ -12,7 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.collections.Lists;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.ByteUtil;
 import org.ich.common.common.utils.FileUtil;
@@ -27,7 +27,7 @@ import org.ich.core.capsule.PedersenHashCapsule;
 import org.ich.core.config.DefaultConfig;
 import org.ich.core.config.args.Args;
 import org.ich.core.db.Manager;
-import org.ich.protos.contract.ShieldContract.PedersenHash;
+import org.ich.core.contract.ShieldContract.PedersenHash;
 
 public class MerkleTreeTest {
 
@@ -50,7 +50,7 @@ public class MerkleTreeTest {
         },
         "config-test-mainnet.conf"
     );
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
   }
 
   /**

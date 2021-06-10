@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.core.capsule.BytesCapsule;
-import org.ich.core.db.TronStoreWithRevoking;
+import org.ich.core.db.IchStoreWithRevoking;
 import org.ich.core.exception.ItemNotFoundException;
 
 @Component
-public class TreeBlockIndexStore extends TronStoreWithRevoking<BytesCapsule> {
+public class TreeBlockIndexStore extends IchStoreWithRevoking<BytesCapsule> {
 
 
   @Autowired

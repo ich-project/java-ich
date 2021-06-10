@@ -7,15 +7,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.ich.core.config.Parameter.NetConstants;
-import org.ich.core.net.TronNetDelegate;
-import org.ich.protos.Protocol.ReasonCode;
+import org.ich.core.net.IchNetDelegate;
+import org.ich.core.Protocol.ReasonCode;
 
 @Slf4j(topic = "net")
 @Component
 public class PeerStatusCheck {
 
   @Autowired
-  private TronNetDelegate tronNetDelegate;
+  private IchNetDelegate ichNetDelegate;
 
   private ScheduledExecutorService peerStatusCheckExecutor = Executors
       .newSingleThreadScheduledExecutor();
@@ -40,7 +40,7 @@ public class PeerStatusCheck {
 
     long now = System.currentTimeMillis();
 
-    tronNetDelegate.getActivePeer().forEach(peer -> {
+    ichNetDelegate.getActivePeer().forEach(peer -> {
 
       boolean isDisconnected = false;
 

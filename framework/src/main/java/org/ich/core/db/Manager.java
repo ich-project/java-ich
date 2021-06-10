@@ -1,8 +1,8 @@
 package org.ich.core.db;
 
 import static org.ich.common.common.utils.Commons.adjustBalance;
-import static org.ich.protos.Protocol.Transaction.Contract.ContractType.TransferContract;
-import static org.ich.protos.Protocol.Transaction.Result.contractResult.SUCCESS;
+import static org.ich.core.Protocol.Transaction.Contract.ContractType.TransferContract;
+import static org.ich.core.Protocol.Transaction.Result.contractResult.SUCCESS;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
@@ -92,7 +92,7 @@ import org.ich.core.db.accountstate.callback.AccountStateCallBack;
 import org.ich.core.db.api.AssetUpdateHelper;
 import org.ich.core.db2.ISession;
 import org.ich.core.db2.core.Chainbase;
-import org.ich.core.db2.core.ITronChainBase;
+import org.ich.core.db2.core.IIchChainBase;
 import org.ich.core.db2.core.SnapshotManager;
 import org.ich.core.exception.AccountResourceInsufficientException;
 import org.ich.core.exception.BadBlockException;
@@ -142,11 +142,11 @@ import org.ich.core.store.VotesStore;
 import org.ich.core.store.WitnessScheduleStore;
 import org.ich.core.store.WitnessStore;
 import org.ich.core.utils.TransactionRegister;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Contract;
-import org.ich.protos.Protocol.TransactionInfo;
-import org.ich.protos.contract.BalanceContract;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Contract;
+import org.ich.core.Protocol.TransactionInfo;
+import org.ich.core.contract.BalanceContract;
 
 
 @Slf4j(topic = "DB")
@@ -1533,7 +1533,7 @@ public class Manager {
   public void updateFork(BlockCapsule block) {
     int blockVersion = block.getInstance().getBlockHeader().getRawData().getVersion();
     if (blockVersion > ChainConstant.BLOCK_VERSION) {
-      logger.warn("newer block version found: " + blockVersion + ", YOU MUST UPGRADE java-tron!");
+      logger.warn("newer block version found: " + blockVersion + ", YOU MUST UPGRADE java-ich!");
     }
     chainBaseManager
         .getForkController().update(block);
@@ -1575,7 +1575,7 @@ public class Manager {
     logger.info("******** end to close db ********");
   }
 
-  public void closeOneStore(ITronChainBase database) {
+  public void closeOneStore(IIchChainBase database) {
     logger.info("******** begin to close " + database.getName() + " ********");
     try {
       database.close();

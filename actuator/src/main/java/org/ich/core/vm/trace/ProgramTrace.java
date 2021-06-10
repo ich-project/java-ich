@@ -19,7 +19,7 @@ package org.ich.core.vm.trace;
 
 import static java.lang.String.format;
 import static org.ich.common.common.utils.ByteArray.toHexString;
-import static org.ich.core.db.TransactionTrace.convertToTronAddress;
+import static org.ich.core.db.TransactionTrace.convertToIchAddress;
 import static org.ich.core.vm.trace.Serializers.serializeFieldsOnly;
 
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class ProgramTrace {
   public ProgramTrace(VMConfig config, ProgramInvoke programInvoke) {
     if (programInvoke != null && config.vmTrace()) {
       contractAddress = Hex
-          .toHexString(convertToTronAddress(programInvoke.getContractAddress().getLast20Bytes()));
+          .toHexString(convertToIchAddress(programInvoke.getContractAddress().getLast20Bytes()));
     }
   }
 

@@ -39,8 +39,8 @@ import org.ich.core.store.*;
 import org.ich.core.vm.config.VMConfig;
 import org.ich.core.vm.program.Program.IllegalOperationException;
 import org.ich.core.vm.program.Storage;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.AccountType;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.AccountType;
 
 @Slf4j(topic = "Repository")
 public class RepositoryImpl implements Repository {
@@ -472,7 +472,7 @@ public class RepositoryImpl implements Repository {
 
   @Override
   public void putStorageValue(byte[] address, DataWord key, DataWord value) {
-    address = TransactionTrace.convertToTronAddress(address);
+    address = TransactionTrace.convertToIchAddress(address);
     if (getAccount(address) == null) {
       return;
     }
@@ -489,7 +489,7 @@ public class RepositoryImpl implements Repository {
 
   @Override
   public DataWord getStorageValue(byte[] address, DataWord key) {
-    address = TransactionTrace.convertToTronAddress(address);
+    address = TransactionTrace.convertToIchAddress(address);
     if (getAccount(address) == null) {
       return null;
     }

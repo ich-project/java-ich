@@ -5,7 +5,7 @@
 **Build a local docker image**
 
 ```shell
-> cd java-tron/docker
+> cd java-ich/docker
 > docker image build -t tron-node .
 ```
 

@@ -5,7 +5,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.Constant;
@@ -21,7 +21,7 @@ public class TransactionHistoryTest {
   private static String dbPath = "output_TransactionHistoryStore_test";
   private static String dbDirectory = "db_TransactionHistoryStore_test";
   private static String indexDirectory = "index_TransactionHistoryStore_test";
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static TransactionHistoryStore transactionHistoryStore;
 
   static {
@@ -33,7 +33,7 @@ public class TransactionHistoryTest {
         },
         Constant.TEST_CONF
     );
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
   }
 
   @AfterClass

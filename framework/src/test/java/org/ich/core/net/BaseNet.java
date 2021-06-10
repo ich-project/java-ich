@@ -23,7 +23,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.parameter.CommonParameter;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.common.common.utils.ReflectUtils;
@@ -41,11 +41,11 @@ public abstract class BaseNet {
   private static String indexDirectory = "net-index";
   private static int port = 10000;
 
-  protected TronApplicationContext context;
+  protected IchApplicationContext context;
 
   private RpcApiService rpcApiService;
   private Application appT;
-  private TronNetDelegate tronNetDelegate;
+  private IchNetDelegate ichNetDelegate;
 
   private ExecutorService executorService = Executors.newFixedThreadPool(1);
 
@@ -91,19 +91,19 @@ public abstract class BaseNet {
         parameter.setNodeListenPort(port);
         parameter.getSeedNode().getIpList().clear();
         parameter.setNodeExternalIp(Constant.LOCAL_HOST);
-        context = new TronApplicationContext(DefaultConfig.class);
+        context = new IchApplicationContext(DefaultConfig.class);
         appT = ApplicationFactory.create(context);
         rpcApiService = context.getBean(RpcApiService.class);
         appT.addService(rpcApiService);
         appT.initServices(parameter);
         appT.startServices();
         appT.startup();
-        tronNetDelegate = context.getBean(TronNetDelegate.class);
+        ichNetDelegate = context.getBean(IchNetDelegate.class);
         rpcApiService.blockUntilShutdown();
       }
     });
     int tryTimes = 0;
-    while (++tryTimes < 100 && tronNetDelegate == null) {
+    while (++tryTimes < 100 && ichNetDelegate == null) {
       Thread.sleep(3000);
     }
   }
@@ -111,7 +111,7 @@ public abstract class BaseNet {
   @After
   public void destroy() {
     Collection<PeerConnection> peerConnections = ReflectUtils
-        .invokeMethod(tronNetDelegate, "getActivePeer");
+        .invokeMethod(ichNetDelegate, "getActivePeer");
     for (PeerConnection peer : peerConnections) {
       peer.close();
     }

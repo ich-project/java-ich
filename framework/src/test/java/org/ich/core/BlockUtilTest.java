@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-ich is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-ich is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -26,9 +26,9 @@ import org.ich.common.common.utils.Sha256Hash;
 import org.ich.core.capsule.BlockCapsule;
 import org.ich.core.capsule.utils.BlockUtil;
 import org.ich.core.config.args.Args;
-import org.ich.protos.Protocol.Block;
-import org.ich.protos.Protocol.BlockHeader;
-import org.ich.protos.Protocol.BlockHeader.raw;
+import org.ich.core.Protocol.Block;
+import org.ich.core.Protocol.BlockHeader;
+import org.ich.core.Protocol.BlockHeader.raw;
 
 @Slf4j
 public class BlockUtilTest {

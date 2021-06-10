@@ -13,14 +13,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.Constant;
 import org.ich.core.config.DefaultConfig;
 import org.ich.core.config.args.Args;
 import org.ich.core.db.AbstractRevokingStore;
 import org.ich.core.db.RevokingDatabase;
-import org.ich.core.db.TronStoreWithRevoking;
+import org.ich.core.db.IchStoreWithRevoking;
 import org.ich.core.db2.SnapshotRootTest.ProtoCapsuleTest;
 import org.ich.core.exception.RevokingStoreIllegalStateException;
 
@@ -28,15 +28,15 @@ import org.ich.core.exception.RevokingStoreIllegalStateException;
 public class RevokingDbWithCacheOldValueTest {
 
   private AbstractRevokingStore revokingDatabase;
-  private TronApplicationContext context;
+  private IchApplicationContext context;
   private Application appT;
 
   @Before
   public void init() {
     Args.setParam(new String[]{"-d", "output_revokingStore_test"}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     appT = ApplicationFactory.create(context);
-    revokingDatabase = new TestRevokingTronDatabase();
+    revokingDatabase = new TestRevokingIchDatabase();
     revokingDatabase.enable();
   }
 
@@ -50,7 +50,7 @@ public class RevokingDbWithCacheOldValueTest {
   @Test
   public synchronized void testReset() {
     revokingDatabase.getStack().clear();
-    TestRevokingTronStore tronDatabase = new TestRevokingTronStore(
+    TestRevokingIchStore tronDatabase = new TestRevokingIchStore(
         "testrevokingtronstore-testReset", revokingDatabase);
     ProtoCapsuleTest testProtoCapsule = new ProtoCapsuleTest(("reset").getBytes());
     try (ISession tmpSession = revokingDatabase.buildSession()) {
@@ -66,7 +66,7 @@ public class RevokingDbWithCacheOldValueTest {
   @Test
   public synchronized void testPop() throws RevokingStoreIllegalStateException {
     revokingDatabase.getStack().clear();
-    TestRevokingTronStore tronDatabase = new TestRevokingTronStore(
+    TestRevokingIchStore tronDatabase = new TestRevokingIchStore(
         "testrevokingtronstore-testPop", revokingDatabase);
 
     for (int i = 1; i < 11; i++) {
@@ -93,7 +93,7 @@ public class RevokingDbWithCacheOldValueTest {
   @Test
   public synchronized void testUndo() throws RevokingStoreIllegalStateException {
     revokingDatabase.getStack().clear();
-    TestRevokingTronStore tronDatabase = new TestRevokingTronStore(
+    TestRevokingIchStore tronDatabase = new TestRevokingIchStore(
         "testrevokingtronstore-testUndo", revokingDatabase);
 
     ISession dialog = revokingDatabase.buildSession();
@@ -154,7 +154,7 @@ public class RevokingDbWithCacheOldValueTest {
   @Test
   public synchronized void testGetlatestValues() {
     revokingDatabase.getStack().clear();
-    TestRevokingTronStore tronDatabase = new TestRevokingTronStore(
+    TestRevokingIchStore tronDatabase = new TestRevokingIchStore(
         "testrevokingtronstore-testGetlatestValues", revokingDatabase);
 
     for (int i = 0; i < 10; i++) {
@@ -177,7 +177,7 @@ public class RevokingDbWithCacheOldValueTest {
   @Test
   public synchronized void testGetValuesNext() {
     revokingDatabase.getStack().clear();
-    TestRevokingTronStore tronDatabase = new TestRevokingTronStore(
+    TestRevokingIchStore tronDatabase = new TestRevokingIchStore(
         "testrevokingtronstore-testGetValuesNext", revokingDatabase);
 
     for (int i = 0; i < 10; i++) {
@@ -203,7 +203,7 @@ public class RevokingDbWithCacheOldValueTest {
   @Test
   public synchronized void testGetKeysNext() {
     revokingDatabase.getStack().clear();
-    TestRevokingTronStore tronDatabase = new TestRevokingTronStore(
+    TestRevokingIchStore tronDatabase = new TestRevokingIchStore(
         "testrevokingtronstore-testGetKeysNext", revokingDatabase);
 
     String protoCapsuleStr = "getKeysNext";
@@ -230,7 +230,7 @@ public class RevokingDbWithCacheOldValueTest {
   @Test
   public void shutdown() throws RevokingStoreIllegalStateException {
     revokingDatabase.getStack().clear();
-    TestRevokingTronStore tronDatabase = new TestRevokingTronStore(
+    TestRevokingIchStore tronDatabase = new TestRevokingIchStore(
         "testrevokingtronstore-shutdown", revokingDatabase);
 
     List<ProtoCapsuleTest> capsules = new ArrayList<>();
@@ -260,9 +260,9 @@ public class RevokingDbWithCacheOldValueTest {
 
   }
 
-  private static class TestRevokingTronStore extends TronStoreWithRevoking<ProtoCapsuleTest> {
+  private static class TestRevokingIchStore extends IchStoreWithRevoking<ProtoCapsuleTest> {
 
-    protected TestRevokingTronStore(String dbName, RevokingDatabase revokingDatabase) {
+    protected TestRevokingIchStore(String dbName, RevokingDatabase revokingDatabase) {
       super(dbName, revokingDatabase);
     }
 
@@ -273,7 +273,7 @@ public class RevokingDbWithCacheOldValueTest {
     }
   }
 
-  private static class TestRevokingTronDatabase extends AbstractRevokingStore {
+  private static class TestRevokingIchDatabase extends AbstractRevokingStore {
 
   }
 }

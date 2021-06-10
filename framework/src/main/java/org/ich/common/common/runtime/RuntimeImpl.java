@@ -24,8 +24,8 @@ import org.ich.core.vm.program.Program.OutOfTimeException;
 import org.ich.core.vm.program.Program.PrecompiledContractException;
 import org.ich.core.vm.program.Program.StackTooLargeException;
 import org.ich.core.vm.program.Program.StackTooSmallException;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.contractResult;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.contractResult;
 
 @Slf4j(topic = "VM")
 public class RuntimeImpl implements Runtime {

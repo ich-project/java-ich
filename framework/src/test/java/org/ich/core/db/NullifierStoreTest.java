@@ -8,7 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.Constant;
 import org.ich.core.Wallet;
@@ -26,7 +26,7 @@ public class NullifierStoreTest {
   public static Application AppT;
   private static NullifierStore nullifierStore;
   private static String dbPath = "output_NullifierStore_test";
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static BytesCapsule nullifier1;
   private static BytesCapsule nullifier2;
   private static BytesCapsule nullifier2New;
@@ -34,7 +34,7 @@ public class NullifierStoreTest {
   static {
     Args.setParam(new String[]{"--output-directory", dbPath},
         Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     AppT = ApplicationFactory.create(context);
   }
 

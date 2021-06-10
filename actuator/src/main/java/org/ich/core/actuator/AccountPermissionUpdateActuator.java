@@ -17,12 +17,12 @@ import org.ich.core.exception.ContractExeException;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.store.AccountStore;
 import org.ich.core.store.DynamicPropertiesStore;
-import org.ich.protos.Protocol.Key;
-import org.ich.protos.Protocol.Permission;
-import org.ich.protos.Protocol.Permission.PermissionType;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.AccountContract.AccountPermissionUpdateContract;
+import org.ich.core.Protocol.Key;
+import org.ich.core.Protocol.Permission;
+import org.ich.core.Protocol.Permission.PermissionType;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.AccountContract.AccountPermissionUpdateContract;
 
 
 @Slf4j(topic = "actuator")

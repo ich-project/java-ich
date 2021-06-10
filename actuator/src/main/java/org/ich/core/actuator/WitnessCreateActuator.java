@@ -19,9 +19,9 @@ import org.ich.core.store.AccountStore;
 import org.ich.core.store.DynamicPropertiesStore;
 import org.ich.core.store.WitnessStore;
 import org.ich.core.utils.TransactionUtil;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.WitnessContract.WitnessCreateContract;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.WitnessContract.WitnessCreateContract;
 
 @Slf4j(topic = "actuator")
 public class WitnessCreateActuator extends AbstractActuator {

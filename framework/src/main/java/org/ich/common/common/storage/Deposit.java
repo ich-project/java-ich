@@ -14,7 +14,7 @@ import org.ich.core.db.Manager;
 import org.ich.core.vm.program.Storage;
 import org.ich.core.vm.repository.Key;
 import org.ich.core.vm.repository.Value;
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 
 public interface Deposit {
 

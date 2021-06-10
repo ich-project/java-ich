@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.ich.api.GrpcAPI.BytesMessage;
 import org.ich.core.Wallet;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract;
 
 
 @Component

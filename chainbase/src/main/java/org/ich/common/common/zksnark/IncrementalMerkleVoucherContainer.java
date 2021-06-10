@@ -7,7 +7,7 @@ import lombok.Setter;
 import org.ich.core.capsule.IncrementalMerkleTreeCapsule;
 import org.ich.core.capsule.IncrementalMerkleVoucherCapsule;
 import org.ich.core.exception.ZksnarkException;
-import org.ich.protos.contract.ShieldContract.PedersenHash;
+import org.ich.core.contract.ShieldContract.PedersenHash;
 
 public class IncrementalMerkleVoucherContainer {
 

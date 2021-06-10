@@ -18,9 +18,9 @@ import org.ich.common.common.utils.ByteArray;
 import org.ich.core.Wallet;
 import org.ich.core.capsule.TransactionCapsule;
 import org.ich.core.exception.ContractValidateException;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.contract.SmartContractOuterClass.TriggerSmartContract;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.contract.SmartContractOuterClass.TriggerSmartContract;
 
 
 @Component

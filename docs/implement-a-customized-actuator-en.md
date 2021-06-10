@@ -1,6 +1,6 @@
 # Customized SumActuator
 
-Having a tailored actuator is key to building a java-tron-based customized public chain. This article illustrates how to develop a java-tron-based `SumActuator`.
+Having a tailored actuator is key to building a java-ich-based customized public chain. This article illustrates how to develop a java-ich-based `SumActuator`.
 
 Actuator module is divided into 4 different methods that are defined in the `Actuator` interface:
 
@@ -11,14 +11,14 @@ Actuator module is divided into 4 different methods that are defined in the `Act
 
 ## Define and register the contract
 
-Currently, contracts supported by java-tron are defined under `src/main/protos/core/contract` directory in protocol module. First creating a `math_contract.proto` file under this directory and declaring `SumContract`. You can also implement any mathematical calculation you want, such as `Subtraction`.
+Currently, contracts supported by java-ich are defined under `src/main/protos/core/contract` directory in protocol module. First creating a `math_contract.proto` file under this directory and declaring `SumContract`. You can also implement any mathematical calculation you want, such as `Subtraction`.
 
 The logic for `SumContract` is the summation of two numerical values:
 
 ```protobuf
 syntax = "proto3";
 package protocol;
-option java_package = "org.ich.protos.contract"; //Specify the name of the package that generated the Java file
+option java_package = "org.ich.core.contract"; //Specify the name of the package that generated the Java file
 option go_package = "github.com/tronprotocol/grpc-gateway/core";
 message SumContract {
     int64 param1 = 1;
@@ -27,7 +27,7 @@ message SumContract {
 }
 ```
 
-Meanwhile, register the new contract type in `Transaction.Contract.ContractType` emuneration within the `src/main/protos/core/Tron.proto` file. Important data structures, such as transactions, accounts and blocks, are defined in the `Tron.proto` file:
+Meanwhile, register the new contract type in `Transaction.Contract.ContractType` emuneration within the `src/main/protos/core/Ich.proto` file. Important data structures, such as transactions, accounts and blocks, are defined in the `Ich.proto` file:
 
 ```protobuf
 message Transaction {
@@ -58,16 +58,16 @@ service Wallet {
   ...
 };
 ```
-At last, recompile the modified proto files. Compiling the java-tron project directly will compile the proto files as well, `protoc` command is also supported.
+At last, recompile the modified proto files. Compiling the java-ich project directly will compile the proto files as well, `protoc` command is also supported.
 
-*Currently, java-tron uses protoc v3.4.0. Please keep the same version when compiling by `protoc` command.*
+*Currently, java-ich uses protoc v3.4.0. Please keep the same version when compiling by `protoc` command.*
 
 ```shell
 # recommended
 ./gradlew build -x test
 
 # or build via protoc
-protoc -I=src/main/protos -I=src/main/protos/core --java_out=src/main/java  Tron.proto
+protoc -I=src/main/protos -I=src/main/protos/core --java_out=src/main/java  Ich.proto
 protoc -I=src/main/protos/core/contract --java_out=src/main/java  math_contract.proto
 protoc -I=src/main/protos/api -I=src/main/protos/core -I=src/main/protos  --java_out=src/main/java api.proto
 ```
@@ -76,7 +76,7 @@ After compilation, the corresponding .class under the java_out directory will be
 
 ## Implement SumActuator
 
-For now, the default Actuator supported by java-tron is located in `org.ich.core.actuator`. Creating `SumActuator` under this directory:
+For now, the default Actuator supported by java-ich is located in `org.ich.core.actuator`. Creating `SumActuator` under this directory:
 
 ```java
 public class SumActuator extends AbstractActuator {
@@ -213,7 +213,7 @@ public class SumActuatorTest {
   private String serviceNode = "127.0.0.1:50051";
   private String confFile = "config-localtest.conf";
   private String dbPath = "output-directory";
-  private TronApplicationContext context;
+  private IchApplicationContext context;
   private Application appTest;
   private ManagedChannel channelFull = null;
   private WalletGrpc.WalletBlockingStub blockingStubFull = null;
@@ -226,7 +226,7 @@ public class SumActuatorTest {
     CommonParameter argsTest = Args.getInstance();
     Args.setParam(new String[]{"--output-directory", dbPath},
             confFile);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     RpcApiService rpcApiService = context.getBean(RpcApiService.class);
     appTest = ApplicationFactory.create(context);
     appTest.addService(rpcApiService);
@@ -304,7 +304,7 @@ INFO [API] RpcApiService has started, listening on 50051
 INFO [net] Node config, trust 0, active 0, forward 0.
 INFO [discover] Discovery server started, bind port 6666
 INFO [net] Fast forward config, isWitness: false, keySize: 1, fastForwardNodes: 0
-INFO [net] TronNetService start successfully.
+INFO [net] IchNetService start successfully.
 INFO [net] TCP listener started, bind port 6666
 INFO [Configuration] user defined config file doesn't exists, use default config file in jar
 INFO [actuator] 

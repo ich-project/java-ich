@@ -4,7 +4,7 @@ ENV TMP_DIR="/tron-build"
 ENV JDK_TAR="jdk-8u202-linux-x64.tar.gz"
 ENV JDK_DIR="jdk1.8.0_202"
 ENV JDK_MD5="0029351f7a946f6c05b582100c7d45b7"
-ENV BASE_DIR="/java-tron"
+ENV BASE_DIR="/java-ich"
 
 
 RUN set -o errexit -o nounset \
@@ -19,13 +19,13 @@ RUN set -o errexit -o nounset \
     && echo "git clone" \
     && mkdir -p $TMP_DIR \
     && cd $TMP_DIR \
-    && git clone https://github.com/tronprotocol/java-tron.git \
-    && cd java-tron \
+    && git clone https://github.com/ich-project/java-ich.git \
+    && cd java-ich \
     && git checkout docker \
     && ./gradlew build -x test \
     && cd build/distributions \
-    && unzip -o java-tron-1.0.0.zip \
-    && mv java-tron-1.0.0 $BASE_DIR \
+    && unzip -o java-ich-1.0.0.zip \
+    && mv java-ich-1.0.0 $BASE_DIR \
     && rm -rf $TMP_DIR \
     && rm -rf ~/.gradle \
     && mv $JAVA_HOME/jre /usr/local \

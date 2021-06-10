@@ -1,6 +1,6 @@
 package org.ich.core.exception;
 
-public class VMIllegalException extends TronException {
+public class VMIllegalException extends IchException {
 
   public VMIllegalException() {
     super();

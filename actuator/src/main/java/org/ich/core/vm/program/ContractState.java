@@ -28,7 +28,7 @@ import org.ich.core.vm.program.listener.ProgramListenerAware;
 import org.ich.core.vm.repository.Key;
 import org.ich.core.vm.repository.Repository;
 import org.ich.core.vm.repository.Value;
-import org.ich.protos.Protocol.AccountType;
+import org.ich.core.Protocol.AccountType;
 
 import java.util.Optional;
 

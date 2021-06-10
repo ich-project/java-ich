@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.parameter.CommonParameter;
 import org.ich.core.Constant;
 import org.ich.core.config.DefaultConfig;
@@ -64,8 +64,8 @@ public class FullNode {
 
     DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
     beanFactory.setAllowCircularReferences(false);
-    TronApplicationContext context =
-        new TronApplicationContext(beanFactory);
+    IchApplicationContext context =
+        new IchApplicationContext(beanFactory);
     context.register(DefaultConfig.class);
 
     context.refresh();

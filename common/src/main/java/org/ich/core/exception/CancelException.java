@@ -1,6 +1,6 @@
 package org.ich.core.exception;
 
-public class CancelException extends TronException {
+public class CancelException extends IchException {
 
   public CancelException() {
     super();

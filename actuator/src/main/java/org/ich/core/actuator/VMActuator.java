@@ -48,14 +48,14 @@ import org.ich.core.vm.program.invoke.ProgramInvokeFactory;
 import org.ich.core.vm.program.invoke.ProgramInvokeFactoryImpl;
 import org.ich.core.vm.repository.Repository;
 import org.ich.core.vm.repository.RepositoryImpl;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.Block;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.contractResult;
-import org.ich.protos.contract.SmartContractOuterClass.CreateSmartContract;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract;
-import org.ich.protos.contract.SmartContractOuterClass.TriggerSmartContract;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.Block;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.contractResult;
+import org.ich.core.contract.SmartContractOuterClass.CreateSmartContract;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract;
+import org.ich.core.contract.SmartContractOuterClass.TriggerSmartContract;
 
 @Slf4j(topic = "VM")
 public class VMActuator implements Actuator2 {

@@ -13,22 +13,22 @@ import org.ich.core.capsule.BlockCapsule.BlockId;
 import org.ich.core.config.args.Args;
 import org.ich.core.exception.P2pException;
 import org.ich.core.exception.P2pException.TypeEnum;
-import org.ich.core.net.TronNetDelegate;
+import org.ich.core.net.IchNetDelegate;
 import org.ich.core.net.message.BlockMessage;
-import org.ich.core.net.message.TronMessage;
+import org.ich.core.net.message.IchMessage;
 import org.ich.core.net.peer.Item;
 import org.ich.core.net.peer.PeerConnection;
 import org.ich.core.net.service.AdvService;
 import org.ich.core.net.service.SyncService;
 import org.ich.core.services.WitnessProductBlockService;
-import org.ich.protos.Protocol.Inventory.InventoryType;
+import org.ich.core.Protocol.Inventory.InventoryType;
 
 @Slf4j(topic = "net")
 @Component
-public class BlockMsgHandler implements TronMsgHandler {
+public class BlockMsgHandler implements IchMsgHandler {
 
   @Autowired
-  private TronNetDelegate tronNetDelegate;
+  private IchNetDelegate ichNetDelegate;
 
   @Autowired
   private AdvService advService;
@@ -44,7 +44,7 @@ public class BlockMsgHandler implements TronMsgHandler {
   private boolean fastForward = Args.getInstance().isFastForward();
 
   @Override
-  public void processMessage(PeerConnection peer, TronMessage msg) throws P2pException {
+  public void processMessage(PeerConnection peer, IchMessage msg) throws P2pException {
 
     BlockMessage blockMessage = (BlockMessage) msg;
     BlockId blockId = blockMessage.getBlockId();
@@ -59,7 +59,7 @@ public class BlockMsgHandler implements TronMsgHandler {
     } else {
       Long time = peer.getAdvInvRequest().remove(new Item(blockId, InventoryType.BLOCK));
       long now = System.currentTimeMillis();
-      long interval = blockId.getNum() - tronNetDelegate.getHeadBlockId().getNum();
+      long interval = blockId.getNum() - ichNetDelegate.getHeadBlockId().getNum();
       processBlock(peer, blockMessage.getBlockCapsule());
       logger.info(
           "Receive block/interval {}/{} from {} fetch/delay {}/{}ms, "
@@ -93,9 +93,9 @@ public class BlockMsgHandler implements TronMsgHandler {
 
   private void processBlock(PeerConnection peer, BlockCapsule block) throws P2pException {
     BlockId blockId = block.getBlockId();
-    if (!tronNetDelegate.containBlock(block.getParentBlockId())) {
+    if (!ichNetDelegate.containBlock(block.getParentBlockId())) {
       logger.warn("Get unlink block {} from {}, head is {}.", blockId.getString(),
-          peer.getInetAddress(), tronNetDelegate.getHeadBlockId().getString());
+          peer.getInetAddress(), ichNetDelegate.getHeadBlockId().getString());
       syncService.startSync(peer);
       return;
     }
@@ -107,20 +107,20 @@ public class BlockMsgHandler implements TronMsgHandler {
     }
 
     if (fastForward) {
-      if (block.getNum() < tronNetDelegate.getHeadBlockId().getNum()) {
+      if (block.getNum() < ichNetDelegate.getHeadBlockId().getNum()) {
         logger.warn("Receive a low block {}, head {}",
-            blockId.getString(), tronNetDelegate.getHeadBlockId().getString());
+            blockId.getString(), ichNetDelegate.getHeadBlockId().getString());
         return;
       }
-      if (tronNetDelegate.validBlock(block)) {
+      if (ichNetDelegate.validBlock(block)) {
         advService.fastForward(new BlockMessage(block));
-        tronNetDelegate.trustNode(peer);
+        ichNetDelegate.trustNode(peer);
       }
     }
 
-    tronNetDelegate.processBlock(block, false);
+    ichNetDelegate.processBlock(block, false);
     witnessProductBlockService.validWitnessProductTwoBlock(block);
-    tronNetDelegate.getActivePeer().forEach(p -> {
+    ichNetDelegate.getActivePeer().forEach(p -> {
       if (p.getAdvInvReceive().getIfPresent(blockId) != null) {
         p.setBlockBothHave(blockId);
       }

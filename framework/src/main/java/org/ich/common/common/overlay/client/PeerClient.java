@@ -12,13 +12,13 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 import lombok.extern.slf4j.Slf4j;
 import org.ich.common.common.overlay.discover.node.NodeHandler;
-import org.ich.common.common.overlay.server.TronChannelInitializer;
+import org.ich.common.common.overlay.server.IchChannelInitializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.ich.common.common.overlay.discover.node.Node;
 import org.ich.core.config.args.Args;
-import org.ich.protos.Protocol.ReasonCode;
+import org.ich.core.Protocol.ReasonCode;
 
 @Slf4j(topic = "net")
 @Component
@@ -35,7 +35,7 @@ public class PeerClient {
 
       @Override
       public Thread newThread(Runnable r) {
-        return new Thread(r, "TronJClientWorker-" + cnt.getAndIncrement());
+        return new Thread(r, "IchJClientWorker-" + cnt.getAndIncrement());
       }
     });
   }
@@ -69,8 +69,8 @@ public class PeerClient {
 
     logger.info("connect peer {} {} {}", host, port, remoteId);
 
-    TronChannelInitializer tronChannelInitializer = ctx
-        .getBean(TronChannelInitializer.class, remoteId);
+    IchChannelInitializer tronChannelInitializer = ctx
+        .getBean(IchChannelInitializer.class, remoteId);
     tronChannelInitializer.setPeerDiscoveryMode(discoveryMode);
 
     Bootstrap b = new Bootstrap();

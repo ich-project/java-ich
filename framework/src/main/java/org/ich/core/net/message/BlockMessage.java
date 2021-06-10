@@ -6,7 +6,7 @@ import org.ich.core.capsule.BlockCapsule;
 import org.ich.core.capsule.BlockCapsule.BlockId;
 import org.ich.core.capsule.TransactionCapsule;
 
-public class BlockMessage extends TronMessage {
+public class BlockMessage extends IchMessage {
 
   private BlockCapsule block;
 

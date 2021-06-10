@@ -12,15 +12,15 @@ import org.ich.api.GrpcAPI.NodeList;
 import org.ich.api.GrpcAPI.NumberMessage;
 import org.ich.api.GrpcAPI.Return;
 import org.ich.api.WalletGrpc;
-import org.ich.protos.Protocol.Account;
-import org.ich.protos.Protocol.Block;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
-import org.ich.protos.contract.AssetIssueContractOuterClass.ParticipateAssetIssueContract;
-import org.ich.protos.contract.AssetIssueContractOuterClass.TransferAssetContract;
-import org.ich.protos.contract.BalanceContract.TransferContract;
-import org.ich.protos.contract.WitnessContract.VoteWitnessContract;
-import org.ich.protos.contract.WitnessContract.WitnessCreateContract;
+import org.ich.core.Protocol.Account;
+import org.ich.core.Protocol.Block;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.contract.AssetIssueContractOuterClass.ParticipateAssetIssueContract;
+import org.ich.core.contract.AssetIssueContractOuterClass.TransferAssetContract;
+import org.ich.core.contract.BalanceContract.TransferContract;
+import org.ich.core.contract.WitnessContract.VoteWitnessContract;
+import org.ich.core.contract.WitnessContract.WitnessCreateContract;
 
 public class WalletGrpcClient {
 

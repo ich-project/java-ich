@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.ich.api.GrpcAPI.EmptyMessage;
 import org.ich.api.WalletGrpc;
 import org.ich.api.WalletGrpc.WalletBlockingStub;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.entity.NodeInfo;
 import org.ich.common.common.utils.Sha256Hash;
 import org.ich.core.capsule.BlockCapsule;
@@ -23,7 +23,7 @@ public class NodeInfoServiceTest {
   private String fullnode = Configuration.getByPath("testng.conf").getStringList("fullnode.ip.list")
       .get(0);
 
-  public NodeInfoServiceTest(TronApplicationContext context) {
+  public NodeInfoServiceTest(IchApplicationContext context) {
     nodeInfoService = context.getBean("nodeInfoService", NodeInfoService.class);
     witnessProductBlockService = context.getBean(WitnessProductBlockService.class);
   }

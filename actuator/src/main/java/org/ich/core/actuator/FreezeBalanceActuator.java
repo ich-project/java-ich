@@ -24,10 +24,10 @@ import org.ich.core.store.AccountStore;
 import org.ich.core.store.DelegatedResourceAccountIndexStore;
 import org.ich.core.store.DelegatedResourceStore;
 import org.ich.core.store.DynamicPropertiesStore;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.BalanceContract.FreezeBalanceContract;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.BalanceContract.FreezeBalanceContract;
 
 @Slf4j(topic = "actuator")
 public class FreezeBalanceActuator extends AbstractActuator {
@@ -58,8 +58,8 @@ public class FreezeBalanceActuator extends AbstractActuator {
         .get(freezeBalanceContract.getOwnerAddress().toByteArray());
 
     if (dynamicStore.supportAllowNewResourceModel()
-        && accountCapsule.oldTronPowerIsNotInitialized()) {
-      accountCapsule.initializeOldTronPower();
+        && accountCapsule.oldIchPowerIsNotInitialized()) {
+      accountCapsule.initializeOldIchPower();
     }
 
     long now = dynamicStore.getLatestBlockHeaderTimestamp();
@@ -103,13 +103,13 @@ public class FreezeBalanceActuator extends AbstractActuator {
         dynamicStore
             .addTotalEnergyWeight(frozenBalance / TRX_PRECISION);
         break;
-      case TRON_POWER:
-        long newFrozenBalanceForTronPower =
-            frozenBalance + accountCapsule.getTronPowerFrozenBalance();
-        accountCapsule.setFrozenForTronPower(newFrozenBalanceForTronPower, expireTime);
+      case ICH_POWER:
+        long newFrozenBalanceForIchPower =
+            frozenBalance + accountCapsule.getIchPowerFrozenBalance();
+        accountCapsule.setFrozenForIchPower(newFrozenBalanceForIchPower, expireTime);
 
         dynamicStore
-            .addTotalTronPowerWeight(frozenBalance / TRX_PRECISION);
+            .addTotalIchPowerWeight(frozenBalance / TRX_PRECISION);
         break;
       default:
         logger.debug("Resource Code Error.");
@@ -197,12 +197,12 @@ public class FreezeBalanceActuator extends AbstractActuator {
       case BANDWIDTH:
       case ENERGY:
         break;
-      case TRON_POWER:
+      case ICH_POWER:
         if (dynamicStore.supportAllowNewResourceModel()) {
           byte[] receiverAddress = freezeBalanceContract.getReceiverAddress().toByteArray();
           if (!ArrayUtils.isEmpty(receiverAddress)) {
             throw new ContractValidateException(
-                "TRON_POWER is not allowed to delegate to other accounts.");
+                "ICH_POWER is not allowed to delegate to other accounts.");
           }
         } else {
           throw new ContractValidateException(
@@ -212,7 +212,7 @@ public class FreezeBalanceActuator extends AbstractActuator {
       default:
         if (dynamicStore.supportAllowNewResourceModel()) {
           throw new ContractValidateException(
-              "ResourceCode error, valid ResourceCode[BANDWIDTH、ENERGY、TRON_POWER]");
+              "ResourceCode error, valid ResourceCode[BANDWIDTH、ENERGY、ICH_POWER]");
         } else {
           throw new ContractValidateException(
               "ResourceCode error, valid ResourceCode[BANDWIDTH、ENERGY]");

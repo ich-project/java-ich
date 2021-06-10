@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.ich.common.common.overlay.message.DisconnectMessage;
 import org.ich.core.exception.P2pException;
 import org.ich.core.net.message.MessageTypes;
-import org.ich.protos.Protocol.ReasonCode;
+import org.ich.core.Protocol.ReasonCode;
 
 public class MessageTest {
 

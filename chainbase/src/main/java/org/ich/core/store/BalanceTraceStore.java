@@ -14,16 +14,16 @@ import org.ich.common.common.utils.Sha256Hash;
 import org.ich.core.capsule.BlockBalanceTraceCapsule;
 import org.ich.core.capsule.BlockCapsule;
 import org.ich.core.capsule.TransactionCapsule;
-import org.ich.core.db.TronStoreWithRevoking;
+import org.ich.core.db.IchStoreWithRevoking;
 import org.ich.core.exception.BadItemException;
-import org.ich.protos.contract.BalanceContract.TransactionBalanceTrace;
+import org.ich.core.contract.BalanceContract.TransactionBalanceTrace;
 
 import java.util.Objects;
 
 
 @Component
 @Slf4j(topic = "DB")
-public class BalanceTraceStore extends TronStoreWithRevoking<BlockBalanceTraceCapsule>  {
+public class BalanceTraceStore extends IchStoreWithRevoking<BlockBalanceTraceCapsule>  {
 
   @Getter
   private BlockCapsule.BlockId currentBlockId;

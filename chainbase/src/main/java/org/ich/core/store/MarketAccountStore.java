@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.ich.core.capsule.MarketAccountOrderCapsule;
-import org.ich.core.db.TronStoreWithRevoking;
+import org.ich.core.db.IchStoreWithRevoking;
 import org.ich.core.exception.ItemNotFoundException;
 
 @Component
-public class MarketAccountStore extends TronStoreWithRevoking<MarketAccountOrderCapsule> {
+public class MarketAccountStore extends IchStoreWithRevoking<MarketAccountOrderCapsule> {
 
   @Autowired
   protected MarketAccountStore(@Value("market_account") String dbName) {

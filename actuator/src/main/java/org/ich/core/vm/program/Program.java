@@ -33,7 +33,7 @@ import org.ich.core.capsule.*;
 import org.ich.core.db.TransactionTrace;
 import org.ich.core.exception.ContractExeException;
 import org.ich.core.exception.ContractValidateException;
-import org.ich.core.exception.TronException;
+import org.ich.core.exception.IchException;
 import org.ich.core.utils.TransactionUtil;
 import org.ich.core.vm.*;
 import org.ich.core.vm.config.VMConfig;
@@ -49,11 +49,11 @@ import org.ich.core.vm.repository.Repository;
 import org.ich.core.vm.trace.ProgramTrace;
 import org.ich.core.vm.trace.ProgramTraceListener;
 import org.ich.core.vm.utils.MUtil;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.contract.Common;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract.Builder;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.contract.Common;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract.Builder;
 
 import java.io.ByteArrayOutputStream;
 import java.math.BigInteger;
@@ -503,8 +503,8 @@ public class Program {
 
   public void suicide(DataWord obtainerAddress) {
 
-    byte[] owner = TransactionTrace.convertToTronAddress(getContractAddress().getLast20Bytes());
-    byte[] obtainer = TransactionTrace.convertToTronAddress(obtainerAddress.getLast20Bytes());
+    byte[] owner = TransactionTrace.convertToIchAddress(getContractAddress().getLast20Bytes());
+    byte[] obtainer = TransactionTrace.convertToIchAddress(obtainerAddress.getLast20Bytes());
 
     long balance = getContractState().getBalance(owner);
 
@@ -585,7 +585,7 @@ public class Program {
   }
 
   public boolean canSuicide() {
-    byte[] owner = TransactionTrace.convertToTronAddress(getContractAddress().getLast20Bytes());
+    byte[] owner = TransactionTrace.convertToIchAddress(getContractAddress().getLast20Bytes());
     AccountCapsule accountCapsule = getContractState().getAccount(owner);
     return accountCapsule.getDelegatedFrozenBalanceForBandwidth() == 0
         && accountCapsule.getDelegatedFrozenBalanceForEnergy() == 0;
@@ -611,7 +611,7 @@ public class Program {
   private void createContractImpl(DataWord value, byte[] programCode, byte[] newAddress,
       boolean isCreate2) {
     byte[] senderAddress = TransactionTrace
-        .convertToTronAddress(this.getContractAddress().getLast20Bytes());
+        .convertToIchAddress(this.getContractAddress().getLast20Bytes());
 
     if (logger.isDebugEnabled()) {
       logger.debug("creating a new contract inside contract run: [{}]",
@@ -769,7 +769,7 @@ public class Program {
       if (logger.isDebugEnabled()) {
         logger.debug("The remaining energy is refunded, account: [{}], energy: [{}] ",
             Hex.toHexString(
-                TransactionTrace.convertToTronAddress(getContractAddress().getLast20Bytes())),
+                TransactionTrace.convertToIchAddress(getContractAddress().getLast20Bytes())),
             refundEnergy);
       }
     }
@@ -796,9 +796,9 @@ public class Program {
 
     // FETCH THE SAVED STORAGE
     byte[] codeAddress = TransactionTrace
-        .convertToTronAddress(msg.getCodeAddress().getLast20Bytes());
+        .convertToIchAddress(msg.getCodeAddress().getLast20Bytes());
     byte[] senderAddress = TransactionTrace
-        .convertToTronAddress(getContractAddress().getLast20Bytes());
+        .convertToIchAddress(getContractAddress().getLast20Bytes());
     byte[] contextAddress = msg.getType().callIsStateless() ? senderAddress : codeAddress;
 
     if (logger.isDebugEnabled()) {
@@ -1046,7 +1046,7 @@ public class Program {
     DataWord valWord = word2.clone();
     getContractState()
         .putStorageValue(
-            TransactionTrace.convertToTronAddress(getContractAddress().getLast20Bytes()), keyWord,
+            TransactionTrace.convertToIchAddress(getContractAddress().getLast20Bytes()), keyWord,
             valWord);
   }
 
@@ -1056,12 +1056,12 @@ public class Program {
 
   public byte[] getCodeAt(DataWord address) {
     byte[] code = invoke.getDeposit()
-        .getCode(TransactionTrace.convertToTronAddress(address.getLast20Bytes()));
+        .getCode(TransactionTrace.convertToIchAddress(address.getLast20Bytes()));
     return nullToEmpty(code);
   }
 
   public byte[] getCodeHashAt(DataWord address) {
-    byte[] tronAddr = TransactionTrace.convertToTronAddress(address.getLast20Bytes());
+    byte[] tronAddr = TransactionTrace.convertToIchAddress(address.getLast20Bytes());
     AccountCapsule account = getContractState().getAccount(tronAddr);
     if (account != null) {
       ContractCapsule contract = getContractState().getContract(tronAddr);
@@ -1106,26 +1106,26 @@ public class Program {
 
   public DataWord getBalance(DataWord address) {
     long balance = getContractState()
-        .getBalance(TransactionTrace.convertToTronAddress(address.getLast20Bytes()));
+        .getBalance(TransactionTrace.convertToIchAddress(address.getLast20Bytes()));
     return new DataWord(balance);
   }
 
   public DataWord getRewardBalance(DataWord address) {
     ContractService contractService = ContractService.getInstance();
     long rewardBalance = contractService
-            .queryReward(TransactionTrace.convertToTronAddress(address.getLast20Bytes()), getContractState());
+            .queryReward(TransactionTrace.convertToIchAddress(address.getLast20Bytes()), getContractState());
     return new DataWord(rewardBalance);
   }
 
   public DataWord isContract(DataWord address) {
     ContractCapsule contract = getContractState()
-        .getContract(TransactionTrace.convertToTronAddress(address.getLast20Bytes()));
+        .getContract(TransactionTrace.convertToIchAddress(address.getLast20Bytes()));
     return contract != null ? new DataWord(1) : new DataWord(0);
   }
 
   public DataWord isSRCandidate(DataWord address) {
     WitnessCapsule witnessCapsule = getContractState()
-            .getWitnessCapsule(TransactionTrace.convertToTronAddress(address.getLast20Bytes()));
+            .getWitnessCapsule(TransactionTrace.convertToIchAddress(address.getLast20Bytes()));
     return witnessCapsule != null ? new DataWord(1) : new DataWord(0);
   }
 
@@ -1193,7 +1193,7 @@ public class Program {
   public DataWord storageLoad(DataWord key) {
     DataWord ret = getContractState()
         .getStorageValue(
-            TransactionTrace.convertToTronAddress(getContractAddress().getLast20Bytes()),
+            TransactionTrace.convertToIchAddress(getContractAddress().getLast20Bytes()),
             key.clone());
     return ret == null ? null : ret.clone();
   }
@@ -1201,7 +1201,7 @@ public class Program {
   public DataWord getTokenBalance(DataWord address, DataWord tokenId) {
     checkTokenIdInTokenBalance(tokenId);
     long ret = getContractState()
-        .getTokenBalance(TransactionTrace.convertToTronAddress(address.getLast20Bytes()),
+        .getTokenBalance(TransactionTrace.convertToIchAddress(address.getLast20Bytes()),
             String.valueOf(tokenId.longValue()).getBytes());
     return ret == 0 ? new DataWord(0) : new DataWord(ret);
   }
@@ -1372,10 +1372,10 @@ public class Program {
     byte[] senderAddress;
     if(VMConfig.allowTvmIstanbul()) {
       senderAddress = TransactionTrace
-          .convertToTronAddress(this.getContractAddress().getLast20Bytes());
+          .convertToIchAddress(this.getContractAddress().getLast20Bytes());
     } else {
       senderAddress = TransactionTrace
-          .convertToTronAddress(this.getCallerAddress().getLast20Bytes());
+          .convertToIchAddress(this.getCallerAddress().getLast20Bytes());
     }
     byte[] programCode = memoryChunk(memStart.intValue(), memSize.intValue());
 
@@ -1412,9 +1412,9 @@ public class Program {
     Repository deposit = getContractState().newRepositoryChild();
 
     byte[] senderAddress = TransactionTrace
-        .convertToTronAddress(this.getContractAddress().getLast20Bytes());
+        .convertToIchAddress(this.getContractAddress().getLast20Bytes());
     byte[] codeAddress = TransactionTrace
-        .convertToTronAddress(msg.getCodeAddress().getLast20Bytes());
+        .convertToIchAddress(msg.getCodeAddress().getLast20Bytes());
     byte[] contextAddress = msg.getType().callIsStateless() ? senderAddress : codeAddress;
 
     long endowment = msg.getEndowment().value().longValueExact();
@@ -1469,7 +1469,7 @@ public class Program {
       this.stackPushZero();
     } else {
       // Delegate or not. if is delegated, we will use msg sender, otherwise use contract address
-      contract.setCallerAddress(TransactionTrace.convertToTronAddress(msg.getType().callIsDelegate()
+      contract.setCallerAddress(TransactionTrace.convertToIchAddress(msg.getType().callIsDelegate()
           ? getCallerAddress().getLast20Bytes() : getContractAddress().getLast20Bytes()));
       // this is the depositImpl, not contractState as above
       contract.setRepository(deposit);
@@ -1663,9 +1663,9 @@ public class Program {
     Repository repository = getContractState().newRepositoryChild();
     FreezeBalanceProcessor processor = new FreezeBalanceProcessor();
     FreezeBalanceParam param = new FreezeBalanceParam();
-    byte[] owner = TransactionTrace.convertToTronAddress(getContractAddress().getLast20Bytes());
+    byte[] owner = TransactionTrace.convertToIchAddress(getContractAddress().getLast20Bytes());
     param.setOwnerAddress(owner);
-    param.setReceiverAddress(TransactionTrace.convertToTronAddress(receiverAddress.getLast20Bytes()));
+    param.setReceiverAddress(TransactionTrace.convertToIchAddress(receiverAddress.getLast20Bytes()));
     boolean needCheckFrozenTime = CommonParameter.getInstance()
         .getCheckFrozenTime() == 1;//for test
     param.setFrozenDuration(needCheckFrozenTime ?
@@ -1691,9 +1691,9 @@ public class Program {
     Repository repository = getContractState().newRepositoryChild();
     UnfreezeBalanceProcessor processor = new UnfreezeBalanceProcessor();
     UnfreezeBalanceParam param = new UnfreezeBalanceParam();
-    byte[] owner = TransactionTrace.convertToTronAddress(getContractAddress().getLast20Bytes());
+    byte[] owner = TransactionTrace.convertToIchAddress(getContractAddress().getLast20Bytes());
     param.setOwnerAddress(owner);
-    param.setReceiverAddress(TransactionTrace.convertToTronAddress(receiverAddress.getLast20Bytes()));
+    param.setReceiverAddress(TransactionTrace.convertToIchAddress(receiverAddress.getLast20Bytes()));
     param.setResourceType(parseResourceCode(resourceType));
     try {
       processor.validate(param, repository);
@@ -1709,8 +1709,8 @@ public class Program {
   }
 
   public long freezeExpireTime(DataWord targetAddress, DataWord resourceType) {
-    byte[] owner = TransactionTrace.convertToTronAddress(getContractAddress().getLast20Bytes());
-    byte[] target = TransactionTrace.convertToTronAddress(targetAddress.getLast20Bytes());
+    byte[] owner = TransactionTrace.convertToIchAddress(getContractAddress().getLast20Bytes());
+    byte[] target = TransactionTrace.convertToIchAddress(targetAddress.getLast20Bytes());
     int resourceCode = resourceType.intValue();
     if (FastByteComparisons.isEqual(owner, target)) {
       AccountCapsule ownerCapsule = getContractState().getAccount(owner);
@@ -1757,9 +1757,9 @@ public class Program {
     Repository repository = getContractState().newRepositoryChild();
     StakeProcessor stakeProcessor = new StakeProcessor();
     StakeParam stakeParam = new StakeParam();
-    byte[] owner = TransactionTrace.convertToTronAddress(getContractAddress().getLast20Bytes());
+    byte[] owner = TransactionTrace.convertToIchAddress(getContractAddress().getLast20Bytes());
     stakeParam.setOwnerAddress(owner);
-    stakeParam.setSrAddress(TransactionTrace.convertToTronAddress(srAddress.getLast20Bytes()));
+    stakeParam.setSrAddress(TransactionTrace.convertToIchAddress(srAddress.getLast20Bytes()));
     stakeParam.setNow(getTimestamp().longValue() * 1000);
     try {
       stakeParam.setStakeAmount(stakeAmount.sValue().longValueExact());
@@ -1780,7 +1780,7 @@ public class Program {
     Repository repository = getContractState().newRepositoryChild();
     UnstakeProcessor unstakeProcessor = new UnstakeProcessor();
     UnstakeParam unstakeParam = new UnstakeParam();
-    byte[] owner = TransactionTrace.convertToTronAddress(getContractAddress().getLast20Bytes());
+    byte[] owner = TransactionTrace.convertToIchAddress(getContractAddress().getLast20Bytes());
     unstakeParam.setOwnerAddress(owner);
     unstakeParam.setNow(getTimestamp().longValue() * 1000);
     try {
@@ -1800,7 +1800,7 @@ public class Program {
     Repository repository = getContractState().newRepositoryChild();
     WithdrawRewardProcessor withdrawRewardContractProcessor = new WithdrawRewardProcessor();
     WithdrawRewardParam withdrawRewardParam = new WithdrawRewardParam();
-    byte[] ownerAddress = TransactionTrace.convertToTronAddress(getContractAddress().getLast20Bytes());
+    byte[] ownerAddress = TransactionTrace.convertToIchAddress(getContractAddress().getLast20Bytes());
     withdrawRewardParam.setTargetAddress(ownerAddress);
     try {
       withdrawRewardContractProcessor.validate(withdrawRewardParam, repository,
@@ -1817,7 +1817,7 @@ public class Program {
 
   public void tokenIssue(DataWord name, DataWord abbr, DataWord totalSupply, DataWord precision) {
     Repository repository = getContractState().newRepositoryChild();
-    byte[] ownerAddress = TransactionTrace.convertToTronAddress(getContractAddress().getLast20Bytes());
+    byte[] ownerAddress = TransactionTrace.convertToIchAddress(getContractAddress().getLast20Bytes());
     TokenIssueProcessor tokenIssueProcessor = new TokenIssueProcessor();
     TokenIssueParam tokenIssueParam = new TokenIssueParam();
     tokenIssueParam.setName(name.getNoEndZeroesData());
@@ -1838,7 +1838,7 @@ public class Program {
 
   public void updateAsset(DataWord urlDataOffs, DataWord descriptionDataOffs) {
     Repository repository = getContractState().newRepositoryChild();
-    byte[] ownerAddress = TransactionTrace.convertToTronAddress(getContractAddress().getLast20Bytes());
+    byte[] ownerAddress = TransactionTrace.convertToIchAddress(getContractAddress().getLast20Bytes());
     DataWord urlSize = memoryLoad(urlDataOffs);
     DataWord descriptionSize = memoryLoad(descriptionDataOffs);
     byte[] urlData = memoryChunk(urlDataOffs.intValueSafe() + DataWord.WORD_SIZE,
@@ -2027,11 +2027,11 @@ public class Program {
       return new OutOfStorageException("Not enough ContractState resource");
     }
 
-    public static PrecompiledContractException contractValidateException(TronException e) {
+    public static PrecompiledContractException contractValidateException(IchException e) {
       return new PrecompiledContractException(e.getMessage());
     }
 
-    public static PrecompiledContractException contractExecuteException(TronException e) {
+    public static PrecompiledContractException contractExecuteException(IchException e) {
       return new PrecompiledContractException(e.getMessage());
     }
 

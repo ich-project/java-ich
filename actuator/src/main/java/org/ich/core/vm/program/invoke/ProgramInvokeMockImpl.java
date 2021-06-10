@@ -28,8 +28,8 @@ import org.ich.common.common.runtime.vm.DataWord;
 import org.ich.core.capsule.ContractCapsule;
 import org.ich.core.vm.repository.Repository;
 import org.ich.core.vm.repository.RepositoryImpl;
-import org.ich.protos.Protocol;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract;
+import org.ich.core.Protocol;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract;
 
 
 /**

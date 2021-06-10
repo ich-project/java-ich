@@ -1,7 +1,7 @@
 package org.ich.common.common.logsfilter.capsule;
 
-import static org.ich.protos.Protocol.Transaction.Contract.ContractType.TransferAssetContract;
-import static org.ich.protos.Protocol.Transaction.Contract.ContractType.TransferContract;
+import static org.ich.core.Protocol.Transaction.Contract.ContractType.TransferAssetContract;
+import static org.ich.core.Protocol.Transaction.Contract.ContractType.TransferContract;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
@@ -21,9 +21,9 @@ import org.ich.common.common.utils.StringUtil;
 import org.ich.core.capsule.BlockCapsule;
 import org.ich.core.capsule.TransactionCapsule;
 import org.ich.core.db.TransactionTrace;
-import org.ich.protos.Protocol;
-import org.ich.protos.contract.AssetIssueContractOuterClass.TransferAssetContract;
-import org.ich.protos.contract.BalanceContract.TransferContract;
+import org.ich.core.Protocol;
+import org.ich.core.contract.AssetIssueContractOuterClass.TransferAssetContract;
+import org.ich.core.contract.BalanceContract.TransferContract;
 
 @Slf4j
 public class TransactionLogTriggerCapsule extends TriggerCapsule {

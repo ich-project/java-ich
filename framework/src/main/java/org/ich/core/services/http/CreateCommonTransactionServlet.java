@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 import org.ich.core.Wallet;
 import org.ich.core.actuator.TransactionFactory;
 import org.ich.core.exception.ContractValidateException;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
 
 
 @Component

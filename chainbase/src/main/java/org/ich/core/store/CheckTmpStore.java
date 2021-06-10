@@ -6,12 +6,12 @@ import java.util.function.Consumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import org.ich.core.db.TronDatabase;
+import org.ich.core.db.IchDatabase;
 import org.ich.core.exception.BadItemException;
 import org.ich.core.exception.ItemNotFoundException;
 
 @Component
-public class CheckTmpStore extends TronDatabase<byte[]> {
+public class CheckTmpStore extends IchDatabase<byte[]> {
 
   @Autowired
   public CheckTmpStore(ApplicationContext ctx) {

@@ -4,7 +4,7 @@ import java.io.File;
 import lombok.extern.slf4j.Slf4j;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.storage.DepositImpl;
 import org.ich.common.common.utils.FileUtil;
 import org.junit.After;
@@ -25,13 +25,13 @@ import org.ich.core.exception.ReceiptCheckErrException;
 import org.ich.core.exception.VMIllegalException;
 import org.ich.core.vm.program.Program.OutOfEnergyException;
 import org.ich.core.vm.program.Program.OutOfTimeException;
-import org.ich.protos.Protocol.AccountType;
+import org.ich.core.Protocol.AccountType;
 
 @Slf4j
 public class EnergyWhenTimeoutStyleTest {
 
   private Manager dbManager;
-  private TronApplicationContext context;
+  private IchApplicationContext context;
   private DepositImpl deposit;
   private String dbPath = "output_CPUTimeTest";
   private String OWNER_ADDRESS;
@@ -46,7 +46,7 @@ public class EnergyWhenTimeoutStyleTest {
   public void init() {
     Args.setParam(new String[]{"--output-directory", dbPath},
         Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     AppT = ApplicationFactory.create(context);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049abc";
     dbManager = context.getBean(Manager.class);

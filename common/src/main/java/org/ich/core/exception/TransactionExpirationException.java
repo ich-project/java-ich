@@ -1,6 +1,6 @@
 package org.ich.core.exception;
 
-public class TransactionExpirationException extends TronException {
+public class TransactionExpirationException extends IchException {
 
   public TransactionExpirationException() {
     super();

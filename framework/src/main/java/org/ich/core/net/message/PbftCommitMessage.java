@@ -1,9 +1,9 @@
 package org.ich.core.net.message;
 
 import org.ich.core.capsule.PbftSignCapsule;
-import org.ich.protos.Protocol.PBFTCommitResult;
+import org.ich.core.Protocol.PBFTCommitResult;
 
-public class PbftCommitMessage extends TronMessage {
+public class PbftCommitMessage extends IchMessage {
 
   private PbftSignCapsule pbftSignCapsule;
 

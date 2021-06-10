@@ -7,7 +7,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.ich.core.capsule.ProposalCapsule;
 import org.ich.core.db.Manager;
-import org.ich.protos.Protocol.Proposal.State;
+import org.ich.core.Protocol.Proposal.State;
 
 @Slf4j(topic = "witness")
 public class ProposalController {

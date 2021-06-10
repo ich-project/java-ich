@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.ich.common.common.utils.ByteArray;
-import org.ich.protos.Protocol.DelegatedResourceAccountIndex;
+import org.ich.core.Protocol.DelegatedResourceAccountIndex;
 
 @Slf4j(topic = "capsule")
 public class DelegatedResourceAccountIndexCapsule implements

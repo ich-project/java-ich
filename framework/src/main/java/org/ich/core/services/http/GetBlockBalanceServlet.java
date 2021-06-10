@@ -6,8 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.ich.core.Wallet;
-import org.ich.protos.Protocol.Account;
-import org.ich.protos.contract.BalanceContract.BlockBalanceTrace;
+import org.ich.core.Protocol.Account;
+import org.ich.core.contract.BalanceContract.BlockBalanceTrace;
 
 
 @Component

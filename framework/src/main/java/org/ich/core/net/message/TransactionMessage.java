@@ -3,9 +3,9 @@ package org.ich.core.net.message;
 import org.ich.common.common.overlay.message.Message;
 import org.ich.common.common.utils.Sha256Hash;
 import org.ich.core.capsule.TransactionCapsule;
-import org.ich.protos.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction;
 
-public class TransactionMessage extends TronMessage {
+public class TransactionMessage extends IchMessage {
 
   private TransactionCapsule transactionCapsule;
 

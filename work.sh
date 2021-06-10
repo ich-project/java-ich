@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Function: to start, stop and restart java-tron.
+# Function: to start, stop and restart java-ich.
 # Usage: bash work.sh start|stop|restart.
 # Note: modify the paths and private key to your own.
 
@@ -45,9 +45,9 @@ case "${1}" in
             & echo $! > ${PID_FILE_PATH}
 
         if [ $? -eq 0 ]; then
-            echo "Succeeded to start java-tron."
+            echo "Succeeded to start java-ich."
         else
-            echo "Failed to start java-tron."
+            echo "Failed to start java-ich."
         fi
     ;;
     stop)
@@ -55,9 +55,9 @@ case "${1}" in
 
         if [ $? -eq 0 ]; then
             rm ${PID_FILE_PATH}
-            echo "Succeeded to stop java-tron."
+            echo "Succeeded to stop java-ich."
         else
-            echo "Failed to stop java-tron."
+            echo "Failed to stop java-ich."
         fi
     ;;
     restart)

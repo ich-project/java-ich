@@ -8,19 +8,19 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.overlay.client.DatabaseGrpcClient;
 import org.ich.core.Constant;
 import org.ich.core.config.DefaultConfig;
 import org.ich.core.config.args.Args;
 import org.ich.core.services.RpcApiService;
-import org.ich.protos.Protocol.Block;
-import org.ich.protos.Protocol.DynamicProperties;
+import org.ich.core.Protocol.Block;
+import org.ich.core.Protocol.DynamicProperties;
 
 @Slf4j
 public class SolidityNodeTest {
 
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
 
   private static RpcApiService rpcApiService;
   private static Application appT;
@@ -28,7 +28,7 @@ public class SolidityNodeTest {
 
   static {
     Args.setParam(new String[]{"-d", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     Args.getInstance().setSolidityNode(true);
     appT = ApplicationFactory.create(context);
     rpcApiService = context.getBean(RpcApiService.class);

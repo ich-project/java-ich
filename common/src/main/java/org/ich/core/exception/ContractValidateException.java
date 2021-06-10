@@ -1,6 +1,6 @@
 package org.ich.core.exception;
 
-public class ContractValidateException extends TronException {
+public class ContractValidateException extends IchException {
 
   public ContractValidateException() {
     super();

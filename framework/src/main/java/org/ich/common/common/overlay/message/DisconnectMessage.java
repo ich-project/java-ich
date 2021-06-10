@@ -1,8 +1,8 @@
 package org.ich.common.common.overlay.message;
 
 import org.ich.core.net.message.MessageTypes;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.ReasonCode;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.ReasonCode;
 
 public class DisconnectMessage extends P2pMessage {
 

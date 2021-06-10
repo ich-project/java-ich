@@ -8,7 +8,7 @@ import org.ich.common.common.parameter.CommonParameter;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.core.capsule.BlockCapsule;
 import org.ich.core.config.args.Args;
-import org.ich.protos.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction;
 
 public class BlockUtil {
 

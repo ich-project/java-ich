@@ -18,7 +18,7 @@ import org.ich.core.db.Manager;
 import org.ich.core.metrics.MetricsKey;
 import org.ich.core.metrics.MetricsUtil;
 import org.ich.core.metrics.net.RateInfo;
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 
 @Component
 public class BlockChainMetricManager {

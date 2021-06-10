@@ -18,7 +18,7 @@ import org.ich.common.common.runtime.vm.LogInfo;
 import org.ich.common.common.utils.ByteArraySet;
 import org.ich.common.common.utils.ByteUtil;
 import org.ich.core.capsule.TransactionResultCapsule;
-import org.ich.protos.Protocol.Transaction.Result.contractResult;
+import org.ich.core.Protocol.Transaction.Result.contractResult;
 
 public class ProgramResult {
 

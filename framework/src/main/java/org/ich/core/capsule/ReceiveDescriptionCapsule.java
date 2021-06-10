@@ -3,7 +3,7 @@ package org.ich.core.capsule;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import lombok.extern.slf4j.Slf4j;
-import org.ich.protos.contract.ShieldContract.ReceiveDescription;
+import org.ich.core.contract.ShieldContract.ReceiveDescription;
 
 @Slf4j(topic = "capsule")
 public class ReceiveDescriptionCapsule implements ProtoCapsule<ReceiveDescription> {

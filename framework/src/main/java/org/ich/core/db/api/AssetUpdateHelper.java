@@ -17,8 +17,8 @@ import org.ich.core.capsule.AssetIssueCapsule;
 import org.ich.core.capsule.BlockCapsule;
 import org.ich.core.capsule.ExchangeCapsule;
 import org.ich.core.capsule.TransactionCapsule;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
 
 @Slf4j(topic = "DB")
 public class AssetUpdateHelper {

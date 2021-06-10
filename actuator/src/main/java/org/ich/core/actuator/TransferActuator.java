@@ -16,10 +16,10 @@ import org.ich.core.exception.ContractExeException;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.store.AccountStore;
 import org.ich.core.store.DynamicPropertiesStore;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.BalanceContract.TransferContract;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.BalanceContract.TransferContract;
 
 @Slf4j(topic = "actuator")
 public class TransferActuator extends AbstractActuator {

@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.common.common.utils.SessionOptional;
@@ -21,7 +21,7 @@ import org.ich.core.Constant;
 import org.ich.core.capsule.utils.MarketUtils;
 import org.ich.core.config.DefaultConfig;
 import org.ich.core.config.args.Args;
-import org.ich.core.db.TronStoreWithRevoking;
+import org.ich.core.db.IchStoreWithRevoking;
 import org.ich.core.db2.SnapshotRootTest.ProtoCapsuleTest;
 import org.ich.core.db2.core.SnapshotManager;
 import org.ich.core.exception.RevokingStoreIllegalStateException;
@@ -30,15 +30,15 @@ import org.ich.core.exception.RevokingStoreIllegalStateException;
 public class RevokingDbWithCacheNewValueTest {
 
   private SnapshotManager revokingDatabase;
-  private TronApplicationContext context;
+  private IchApplicationContext context;
   private Application appT;
-  private TestRevokingTronStore tronDatabase;
+  private TestRevokingIchStore tronDatabase;
 
   @Before
   public void init() {
     Args.setParam(new String[]{"-d", "output_revokingStore_test"},
         Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     appT = ApplicationFactory.create(context);
   }
 
@@ -54,7 +54,7 @@ public class RevokingDbWithCacheNewValueTest {
   public synchronized void testPop() throws RevokingStoreIllegalStateException {
     revokingDatabase = context.getBean(SnapshotManager.class);
     revokingDatabase.enable();
-    tronDatabase = new TestRevokingTronStore("testRevokingDBWithCacheNewValue-testPop");
+    tronDatabase = new TestRevokingIchStore("testRevokingDBWithCacheNewValue-testPop");
     revokingDatabase.add(tronDatabase.getRevokingDB());
 
     while (revokingDatabase.size() != 0) {
@@ -84,7 +84,7 @@ public class RevokingDbWithCacheNewValueTest {
   public synchronized void testMerge() {
     revokingDatabase = context.getBean(SnapshotManager.class);
     revokingDatabase.enable();
-    tronDatabase = new TestRevokingTronStore("testRevokingDBWithCacheNewValue-testMerge");
+    tronDatabase = new TestRevokingIchStore("testRevokingDBWithCacheNewValue-testMerge");
     revokingDatabase.add(tronDatabase.getRevokingDB());
 
     while (revokingDatabase.size() != 0) {
@@ -116,7 +116,7 @@ public class RevokingDbWithCacheNewValueTest {
   public synchronized void testRevoke() {
     revokingDatabase = context.getBean(SnapshotManager.class);
     revokingDatabase.enable();
-    tronDatabase = new TestRevokingTronStore("testRevokingDBWithCacheNewValue-testRevoke");
+    tronDatabase = new TestRevokingIchStore("testRevokingDBWithCacheNewValue-testRevoke");
     revokingDatabase.add(tronDatabase.getRevokingDB());
 
     while (revokingDatabase.size() != 0) {
@@ -176,7 +176,7 @@ public class RevokingDbWithCacheNewValueTest {
   public synchronized void testGetlatestValues() {
     revokingDatabase = context.getBean(SnapshotManager.class);
     revokingDatabase.enable();
-    tronDatabase = new TestRevokingTronStore("testSnapshotManager-testGetlatestValues");
+    tronDatabase = new TestRevokingIchStore("testSnapshotManager-testGetlatestValues");
     revokingDatabase.add(tronDatabase.getRevokingDB());
     while (revokingDatabase.size() != 0) {
       revokingDatabase.pop();
@@ -203,7 +203,7 @@ public class RevokingDbWithCacheNewValueTest {
   public synchronized void testGetValuesNext() {
     revokingDatabase = context.getBean(SnapshotManager.class);
     revokingDatabase.enable();
-    tronDatabase = new TestRevokingTronStore("testSnapshotManager-testGetValuesNext");
+    tronDatabase = new TestRevokingIchStore("testSnapshotManager-testGetValuesNext");
     revokingDatabase.add(tronDatabase.getRevokingDB());
     while (revokingDatabase.size() != 0) {
       revokingDatabase.pop();
@@ -231,7 +231,7 @@ public class RevokingDbWithCacheNewValueTest {
   public synchronized void testGetKeysNext() {
     revokingDatabase = context.getBean(SnapshotManager.class);
     revokingDatabase.enable();
-    tronDatabase = new TestRevokingTronStore("testSnapshotManager-testGetKeysNext");
+    tronDatabase = new TestRevokingIchStore("testSnapshotManager-testGetKeysNext");
     revokingDatabase.add(tronDatabase.getRevokingDB());
     while (revokingDatabase.size() != 0) {
       revokingDatabase.pop();
@@ -302,7 +302,7 @@ public class RevokingDbWithCacheNewValueTest {
   public synchronized void testGetKeysNextWithSameKey() {
     revokingDatabase = context.getBean(SnapshotManager.class);
     revokingDatabase.enable();
-    tronDatabase = new TestRevokingTronStore("testSnapshotManager-testGetKeysNextWithSameKey");
+    tronDatabase = new TestRevokingIchStore("testSnapshotManager-testGetKeysNextWithSameKey");
     revokingDatabase.add(tronDatabase.getRevokingDB());
     while (revokingDatabase.size() != 0) {
       revokingDatabase.pop();
@@ -384,7 +384,7 @@ public class RevokingDbWithCacheNewValueTest {
   public synchronized void testGetKeysNextWithSameKeyOrderCheck() {
     revokingDatabase = context.getBean(SnapshotManager.class);
     revokingDatabase.enable();
-    tronDatabase = new TestRevokingTronStore("testSnapshotManager-testGetKeysNextWithSameKey");
+    tronDatabase = new TestRevokingIchStore("testSnapshotManager-testGetKeysNextWithSameKey");
     revokingDatabase.add(tronDatabase.getRevokingDB());
     while (revokingDatabase.size() != 0) {
       revokingDatabase.pop();
@@ -463,9 +463,9 @@ public class RevokingDbWithCacheNewValueTest {
     }
   }
 
-  public static class TestRevokingTronStore extends TronStoreWithRevoking<ProtoCapsuleTest> {
+  public static class TestRevokingIchStore extends IchStoreWithRevoking<ProtoCapsuleTest> {
 
-    protected TestRevokingTronStore(String dbName) {
+    protected TestRevokingIchStore(String dbName) {
       super(dbName);
     }
 

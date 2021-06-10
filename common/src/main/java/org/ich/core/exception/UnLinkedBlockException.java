@@ -1,6 +1,6 @@
 package org.ich.core.exception;
 
-public class UnLinkedBlockException extends TronException {
+public class UnLinkedBlockException extends IchException {
 
   public UnLinkedBlockException() {
     super();

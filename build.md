@@ -9,7 +9,7 @@
 
 ## Build and Deploy automatically using scripts
 
-- Please take a look at the [Tron Deployment Scripts](https://github.com/ich-project/TronDeployment) repository.
+- Please take a look at the [Ich Deployment Scripts](https://github.com/ich-project/IchDeployment) repository.
 
 ## Getting the code with git
 

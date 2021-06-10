@@ -8,11 +8,11 @@ import org.ich.common.common.utils.Sha256Hash;
 import org.ich.consensus.base.Param.Miner;
 import org.ich.core.capsule.BlockCapsule;
 import org.ich.core.net.message.MessageTypes;
-import org.ich.protos.Protocol.PBFTMessage;
-import org.ich.protos.Protocol.PBFTMessage.DataType;
-import org.ich.protos.Protocol.PBFTMessage.MsgType;
-import org.ich.protos.Protocol.PBFTMessage.Raw;
-import org.ich.protos.Protocol.SRL;
+import org.ich.core.Protocol.PBFTMessage;
+import org.ich.core.Protocol.PBFTMessage.DataType;
+import org.ich.core.Protocol.PBFTMessage.MsgType;
+import org.ich.core.Protocol.PBFTMessage.Raw;
+import org.ich.core.Protocol.SRL;
 
 public class PbftMessage extends PbftBaseMessage {
 

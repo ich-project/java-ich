@@ -17,7 +17,7 @@ import org.ich.api.WalletGrpc;
 import org.ich.api.WalletSolidityGrpc;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.config.DbBackupConfig;
 import org.ich.common.common.crypto.ECKey;
 import org.ich.common.common.utils.FileUtil;
@@ -27,8 +27,8 @@ import org.ich.core.config.DefaultConfig;
 import org.ich.core.config.args.Args;
 import org.ich.core.services.RpcApiService;
 import org.ich.core.services.interfaceOnSolidity.RpcApiServiceOnSolidity;
-import org.ich.protos.Protocol;
-import org.ich.protos.contract.BalanceContract;
+import org.ich.core.Protocol;
+import org.ich.core.contract.BalanceContract;
 import org.ich.tool.litefullnode.LiteFullNodeTool;
 import stest.ich.wallet.common.client.utils.TransactionUtils;
 
@@ -36,7 +36,7 @@ public class LiteFullNodeToolTest {
 
   private static final Logger logger = LoggerFactory.getLogger("Test");
 
-  private TronApplicationContext context;
+  private IchApplicationContext context;
   private ManagedChannel channelFull = null;
   private WalletGrpc.WalletBlockingStub blockingStubFull = null;
   private WalletSolidityGrpc.WalletSolidityBlockingStub blockingStubSolidity = null;
@@ -54,7 +54,7 @@ public class LiteFullNodeToolTest {
    * init logic.
    */
   public void startApp() {
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     appTest = ApplicationFactory.create(context);
     rpcApiService = context.getBean(RpcApiService.class);
     rpcApiServiceOnSolidity = context.getBean(RpcApiServiceOnSolidity.class);

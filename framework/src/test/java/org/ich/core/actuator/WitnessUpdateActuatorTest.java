@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.Constant;
@@ -24,10 +24,10 @@ import org.ich.core.config.args.Args;
 import org.ich.core.db.Manager;
 import org.ich.core.exception.ContractExeException;
 import org.ich.core.exception.ContractValidateException;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.AssetIssueContractOuterClass;
-import org.ich.protos.contract.WitnessContract.WitnessUpdateContract;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.AssetIssueContractOuterClass;
+import org.ich.core.contract.WitnessContract.WitnessUpdateContract;
 
 @Slf4j
 public class WitnessUpdateActuatorTest {
@@ -41,12 +41,12 @@ public class WitnessUpdateActuatorTest {
   private static final String URL = "https://tron.network";
   private static final String NewURL = "https://tron.org";
   private static final String OWNER_ADDRESS_INVALID = "aaaa";
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static Manager dbManager;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049abc";
     OWNER_ADDRESS_NOTEXIST =
         Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a1abc";

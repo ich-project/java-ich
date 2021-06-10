@@ -1,6 +1,6 @@
 package org.ich.core.exception;
 
-public class TraitorPeerException extends TronException {
+public class TraitorPeerException extends IchException {
 
   public TraitorPeerException() {
     super();

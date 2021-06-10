@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-ich is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-ich is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -19,23 +19,24 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
-import java.util.List;
-import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.ich.common.common.utils.ByteArray;
+import org.ich.core.Protocol.Account;
+import org.ich.core.Protocol.Account.AccountResource;
+import org.ich.core.Protocol.Account.Builder;
+import org.ich.core.Protocol.Account.Frozen;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Key;
+import org.ich.core.Protocol.Permission;
+import org.ich.core.Protocol.Permission.PermissionType;
+import org.ich.core.Protocol.Vote;
+import org.ich.core.contract.AccountContract.AccountCreateContract;
+import org.ich.core.contract.AccountContract.AccountUpdateContract;
 import org.ich.core.store.AssetIssueStore;
 import org.ich.core.store.DynamicPropertiesStore;
-import org.ich.protos.Protocol.Account;
-import org.ich.protos.Protocol.Account.AccountResource;
-import org.ich.protos.Protocol.Account.Builder;
-import org.ich.protos.Protocol.Account.Frozen;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Key;
-import org.ich.protos.Protocol.Permission;
-import org.ich.protos.Protocol.Permission.PermissionType;
-import org.ich.protos.Protocol.Vote;
-import org.ich.protos.contract.AccountContract.AccountCreateContract;
-import org.ich.protos.contract.AccountContract.AccountUpdateContract;
+
+import java.util.List;
+import java.util.Map;
 
 @Slf4j(topic = "capsule")
 public class AccountCapsule implements ProtoCapsule<Account>, Comparable<AccountCapsule> {
@@ -482,7 +483,7 @@ public class AccountCapsule implements ProtoCapsule<Account>, Comparable<Account
     }
   }
 
-  public long getTronPowerUsage() {
+  public long getIchPowerUsage() {
     if (this.account.getVotesList() != null) {
       return this.account.getVotesList().stream().mapToLong(Vote::getVoteCount).sum();
     } else {
@@ -490,8 +491,8 @@ public class AccountCapsule implements ProtoCapsule<Account>, Comparable<Account
     }
   }
 
-  //tp:Tron_Power
-  public long getTronPower() {
+  //tp:Ich_Power
+  public long getIchPower() {
     long tp = 0;
     for (int i = 0; i < account.getFrozenCount(); ++i) {
       tp += account.getFrozen(i).getFrozenBalance();
@@ -503,13 +504,13 @@ public class AccountCapsule implements ProtoCapsule<Account>, Comparable<Account
     return tp;
   }
 
-  public long getAllTronPower() {
-    if (account.getOldTronPower() == -1) {
-      return getTronPowerFrozenBalance();
-    } else if (account.getOldTronPower() == 0) {
-      return getTronPower() + getTronPowerFrozenBalance();
+  public long getAllIchPower() {
+    if (account.getOldIchPower() == -1) {
+      return getIchPowerFrozenBalance();
+    } else if (account.getOldIchPower() == 0) {
+      return getIchPower() + getIchPowerFrozenBalance();
     } else {
-      return account.getOldTronPower() + getTronPowerFrozenBalance();
+      return account.getOldIchPower() + getIchPowerFrozenBalance();
     }
   }
 
@@ -880,50 +881,50 @@ public class AccountCapsule implements ProtoCapsule<Account>, Comparable<Account
     return this.account.getAccountResource().getFrozenBalanceForEnergy().getFrozenBalance();
   }
 
-  public boolean oldTronPowerIsNotInitialized() {
-    return this.account.getOldTronPower() == 0;
+  public boolean oldIchPowerIsNotInitialized() {
+    return this.account.getOldIchPower() == 0;
   }
 
-  public boolean oldTronPowerIsInvalid() {
-    return this.account.getOldTronPower() == -1;
+  public boolean oldIchPowerIsInvalid() {
+    return this.account.getOldIchPower() == -1;
   }
 
-  public void initializeOldTronPower() {
-    long value = getTronPower();
+  public void initializeOldIchPower() {
+    long value = getIchPower();
     if (value == 0) {
       value = -1;
     }
     setInstance(getInstance().toBuilder()
-        .setOldTronPower(value)
+        .setOldIchPower(value)
         .build());
   }
 
-  public void invalidateOldTronPower() {
+  public void invalidateOldIchPower() {
     setInstance(getInstance().toBuilder()
-        .setOldTronPower(-1)
+        .setOldIchPower(-1)
         .build());
   }
 
 
-  public void setOldTronPower(long value) {
+  public void setOldIchPower(long value) {
     setInstance(getInstance().toBuilder()
-        .setOldTronPower(value)
+        .setOldIchPower(value)
         .build());
   }
 
-  public void setFrozenForTronPower(long frozenBalance, long expireTime) {
+  public void setFrozenForIchPower(long frozenBalance, long expireTime) {
     Frozen newFrozen = Frozen.newBuilder()
         .setFrozenBalance(frozenBalance)
         .setExpireTime(expireTime)
         .build();
 
     setInstance(getInstance().toBuilder()
-        .setTronPower(newFrozen)
+        .setIchPower(newFrozen)
         .build());
   }
 
-  public long getTronPowerFrozenBalance() {
-    return this.account.getTronPower().getFrozenBalance();
+  public long getIchPowerFrozenBalance() {
+    return this.account.getIchPower().getFrozenBalance();
   }
 
   public long getEnergyUsage() {

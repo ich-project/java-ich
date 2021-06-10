@@ -30,8 +30,8 @@ import org.ich.core.zen.address.PaymentAddress;
 import org.ich.core.zen.note.Note;
 import org.ich.core.zen.note.NoteEncryption;
 import org.ich.core.zen.note.OutgoingPlaintext;
-import org.ich.protos.contract.ShieldContract;
-import org.ich.protos.contract.ShieldContract.ReceiveDescription;
+import org.ich.core.contract.ShieldContract;
+import org.ich.core.contract.ShieldContract.ReceiveDescription;
 
 
 @Slf4j

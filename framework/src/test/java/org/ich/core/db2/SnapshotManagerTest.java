@@ -8,12 +8,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.Constant;
 import org.ich.core.config.DefaultConfig;
 import org.ich.core.config.args.Args;
-import org.ich.core.db2.RevokingDbWithCacheNewValueTest.TestRevokingTronStore;
+import org.ich.core.db2.RevokingDbWithCacheNewValueTest.TestRevokingIchStore;
 import org.ich.core.db2.SnapshotRootTest.ProtoCapsuleTest;
 import org.ich.core.db2.core.SnapshotManager;
 import org.ich.core.exception.BadItemException;
@@ -23,19 +23,19 @@ import org.ich.core.exception.ItemNotFoundException;
 public class SnapshotManagerTest {
 
   private SnapshotManager revokingDatabase;
-  private TronApplicationContext context;
+  private IchApplicationContext context;
   private Application appT;
-  private TestRevokingTronStore tronDatabase;
+  private TestRevokingIchStore tronDatabase;
 
   @Before
   public void init() {
     Args.setParam(new String[]{"-d", "output_SnapshotManager_test"},
         Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     appT = ApplicationFactory.create(context);
     revokingDatabase = context.getBean(SnapshotManager.class);
     revokingDatabase.enable();
-    tronDatabase = new TestRevokingTronStore("testSnapshotManager-test");
+    tronDatabase = new TestRevokingIchStore("testSnapshotManager-test");
     revokingDatabase.add(tronDatabase.getRevokingDB());
   }
 

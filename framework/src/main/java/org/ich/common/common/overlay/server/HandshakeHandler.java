@@ -41,7 +41,7 @@ import org.ich.core.db.Manager;
 import org.ich.core.metrics.MetricsKey;
 import org.ich.core.metrics.MetricsUtil;
 import org.ich.core.net.peer.PeerConnection;
-import org.ich.protos.Protocol.ReasonCode;
+import org.ich.core.Protocol.ReasonCode;
 
 @Slf4j(topic = "net")
 @Component

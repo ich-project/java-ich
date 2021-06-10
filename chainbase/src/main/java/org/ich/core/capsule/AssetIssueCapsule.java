@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-ich is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-ich is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -21,8 +21,8 @@ import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.core.store.DynamicPropertiesStore;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract.FrozenSupply;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract.FrozenSupply;
 
 @Slf4j(topic = "capsule")
 public class AssetIssueCapsule implements ProtoCapsule<AssetIssueContract> {

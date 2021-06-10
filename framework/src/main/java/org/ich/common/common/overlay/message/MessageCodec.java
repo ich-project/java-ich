@@ -12,7 +12,7 @@ import org.ich.core.metrics.MetricsKey;
 import org.ich.core.metrics.MetricsUtil;
 import org.ich.core.net.message.MessageTypes;
 import org.ich.core.net.message.PbftMessageFactory;
-import org.ich.core.net.message.TronMessageFactory;
+import org.ich.core.net.message.IchMessageFactory;
 
 @Component
 @Scope("prototype")
@@ -20,7 +20,7 @@ public class MessageCodec extends ByteToMessageDecoder {
 
   private Channel channel;
   private P2pMessageFactory p2pMessageFactory = new P2pMessageFactory();
-  private TronMessageFactory tronMessageFactory = new TronMessageFactory();
+  private IchMessageFactory tronMessageFactory = new IchMessageFactory();
   private PbftMessageFactory pbftMessageFactory = new PbftMessageFactory();
 
   @Override
@@ -48,7 +48,7 @@ public class MessageCodec extends ByteToMessageDecoder {
     if (MessageTypes.inP2pRange(type)) {
       return p2pMessageFactory.create(encoded);
     }
-    if (MessageTypes.inTronRange(type)) {
+    if (MessageTypes.inIchRange(type)) {
       return tronMessageFactory.create(encoded);
     }
     if (MessageTypes.inPbftRange(type)) {

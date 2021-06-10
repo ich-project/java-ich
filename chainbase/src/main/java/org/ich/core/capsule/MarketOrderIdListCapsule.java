@@ -10,7 +10,7 @@ import org.ich.common.common.utils.ByteArray;
 import org.ich.core.exception.ItemNotFoundException;
 import org.ich.core.store.MarketOrderStore;
 import org.ich.core.store.MarketPairPriceToOrderStore;
-import org.ich.protos.Protocol.MarketOrderIdList;
+import org.ich.core.Protocol.MarketOrderIdList;
 
 @Slf4j(topic = "capsule")
 public class MarketOrderIdListCapsule implements ProtoCapsule<MarketOrderIdList> {

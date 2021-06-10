@@ -3,10 +3,10 @@ package org.ich.core.net.message;
 import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;
 import org.ich.core.capsule.TransactionCapsule;
-import org.ich.protos.Protocol.Block;
-import org.ich.protos.Protocol.Items;
+import org.ich.core.Protocol.Block;
+import org.ich.core.Protocol.Items;
 
-public class BlocksMessage extends TronMessage {
+public class BlocksMessage extends IchMessage {
 
   private List<Block> blocks;
 

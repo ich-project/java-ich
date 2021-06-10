@@ -4,7 +4,7 @@ import static org.ich.common.common.net.udp.message.UdpMessageTypeEnum.BACKUP_KE
 
 import org.ich.common.common.net.udp.message.Message;
 import org.ich.common.common.overlay.discover.node.Node;
-import org.ich.protos.Discover;
+import org.ich.core.Discover;
 
 public class KeepAliveMessage extends Message {
 

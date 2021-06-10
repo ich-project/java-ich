@@ -1,6 +1,6 @@
 package org.ich.core.exception;
 
-public class NonUniqueObjectException extends TronException {
+public class NonUniqueObjectException extends IchException {
 
   public NonUniqueObjectException() {
     super();

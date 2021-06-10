@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.capsule.AccountCapsule;
@@ -18,8 +18,8 @@ import org.ich.core.config.Parameter.ChainConstant;
 import org.ich.core.config.args.Args;
 import org.ich.core.db.EnergyProcessor;
 import org.ich.core.db.Manager;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
 
 @Slf4j
 public class EnergyProcessorTest {
@@ -30,11 +30,11 @@ public class EnergyProcessorTest {
   private static final String USER_ADDRESS;
   private static Manager dbManager;
   private static ChainBaseManager chainBaseManager;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     ASSET_NAME = "test_token";
     CONTRACT_PROVIDER_ADDRESS =
         Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a1abc";

@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.core.Wallet;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
 
 
 @Component

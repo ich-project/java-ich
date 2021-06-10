@@ -15,7 +15,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.crypto.ECKey;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.common.common.utils.Sha256Hash;
@@ -37,13 +37,13 @@ import org.ich.core.store.DynamicPropertiesStore;
 public class PbftApiTest extends BlockGenerate {
 
   private static Manager dbManager;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static String dbPath = "output_pbftAPI_test";
 
   @Before
   public void init() {
     Args.setParam(new String[]{"-d", dbPath, "-w"}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     dbManager = context.getBean(Manager.class);
     setManager(dbManager);
   }

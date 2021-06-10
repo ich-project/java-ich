@@ -1,6 +1,6 @@
 package org.ich.core.exception;
 
-public class BalanceInsufficientException extends TronException {
+public class BalanceInsufficientException extends IchException {
 
   public BalanceInsufficientException() {
     super();

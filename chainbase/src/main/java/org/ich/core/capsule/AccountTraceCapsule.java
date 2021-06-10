@@ -5,8 +5,8 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.Objects;
 
 import org.ich.core.exception.BadItemException;
-import org.ich.protos.contract.BalanceContract;
-import org.ich.protos.contract.BalanceContract.AccountTrace;
+import org.ich.core.contract.BalanceContract;
+import org.ich.core.contract.BalanceContract.AccountTrace;
 
 public class AccountTraceCapsule implements ProtoCapsule<AccountTrace> {
   private BalanceContract.AccountTrace accountTrace;

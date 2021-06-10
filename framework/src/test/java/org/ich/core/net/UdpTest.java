@@ -8,7 +8,7 @@ import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.testng.collections.Lists;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.net.udp.message.Message;
 import org.ich.common.common.net.udp.message.discover.FindNodeMessage;
 import org.ich.common.common.net.udp.message.discover.NeighborsMessage;
@@ -26,7 +26,7 @@ public class UdpTest {
   //private volatile boolean finishFlag = false;
   //private long timeOut = 30_000;
 
-  public UdpTest(TronApplicationContext context) {
+  public UdpTest(IchApplicationContext context) {
     nodeManager = context.getBean(NodeManager.class);
   }
 

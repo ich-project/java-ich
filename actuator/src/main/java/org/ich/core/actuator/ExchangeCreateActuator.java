@@ -23,9 +23,9 @@ import org.ich.core.store.AssetIssueStore;
 import org.ich.core.store.DynamicPropertiesStore;
 import org.ich.core.store.ExchangeStore;
 import org.ich.core.store.ExchangeV2Store;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.ExchangeContract.ExchangeCreateContract;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.ExchangeContract.ExchangeCreateContract;
 
 @Slf4j(topic = "actuator")
 public class ExchangeCreateActuator extends AbstractActuator {

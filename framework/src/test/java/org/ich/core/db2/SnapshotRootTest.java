@@ -13,29 +13,29 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.common.common.utils.SessionOptional;
 import org.ich.core.Constant;
 import org.ich.core.capsule.ProtoCapsule;
 import org.ich.core.config.DefaultConfig;
 import org.ich.core.config.args.Args;
-import org.ich.core.db2.RevokingDbWithCacheNewValueTest.TestRevokingTronStore;
+import org.ich.core.db2.RevokingDbWithCacheNewValueTest.TestRevokingIchStore;
 import org.ich.core.db2.core.Snapshot;
 import org.ich.core.db2.core.SnapshotManager;
 import org.ich.core.db2.core.SnapshotRoot;
 
 public class SnapshotRootTest {
 
-  private TestRevokingTronStore tronDatabase;
-  private TronApplicationContext context;
+  private TestRevokingIchStore tronDatabase;
+  private IchApplicationContext context;
   private Application appT;
   private SnapshotManager revokingDatabase;
 
   @Before
   public void init() {
     Args.setParam(new String[]{"-d", "output_revokingStore_test"}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     appT = ApplicationFactory.create(context);
   }
 
@@ -49,7 +49,7 @@ public class SnapshotRootTest {
   @Test
   public synchronized void testRemove() {
     ProtoCapsuleTest testProtoCapsule = new ProtoCapsuleTest("test".getBytes());
-    tronDatabase = new TestRevokingTronStore("testSnapshotRoot-testRemove");
+    tronDatabase = new TestRevokingIchStore("testSnapshotRoot-testRemove");
     tronDatabase.put("test".getBytes(), testProtoCapsule);
     Assert.assertEquals(testProtoCapsule, tronDatabase.get("test".getBytes()));
 
@@ -60,7 +60,7 @@ public class SnapshotRootTest {
 
   @Test
   public synchronized void testMerge() {
-    tronDatabase = new TestRevokingTronStore("testSnapshotRoot-testMerge");
+    tronDatabase = new TestRevokingIchStore("testSnapshotRoot-testMerge");
     revokingDatabase = context.getBean(SnapshotManager.class);
     revokingDatabase.enable();
     revokingDatabase.add(tronDatabase.getRevokingDB());
@@ -77,7 +77,7 @@ public class SnapshotRootTest {
 
   @Test
   public synchronized void testMergeList() {
-    tronDatabase = new TestRevokingTronStore("testSnapshotRoot-testMergeList");
+    tronDatabase = new TestRevokingIchStore("testSnapshotRoot-testMergeList");
     revokingDatabase = context.getBean(SnapshotManager.class);
     revokingDatabase.enable();
     revokingDatabase.add(tronDatabase.getRevokingDB());

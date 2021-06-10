@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.core.capsule.AccountCapsule;
 import org.ich.core.capsule.BytesCapsule;
-import org.ich.core.db.TronStoreWithRevoking;
+import org.ich.core.db.IchStoreWithRevoking;
 
 @Slf4j
 @Component
-public class DelegationStore extends TronStoreWithRevoking<BytesCapsule> {
+public class DelegationStore extends IchStoreWithRevoking<BytesCapsule> {
 
   public static final long REMARK = -1L;
   public static final int DEFAULT_BROKERAGE = 20;

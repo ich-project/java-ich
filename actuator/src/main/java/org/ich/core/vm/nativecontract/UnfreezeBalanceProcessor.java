@@ -13,7 +13,7 @@ import org.ich.core.exception.ContractExeException;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.vm.nativecontract.param.UnfreezeBalanceParam;
 import org.ich.core.vm.repository.Repository;
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 
 public class UnfreezeBalanceProcessor {
 

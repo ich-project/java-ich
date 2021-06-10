@@ -7,7 +7,7 @@ import java.io.File;
 import lombok.extern.slf4j.Slf4j;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.FileUtil;
 import org.junit.After;
 import org.junit.Before;
@@ -31,9 +31,9 @@ import org.ich.core.exception.VMIllegalException;
 import org.ich.core.store.StoreFactory;
 import org.ich.core.vm.repository.Repository;
 import org.ich.core.vm.repository.RepositoryImpl;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.contract.SmartContractOuterClass.TriggerSmartContract;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.contract.SmartContractOuterClass.TriggerSmartContract;
 
 
 @Slf4j
@@ -41,7 +41,7 @@ import org.ich.protos.contract.SmartContractOuterClass.TriggerSmartContract;
 public class RuntimeImplTest {
 
   private Manager dbManager;
-  private TronApplicationContext context;
+  private IchApplicationContext context;
   private Repository repository;
   private String dbPath = "output_RuntimeImplTest";
   private Application AppT;
@@ -56,7 +56,7 @@ public class RuntimeImplTest {
   @Before
   public void init() {
     Args.setParam(new String[]{"--output-directory", dbPath, "--debug"}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     AppT = ApplicationFactory.create(context);
     callerAddress = Hex
         .decode(Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049abc");

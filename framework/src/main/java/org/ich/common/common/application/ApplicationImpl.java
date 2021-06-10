@@ -10,7 +10,7 @@ import org.ich.core.config.args.Args;
 import org.ich.core.consensus.ConsensusService;
 import org.ich.core.db.Manager;
 import org.ich.core.metrics.MetricsUtil;
-import org.ich.core.net.TronNetService;
+import org.ich.core.net.IchNetService;
 
 @Slf4j(topic = "app")
 @Component
@@ -19,7 +19,7 @@ public class ApplicationImpl implements Application {
   private ServiceContainer services;
 
   @Autowired
-  private TronNetService tronNetService;
+  private IchNetService ichNetService;
 
   @Autowired
   private Manager dbManager;
@@ -55,7 +55,7 @@ public class ApplicationImpl implements Application {
    * start up the app.
    */
   public void startup() {
-    tronNetService.start();
+    ichNetService.start();
     consensusService.start();
     MetricsUtil.init();
   }
@@ -63,7 +63,7 @@ public class ApplicationImpl implements Application {
   @Override
   public void shutdown() {
     logger.info("******** start to shutdown ********");
-    tronNetService.stop();
+    ichNetService.stop();
     consensusService.stop();
     synchronized (dbManager.getRevokingStore()) {
       closeRevokingStore();

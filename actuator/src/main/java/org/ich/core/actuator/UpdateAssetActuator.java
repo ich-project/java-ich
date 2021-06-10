@@ -15,10 +15,10 @@ import org.ich.core.store.AssetIssueStore;
 import org.ich.core.store.AssetIssueV2Store;
 import org.ich.core.store.DynamicPropertiesStore;
 import org.ich.core.utils.TransactionUtil;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.AccountContract.AccountUpdateContract;
-import org.ich.protos.contract.AssetIssueContractOuterClass.UpdateAssetContract;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.AccountContract.AccountUpdateContract;
+import org.ich.core.contract.AssetIssueContractOuterClass.UpdateAssetContract;
 
 @Slf4j(topic = "actuator")
 public class UpdateAssetActuator extends AbstractActuator {

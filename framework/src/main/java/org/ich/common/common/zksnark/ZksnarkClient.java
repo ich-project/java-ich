@@ -2,20 +2,20 @@ package org.ich.common.common.zksnark;
 
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannelBuilder;
-import org.ich.api.TronZksnarkGrpc;
+import org.ich.api.IchZksnarkGrpc;
 import org.ich.api.ZksnarkGrpcAPI.ZksnarkRequest;
 import org.ich.api.ZksnarkGrpcAPI.ZksnarkResponse.Code;
 import org.ich.core.capsule.TransactionCapsule;
-import org.ich.protos.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction;
 
 public class ZksnarkClient {
 
   public static final ZksnarkClient instance = new ZksnarkClient();
 
-  private TronZksnarkGrpc.TronZksnarkBlockingStub blockingStub;
+  private IchZksnarkGrpc.IchZksnarkBlockingStub blockingStub;
 
   public ZksnarkClient() {
-    blockingStub = TronZksnarkGrpc.newBlockingStub(ManagedChannelBuilder
+    blockingStub = IchZksnarkGrpc.newBlockingStub(ManagedChannelBuilder
         .forTarget("127.0.0.1:60051")
         .usePlaintext()
         .build());

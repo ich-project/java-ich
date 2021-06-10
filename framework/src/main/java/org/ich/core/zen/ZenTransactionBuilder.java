@@ -29,9 +29,9 @@ import org.ich.core.zen.note.Note;
 import org.ich.core.zen.note.Note.NotePlaintextEncryptionResult;
 import org.ich.core.zen.note.NoteEncryption;
 import org.ich.core.zen.note.OutgoingPlaintext;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.contract.ShieldContract.ShieldedTransferContract;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.contract.ShieldContract.ShieldedTransferContract;
 
 @Slf4j
 public class ZenTransactionBuilder {

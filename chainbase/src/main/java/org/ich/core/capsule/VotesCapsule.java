@@ -5,8 +5,8 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.ich.common.common.utils.ByteArray;
-import org.ich.protos.Protocol.Vote;
-import org.ich.protos.Protocol.Votes;
+import org.ich.core.Protocol.Vote;
+import org.ich.core.Protocol.Votes;
 
 @Slf4j(topic = "capsule")
 public class VotesCapsule implements ProtoCapsule<Votes> {

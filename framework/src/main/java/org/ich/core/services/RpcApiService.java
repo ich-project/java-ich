@@ -116,60 +116,60 @@ import org.ich.core.services.ratelimiter.RateLimiterInterceptor;
 import org.ich.core.utils.TransactionUtil;
 import org.ich.core.zen.address.DiversifierT;
 import org.ich.core.zen.address.IncomingViewingKey;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.Account;
-import org.ich.protos.Protocol.Block;
-import org.ich.protos.Protocol.DynamicProperties;
-import org.ich.protos.Protocol.Exchange;
-import org.ich.protos.Protocol.MarketOrder;
-import org.ich.protos.Protocol.MarketOrderList;
-import org.ich.protos.Protocol.MarketOrderPair;
-import org.ich.protos.Protocol.MarketOrderPairList;
-import org.ich.protos.Protocol.MarketPriceList;
-import org.ich.protos.Protocol.NodeInfo;
-import org.ich.protos.Protocol.Proposal;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.TransactionInfo;
-import org.ich.protos.Protocol.TransactionSign;
-import org.ich.protos.contract.AccountContract.AccountCreateContract;
-import org.ich.protos.contract.AccountContract.AccountPermissionUpdateContract;
-import org.ich.protos.contract.AccountContract.AccountUpdateContract;
-import org.ich.protos.contract.AccountContract.SetAccountIdContract;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
-import org.ich.protos.contract.AssetIssueContractOuterClass.ParticipateAssetIssueContract;
-import org.ich.protos.contract.AssetIssueContractOuterClass.TransferAssetContract;
-import org.ich.protos.contract.AssetIssueContractOuterClass.UnfreezeAssetContract;
-import org.ich.protos.contract.AssetIssueContractOuterClass.UpdateAssetContract;
-import org.ich.protos.contract.BalanceContract.AccountBalanceRequest;
-import org.ich.protos.contract.BalanceContract.AccountBalanceResponse;
-import org.ich.protos.contract.BalanceContract.BlockBalanceTrace;
-import org.ich.protos.contract.BalanceContract.FreezeBalanceContract;
-import org.ich.protos.contract.BalanceContract.TransferContract;
-import org.ich.protos.contract.BalanceContract.UnfreezeBalanceContract;
-import org.ich.protos.contract.BalanceContract.WithdrawBalanceContract;
-import org.ich.protos.contract.ExchangeContract.ExchangeCreateContract;
-import org.ich.protos.contract.ExchangeContract.ExchangeInjectContract;
-import org.ich.protos.contract.ExchangeContract.ExchangeTransactionContract;
-import org.ich.protos.contract.ExchangeContract.ExchangeWithdrawContract;
-import org.ich.protos.contract.MarketContract.MarketCancelOrderContract;
-import org.ich.protos.contract.MarketContract.MarketSellAssetContract;
-import org.ich.protos.contract.ProposalContract.ProposalApproveContract;
-import org.ich.protos.contract.ProposalContract.ProposalCreateContract;
-import org.ich.protos.contract.ProposalContract.ProposalDeleteContract;
-import org.ich.protos.contract.ShieldContract.IncrementalMerkleVoucherInfo;
-import org.ich.protos.contract.ShieldContract.OutputPointInfo;
-import org.ich.protos.contract.SmartContractOuterClass.ClearABIContract;
-import org.ich.protos.contract.SmartContractOuterClass.CreateSmartContract;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContractDataWrapper;
-import org.ich.protos.contract.SmartContractOuterClass.TriggerSmartContract;
-import org.ich.protos.contract.SmartContractOuterClass.UpdateEnergyLimitContract;
-import org.ich.protos.contract.SmartContractOuterClass.UpdateSettingContract;
-import org.ich.protos.contract.StorageContract.UpdateBrokerageContract;
-import org.ich.protos.contract.WitnessContract.VoteWitnessContract;
-import org.ich.protos.contract.WitnessContract.WitnessCreateContract;
-import org.ich.protos.contract.WitnessContract.WitnessUpdateContract;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.Account;
+import org.ich.core.Protocol.Block;
+import org.ich.core.Protocol.DynamicProperties;
+import org.ich.core.Protocol.Exchange;
+import org.ich.core.Protocol.MarketOrder;
+import org.ich.core.Protocol.MarketOrderList;
+import org.ich.core.Protocol.MarketOrderPair;
+import org.ich.core.Protocol.MarketOrderPairList;
+import org.ich.core.Protocol.MarketPriceList;
+import org.ich.core.Protocol.NodeInfo;
+import org.ich.core.Protocol.Proposal;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.TransactionInfo;
+import org.ich.core.Protocol.TransactionSign;
+import org.ich.core.contract.AccountContract.AccountCreateContract;
+import org.ich.core.contract.AccountContract.AccountPermissionUpdateContract;
+import org.ich.core.contract.AccountContract.AccountUpdateContract;
+import org.ich.core.contract.AccountContract.SetAccountIdContract;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.contract.AssetIssueContractOuterClass.ParticipateAssetIssueContract;
+import org.ich.core.contract.AssetIssueContractOuterClass.TransferAssetContract;
+import org.ich.core.contract.AssetIssueContractOuterClass.UnfreezeAssetContract;
+import org.ich.core.contract.AssetIssueContractOuterClass.UpdateAssetContract;
+import org.ich.core.contract.BalanceContract.AccountBalanceRequest;
+import org.ich.core.contract.BalanceContract.AccountBalanceResponse;
+import org.ich.core.contract.BalanceContract.BlockBalanceTrace;
+import org.ich.core.contract.BalanceContract.FreezeBalanceContract;
+import org.ich.core.contract.BalanceContract.TransferContract;
+import org.ich.core.contract.BalanceContract.UnfreezeBalanceContract;
+import org.ich.core.contract.BalanceContract.WithdrawBalanceContract;
+import org.ich.core.contract.ExchangeContract.ExchangeCreateContract;
+import org.ich.core.contract.ExchangeContract.ExchangeInjectContract;
+import org.ich.core.contract.ExchangeContract.ExchangeTransactionContract;
+import org.ich.core.contract.ExchangeContract.ExchangeWithdrawContract;
+import org.ich.core.contract.MarketContract.MarketCancelOrderContract;
+import org.ich.core.contract.MarketContract.MarketSellAssetContract;
+import org.ich.core.contract.ProposalContract.ProposalApproveContract;
+import org.ich.core.contract.ProposalContract.ProposalCreateContract;
+import org.ich.core.contract.ProposalContract.ProposalDeleteContract;
+import org.ich.core.contract.ShieldContract.IncrementalMerkleVoucherInfo;
+import org.ich.core.contract.ShieldContract.OutputPointInfo;
+import org.ich.core.contract.SmartContractOuterClass.ClearABIContract;
+import org.ich.core.contract.SmartContractOuterClass.CreateSmartContract;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract;
+import org.ich.core.contract.SmartContractOuterClass.SmartContractDataWrapper;
+import org.ich.core.contract.SmartContractOuterClass.TriggerSmartContract;
+import org.ich.core.contract.SmartContractOuterClass.UpdateEnergyLimitContract;
+import org.ich.core.contract.SmartContractOuterClass.UpdateSettingContract;
+import org.ich.core.contract.StorageContract.UpdateBrokerageContract;
+import org.ich.core.contract.WitnessContract.VoteWitnessContract;
+import org.ich.core.contract.WitnessContract.WitnessCreateContract;
+import org.ich.core.contract.WitnessContract.WitnessUpdateContract;
 
 @Component
 @Slf4j(topic = "API")
@@ -592,7 +592,7 @@ public class RpcApiService implements Service {
 
     @Override
     public void getDelegatedResourceAccountIndex(BytesMessage request,
-        StreamObserver<org.ich.protos.Protocol.DelegatedResourceAccountIndex> responseObserver) {
+        StreamObserver<org.ich.core.Protocol.DelegatedResourceAccountIndex> responseObserver) {
       responseObserver
           .onNext(wallet.getDelegatedResourceAccountIndex(request.getValue()));
       responseObserver.onCompleted();
@@ -858,7 +858,7 @@ public class RpcApiService implements Service {
     }
 
     @Override
-    public void getMarketOrderListByPair(org.ich.protos.Protocol.MarketOrderPair request,
+    public void getMarketOrderListByPair(org.ich.core.Protocol.MarketOrderPair request,
         StreamObserver<MarketOrderList> responseObserver) {
       try {
         MarketOrderList orderPairList = wallet
@@ -1272,11 +1272,11 @@ public class RpcApiService implements Service {
       int votesCount = req.getVotesCount();
       Preconditions.checkArgument(votesCount <= 0, "VotesCount[" + votesCount + "] <= 0");
       if (dbManager.getDynamicPropertiesStore().supportAllowNewResourceModel()) {
-        Preconditions.checkArgument(account.getAllTronPower() < votesCount,
-            "tron power[" + account.getAllTronPower() + "] <  VotesCount[" + votesCount + "]");
+        Preconditions.checkArgument(account.getAllIchPower() < votesCount,
+            "tron power[" + account.getAllIchPower() + "] <  VotesCount[" + votesCount + "]");
       } else {
-        Preconditions.checkArgument(account.getTronPower() < votesCount,
-            "tron power[" + account.getTronPower() + "] <  VotesCount[" + votesCount + "]");
+        Preconditions.checkArgument(account.getIchPower() < votesCount,
+            "tron power[" + account.getIchPower() + "] <  VotesCount[" + votesCount + "]");
       }
 
       req.getVotesList().forEach(vote -> {
@@ -1968,7 +1968,7 @@ public class RpcApiService implements Service {
     }
 
     public void getDelegatedResourceAccountIndex(BytesMessage request,
-        StreamObserver<org.ich.protos.Protocol.DelegatedResourceAccountIndex> responseObserver) {
+        StreamObserver<org.ich.core.Protocol.DelegatedResourceAccountIndex> responseObserver) {
       responseObserver
           .onNext(wallet.getDelegatedResourceAccountIndex(request.getValue()));
       responseObserver.onCompleted();
@@ -2609,7 +2609,7 @@ public class RpcApiService implements Service {
     }
 
     @Override
-    public void getMarketOrderListByPair(org.ich.protos.Protocol.MarketOrderPair request,
+    public void getMarketOrderListByPair(org.ich.core.Protocol.MarketOrderPair request,
         StreamObserver<MarketOrderList> responseObserver) {
       try {
         MarketOrderList orderPairList = wallet

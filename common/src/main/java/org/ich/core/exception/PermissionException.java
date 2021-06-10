@@ -1,6 +1,6 @@
 package org.ich.core.exception;
 
-public class PermissionException extends TronException {
+public class PermissionException extends IchException {
 
   public PermissionException() {
     super();

@@ -2,10 +2,10 @@ package org.ich.core.net;
 
 import static org.ich.core.net.message.MessageTypes.P2P_DISCONNECT;
 import static org.ich.core.net.message.MessageTypes.P2P_HELLO;
-import static org.ich.protos.Protocol.ReasonCode.DUPLICATE_PEER;
-import static org.ich.protos.Protocol.ReasonCode.FORKED;
-import static org.ich.protos.Protocol.ReasonCode.INCOMPATIBLE_CHAIN;
-import static org.ich.protos.Protocol.ReasonCode.INCOMPATIBLE_VERSION;
+import static org.ich.core.Protocol.ReasonCode.DUPLICATE_PEER;
+import static org.ich.core.Protocol.ReasonCode.FORKED;
+import static org.ich.core.Protocol.ReasonCode.INCOMPATIBLE_CHAIN;
+import static org.ich.core.Protocol.ReasonCode.INCOMPATIBLE_VERSION;
 
 import com.google.common.cache.CacheBuilder;
 import io.netty.buffer.ByteBuf;
@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Assert;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.overlay.discover.node.Node;
 import org.ich.common.common.overlay.message.DisconnectMessage;
 import org.ich.common.common.overlay.message.HelloMessage;
@@ -37,7 +37,7 @@ import org.ich.core.config.args.Args;
 import org.ich.core.db.Manager;
 import org.ich.core.net.message.BlockMessage;
 import org.ich.core.net.peer.PeerConnection;
-import org.ich.protos.Protocol.Block;
+import org.ich.core.Protocol.Block;
 
 @Slf4j
 public class TcpTest {
@@ -47,17 +47,17 @@ public class TcpTest {
   private Manager manager;
   private ChainBaseManager chainBaseManager;
   private SyncPool pool;
-  private TronNetDelegate tronNetDelegate;
+  private IchNetDelegate ichNetDelegate;
   private int tryTimes = 10;
   private int sleepTime = 1000;
   private boolean finish = false;
 
-  public TcpTest(TronApplicationContext context) {
+  public TcpTest(IchApplicationContext context) {
     channelManager = context.getBean(ChannelManager.class);
     manager = context.getBean(Manager.class);
     chainBaseManager = context.getBean(ChainBaseManager.class);
     pool = context.getBean(SyncPool.class);
-    tronNetDelegate = context.getBean(TronNetDelegate.class);
+    ichNetDelegate = context.getBean(IchNetDelegate.class);
   }
 
   public void normalTest() throws InterruptedException {
@@ -174,7 +174,7 @@ public class TcpTest {
     channel.close();
     Thread.sleep(sleepTime);
     Collection<PeerConnection> peerConnections = ReflectUtils
-        .invokeMethod(tronNetDelegate, "getActivePeer");
+        .invokeMethod(ichNetDelegate, "getActivePeer");
     for (PeerConnection peer : peerConnections) {
       peer.close();
     }
@@ -196,7 +196,7 @@ public class TcpTest {
     channel.close();
     Thread.sleep(sleepTime);
     Collection<PeerConnection> peerConnections = ReflectUtils
-        .invokeMethod(tronNetDelegate, "getActivePeer");
+        .invokeMethod(ichNetDelegate, "getActivePeer");
     for (PeerConnection peer : peerConnections) {
       peer.close();
     }

@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.core.store.AssetIssueStore;
 import org.ich.core.store.DynamicPropertiesStore;
-import org.ich.protos.Protocol.Exchange;
+import org.ich.core.Protocol.Exchange;
 
 @Slf4j(topic = "capsule")
 public class ExchangeCapsule implements ProtoCapsule<Exchange> {

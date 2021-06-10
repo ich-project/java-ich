@@ -1,23 +1,8 @@
 package org.ich.core.db;
 
-import java.lang.ref.Reference;
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.ich.common.common.utils.Pair;
 import org.ich.common.common.utils.Sha256Hash;
 import org.ich.core.capsule.BlockCapsule;
@@ -25,10 +10,20 @@ import org.ich.core.capsule.BlockCapsule.BlockId;
 import org.ich.core.exception.BadNumberBlockException;
 import org.ich.core.exception.NonCommonBlockException;
 import org.ich.core.exception.UnLinkedBlockException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import java.lang.ref.Reference;
+import java.lang.ref.WeakReference;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 @Slf4j(topic = "DB")
-public class KhaosDatabase extends TronDatabase {
+public class KhaosDatabase extends IchDatabase {
 
   private KhaosBlock head;
   @Getter

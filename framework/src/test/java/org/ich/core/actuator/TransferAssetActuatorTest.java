@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-ich is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-ich is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -28,7 +28,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.spongycastle.util.encoders.Hex;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.runtime.TvmTestUtils;
 import org.ich.common.common.storage.DepositImpl;
 import org.ich.common.common.utils.ByteArray;
@@ -47,11 +47,11 @@ import org.ich.core.exception.ContractValidateException;
 import org.ich.core.exception.ReceiptCheckErrException;
 import org.ich.core.exception.VMIllegalException;
 import org.ich.core.vm.config.VMConfig;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.AssetIssueContractOuterClass;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
-import org.ich.protos.contract.AssetIssueContractOuterClass.TransferAssetContract;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.AssetIssueContractOuterClass;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.contract.AssetIssueContractOuterClass.TransferAssetContract;
 
 @Slf4j
 public class TransferAssetActuatorTest {
@@ -76,13 +76,13 @@ public class TransferAssetActuatorTest {
   private static final int VOTE_SCORE = 2;
   private static final String DESCRIPTION = "TRX";
   private static final String URL = "https://tron.network";
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static Manager dbManager;
   private static Any contract;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049150";
     TO_ADDRESS = Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a146a";
     NOT_EXIT_ADDRESS = Wallet.getAddressPreFixString() + "B56446E617E924805E4D6CA021D341FEF6E2013B";

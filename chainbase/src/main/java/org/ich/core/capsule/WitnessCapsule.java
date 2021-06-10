@@ -6,7 +6,7 @@ import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import lombok.extern.slf4j.Slf4j;
 import org.ich.common.common.utils.ByteArray;
-import org.ich.protos.Protocol.Witness;
+import org.ich.core.Protocol.Witness;
 
 @Slf4j(topic = "capsule")
 public class WitnessCapsule implements ProtoCapsule<Witness>, Comparable<WitnessCapsule> {

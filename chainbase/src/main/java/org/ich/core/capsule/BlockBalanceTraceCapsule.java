@@ -4,8 +4,8 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.List;
 
 import org.ich.core.exception.BadItemException;
-import org.ich.protos.contract.BalanceContract.BlockBalanceTrace;
-import org.ich.protos.contract.BalanceContract.TransactionBalanceTrace;
+import org.ich.core.contract.BalanceContract.BlockBalanceTrace;
+import org.ich.core.contract.BalanceContract.TransactionBalanceTrace;
 
 import java.util.Objects;
 

@@ -42,13 +42,13 @@ import org.ich.core.capsule.TransactionCapsule;
 import org.ich.core.config.args.Args;
 import org.ich.core.db.TransactionTrace;
 import org.ich.core.services.http.JsonFormat.ParseException;
-import org.ich.protos.Protocol.Account;
-import org.ich.protos.Protocol.Block;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.TransactionInfo;
-import org.ich.protos.Protocol.TransactionInfo.Log;
-import org.ich.protos.contract.SmartContractOuterClass.CreateSmartContract;
+import org.ich.core.Protocol.Account;
+import org.ich.core.Protocol.Block;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.TransactionInfo;
+import org.ich.core.Protocol.TransactionInfo.Log;
+import org.ich.core.contract.SmartContractOuterClass.CreateSmartContract;
 
 
 @Slf4j(topic = "API")
@@ -478,7 +478,7 @@ public class Util {
     return address;
   }
 
-  public static List<Log> convertLogAddressToTronAddress(TransactionInfo transactionInfo) {
+  public static List<Log> convertLogAddressToIchAddress(TransactionInfo transactionInfo) {
     List<Log> newLogList = new ArrayList<>();
 
     for (Log log : transactionInfo.getLogList()) {
@@ -494,7 +494,7 @@ public class Util {
         int start = 20 - oldAddress.length;
         System.arraycopy(oldAddress, 0, newAddress, start, oldAddress.length);
         logBuilder
-            .setAddress(ByteString.copyFrom(TransactionTrace.convertToTronAddress(newAddress)));
+            .setAddress(ByteString.copyFrom(TransactionTrace.convertToIchAddress(newAddress)));
       }
 
       newLogList.add(logBuilder.build());

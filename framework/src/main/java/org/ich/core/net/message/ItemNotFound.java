@@ -1,10 +1,10 @@
 package org.ich.core.net.message;
 
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 
-public class ItemNotFound extends TronMessage {
+public class ItemNotFound extends IchMessage {
 
-  private org.ich.protos.Protocol.Items notFound;
+  private org.ich.core.Protocol.Items notFound;
 
   /**
    * means can not find this block or trx.

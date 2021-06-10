@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-ich is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-ich is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -20,7 +20,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.core.capsule.utils.TxOutputUtil;
-import org.ich.protos.Protocol.TXOutput;
+import org.ich.core.Protocol.TXOutput;
 
 @Slf4j
 public class TxOutputUtilTest {

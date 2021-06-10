@@ -36,7 +36,7 @@ public class PeerServer {
 
     EventLoopGroup bossGroup = new NioEventLoopGroup(1);
     EventLoopGroup workerGroup = new NioEventLoopGroup(parameter.getTcpNettyWorkThreadNum());
-    TronChannelInitializer tronChannelInitializer = ctx.getBean(TronChannelInitializer.class, "");
+    IchChannelInitializer tronChannelInitializer = ctx.getBean(IchChannelInitializer.class, "");
 
     try {
       ServerBootstrap b = new ServerBootstrap();

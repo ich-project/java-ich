@@ -17,9 +17,9 @@ import org.ich.core.capsule.TransactionResultCapsule;
 import org.ich.core.exception.ContractExeException;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.utils.ProposalUtil;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.ProposalContract.ProposalCreateContract;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.ProposalContract.ProposalCreateContract;
 
 @Slf4j(topic = "actuator")
 public class ProposalCreateActuator extends AbstractActuator {

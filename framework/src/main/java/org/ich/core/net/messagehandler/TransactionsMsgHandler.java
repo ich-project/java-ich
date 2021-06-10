@@ -14,26 +14,26 @@ import org.springframework.stereotype.Component;
 import org.ich.core.config.args.Args;
 import org.ich.core.exception.P2pException;
 import org.ich.core.exception.P2pException.TypeEnum;
-import org.ich.core.net.TronNetDelegate;
+import org.ich.core.net.IchNetDelegate;
 import org.ich.core.net.message.TransactionMessage;
 import org.ich.core.net.message.TransactionsMessage;
-import org.ich.core.net.message.TronMessage;
+import org.ich.core.net.message.IchMessage;
 import org.ich.core.net.peer.Item;
 import org.ich.core.net.peer.PeerConnection;
 import org.ich.core.net.service.AdvService;
-import org.ich.protos.Protocol.Inventory.InventoryType;
-import org.ich.protos.Protocol.ReasonCode;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Inventory.InventoryType;
+import org.ich.core.Protocol.ReasonCode;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
 
 @Slf4j(topic = "net")
 @Component
-public class TransactionsMsgHandler implements TronMsgHandler {
+public class TransactionsMsgHandler implements IchMsgHandler {
 
   private static int MAX_TRX_SIZE = 50_000;
   private static int MAX_SMART_CONTRACT_SUBMIT_SIZE = 100;
   @Autowired
-  private TronNetDelegate tronNetDelegate;
+  private IchNetDelegate ichNetDelegate;
   @Autowired
   private AdvService advService;
 
@@ -62,7 +62,7 @@ public class TransactionsMsgHandler implements TronMsgHandler {
   }
 
   @Override
-  public void processMessage(PeerConnection peer, TronMessage msg) throws P2pException {
+  public void processMessage(PeerConnection peer, IchMessage msg) throws P2pException {
     TransactionsMessage transactionsMessage = (TransactionsMessage) msg;
     check(peer, transactionsMessage);
     for (Transaction trx : transactionsMessage.getTransactions().getTransactionsList()) {
@@ -115,7 +115,7 @@ public class TransactionsMsgHandler implements TronMsgHandler {
     }
 
     try {
-      tronNetDelegate.pushTransaction(trx.getTransactionCapsule());
+      ichNetDelegate.pushTransaction(trx.getTransactionCapsule());
       advService.broadcast(trx);
     } catch (P2pException e) {
       logger.warn("Trx {} from peer {} process failed. type: {}, reason: {}",

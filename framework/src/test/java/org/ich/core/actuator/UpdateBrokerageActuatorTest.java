@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.spongycastle.util.encoders.Hex;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.Constant;
@@ -26,10 +26,10 @@ import org.ich.core.db.Manager;
 import org.ich.core.exception.ContractExeException;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.store.DelegationStore;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.contract.AssetIssueContractOuterClass;
-import org.ich.protos.contract.StorageContract.UpdateBrokerageContract;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.contract.AssetIssueContractOuterClass;
+import org.ich.core.contract.StorageContract.UpdateBrokerageContract;
 
 @Slf4j(topic = "actuator")
 public class UpdateBrokerageActuatorTest {
@@ -39,12 +39,12 @@ public class UpdateBrokerageActuatorTest {
   private static final String OWNER_ADDRESS_NOTEXIST;
   private static final String OWNER_ADDRESS_INVALID;
   private static final int BROKEN_AGE = 10;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static Manager dbManager;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049abc";
     OWNER_ADDRESS_NOTEXIST =
         Wallet.getAddressPreFixString() + "1234b9367799eaa3197fecb144eb71de1e049123";

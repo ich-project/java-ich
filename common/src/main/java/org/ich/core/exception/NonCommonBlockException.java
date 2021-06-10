@@ -1,6 +1,6 @@
 package org.ich.core.exception;
 
-public class NonCommonBlockException extends TronException {
+public class NonCommonBlockException extends IchException {
 
   public NonCommonBlockException() {
     super();

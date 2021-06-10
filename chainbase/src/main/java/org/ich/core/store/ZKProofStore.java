@@ -3,10 +3,10 @@ package org.ich.core.store;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import org.ich.core.db.TronDatabase;
+import org.ich.core.db.IchDatabase;
 
 @Component
-public class ZKProofStore extends TronDatabase<Boolean> {
+public class ZKProofStore extends IchDatabase<Boolean> {
 
   @Autowired
   public ZKProofStore(ApplicationContext ctx) {

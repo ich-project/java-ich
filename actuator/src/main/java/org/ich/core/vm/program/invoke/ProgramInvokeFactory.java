@@ -23,8 +23,8 @@ import org.ich.common.common.runtime.vm.DataWord;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.vm.program.Program;
 import org.ich.core.vm.repository.Repository;
-import org.ich.protos.Protocol.Block;
-import org.ich.protos.Protocol.Transaction;
+import org.ich.core.Protocol.Block;
+import org.ich.core.Protocol.Transaction;
 
 /**
  * @author Roman Mandeleil

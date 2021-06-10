@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.core.capsule.BytesCapsule;
-import org.ich.core.db.TronStoreWithRevoking;
+import org.ich.core.db.IchStoreWithRevoking;
 
 @Slf4j(topic = "DB")
 @Component
-public class WitnessScheduleStore extends TronStoreWithRevoking<BytesCapsule> {
+public class WitnessScheduleStore extends IchStoreWithRevoking<BytesCapsule> {
 
   private static final byte[] ACTIVE_WITNESSES = "active_witnesses".getBytes();
   private static final byte[] CURRENT_SHUFFLED_WITNESSES = "current_shuffled_witnesses".getBytes();

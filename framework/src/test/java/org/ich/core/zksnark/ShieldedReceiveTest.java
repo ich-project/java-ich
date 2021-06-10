@@ -22,7 +22,7 @@ import org.ich.api.GrpcAPI.DecryptNotes;
 import org.ich.api.GrpcAPI.ReceiveNote;
 import org.ich.api.GrpcAPI.SpendAuthSigParameters;
 import org.ich.api.GrpcAPI.TransactionExtention;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.crypto.ECKey;
 import org.ich.common.common.parameter.CommonParameter;
 import org.ich.common.common.utils.ByteArray;
@@ -88,20 +88,20 @@ import org.ich.core.zen.note.Note;
 import org.ich.core.zen.note.Note.NotePlaintextEncryptionResult;
 import org.ich.core.zen.note.NoteEncryption;
 import org.ich.core.zen.note.OutgoingPlaintext;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Block;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.TransactionSign;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
-import org.ich.protos.contract.ShieldContract.IncrementalMerkleVoucherInfo;
-import org.ich.protos.contract.ShieldContract.OutputPoint;
-import org.ich.protos.contract.ShieldContract.OutputPointInfo;
-import org.ich.protos.contract.ShieldContract.PedersenHash;
-import org.ich.protos.contract.ShieldContract.ReceiveDescription;
-import org.ich.protos.contract.ShieldContract.ShieldedTransferContract;
-import org.ich.protos.contract.ShieldContract.SpendDescription;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Block;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.TransactionSign;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.contract.ShieldContract.IncrementalMerkleVoucherInfo;
+import org.ich.core.contract.ShieldContract.OutputPoint;
+import org.ich.core.contract.ShieldContract.OutputPointInfo;
+import org.ich.core.contract.ShieldContract.PedersenHash;
+import org.ich.core.contract.ShieldContract.ReceiveDescription;
+import org.ich.core.contract.ShieldContract.ShieldedTransferContract;
+import org.ich.core.contract.ShieldContract.SpendDescription;
 
 @Slf4j
 public class ShieldedReceiveTest extends BlockGenerate {
@@ -123,13 +123,13 @@ public class ShieldedReceiveTest extends BlockGenerate {
   private static Manager dbManager;
   private static ChainBaseManager chainBaseManager;
   private static ConsensusService consensusService;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static Wallet wallet;
   private static TransactionUtil transactionUtil;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, "config-localtest.conf");
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     FROM_ADDRESS = Wallet.getAddressPreFixString() + "a7d8a35b260395c14aa456297662092ba3b76fc0";
     ADDRESS_ONE_PRIVATE_KEY = "7f7f701e94d4f1dd60ee5205e7ea8ee31121427210417b608a6b2e96433549a7";
   }
@@ -2273,7 +2273,7 @@ public class ShieldedReceiveTest extends BlockGenerate {
     byte[] ivk = fullViewingKey.inViewingKey().getValue();
     Protocol.Transaction t = transactionCap.getInstance();
 
-    for (org.ich.protos.Protocol.Transaction.Contract c : t.getRawData().getContractList()) {
+    for (org.ich.core.Protocol.Transaction.Contract c : t.getRawData().getContractList()) {
       if (c.getType() != ContractType.ShieldedTransferContract) {
         continue;
       }
@@ -2356,7 +2356,7 @@ public class ShieldedReceiveTest extends BlockGenerate {
     byte[] ivk = fullViewingKey.inViewingKey().getValue();
     Protocol.Transaction t = transactionCap.getInstance();
 
-    for (org.ich.protos.Protocol.Transaction.Contract c : t.getRawData().getContractList()) {
+    for (org.ich.core.Protocol.Transaction.Contract c : t.getRawData().getContractList()) {
       if (c.getType() != ContractType.ShieldedTransferContract) {
         continue;
       }

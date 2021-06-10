@@ -7,7 +7,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
 import org.junit.After;
@@ -30,20 +30,20 @@ import org.ich.core.vm.program.invoke.ProgramInvoke;
 import org.ich.core.vm.program.invoke.ProgramInvokeFactory;
 import org.ich.core.vm.repository.Repository;
 import org.ich.core.vm.repository.RepositoryImpl;
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 
 @Slf4j
 public class Trc10InsTest {
 
   private String dbPath;
-  private TronApplicationContext context;
+  private IchApplicationContext context;
 
   @Before
   public void init() {
     dbPath = "output_" + this.getClass().getName();
     FileUtil.deleteDir(new File(dbPath));
     Args.setParam(new String[]{"--output-directory", dbPath, "--debug"}, "config-localtest.conf");
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
   }
 
   // TODO: 2020/11/26
@@ -54,9 +54,9 @@ public class Trc10InsTest {
   public void testTokenIssueAndUpdateAsset() throws ContractValidateException {
     // construct ProgramInvoke instance
     Repository deposit = RepositoryImpl.createRoot(StoreFactory.getInstance());
-    byte[] ownerAddr = TransactionTrace.convertToTronAddress(
+    byte[] ownerAddr = TransactionTrace.convertToIchAddress(
         Hex.decode("abd4b9367799eaa3197fecb144eb71de1e049abc"));
-    byte[] contractAddr = TransactionTrace.convertToTronAddress(
+    byte[] contractAddr = TransactionTrace.convertToIchAddress(
         Hex.decode("471fd3ad3e9eeadeec4608b92d16ce6b500704cc"));
     Protocol.Transaction trx = TvmTestUtils.generateTriggerSmartContractAndGetTransaction(
         ownerAddr, contractAddr, new byte[0], 0, 0);

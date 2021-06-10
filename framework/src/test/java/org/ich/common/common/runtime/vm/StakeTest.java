@@ -24,7 +24,7 @@ import org.ich.core.vm.program.invoke.ProgramInvokeFactory;
 import org.ich.core.vm.program.invoke.ProgramInvokeFactoryImpl;
 import org.ich.core.vm.repository.Repository;
 import org.ich.core.vm.repository.RepositoryImpl;
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 import stest.ich.wallet.common.client.utils.AbiUtil;
 
 @Slf4j

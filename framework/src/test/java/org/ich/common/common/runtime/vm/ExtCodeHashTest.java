@@ -13,7 +13,7 @@ import org.ich.core.exception.ContractExeException;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.exception.ReceiptCheckErrException;
 import org.ich.core.exception.VMIllegalException;
-import org.ich.protos.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction;
 import stest.ich.wallet.common.client.utils.AbiUtil;
 
 @Slf4j

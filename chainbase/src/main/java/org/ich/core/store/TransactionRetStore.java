@@ -12,13 +12,13 @@ import org.ich.common.common.utils.ByteArray;
 import org.ich.core.capsule.TransactionInfoCapsule;
 import org.ich.core.capsule.TransactionRetCapsule;
 import org.ich.core.db.TransactionStore;
-import org.ich.core.db.TronStoreWithRevoking;
+import org.ich.core.db.IchStoreWithRevoking;
 import org.ich.core.exception.BadItemException;
-import org.ich.protos.Protocol.TransactionInfo;
+import org.ich.core.Protocol.TransactionInfo;
 
 @Slf4j(topic = "DB")
 @Component
-public class TransactionRetStore extends TronStoreWithRevoking<TransactionRetCapsule> {
+public class TransactionRetStore extends IchStoreWithRevoking<TransactionRetCapsule> {
 
   @Autowired
   private TransactionStore transactionStore;

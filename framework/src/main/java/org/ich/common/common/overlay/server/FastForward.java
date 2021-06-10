@@ -25,8 +25,8 @@ import org.ich.core.capsule.TransactionCapsule;
 import org.ich.core.config.args.Args;
 import org.ich.core.db.Manager;
 import org.ich.core.store.WitnessScheduleStore;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.ReasonCode;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.ReasonCode;
 
 @Slf4j(topic = "net")
 @Component

@@ -14,7 +14,7 @@ import org.ich.core.exception.ContractValidateException;
 import org.ich.core.store.DynamicPropertiesStore;
 import org.ich.core.vm.nativecontract.param.FreezeBalanceParam;
 import org.ich.core.vm.repository.Repository;
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 
 @Slf4j(topic = "Processor")
 public class FreezeBalanceProcessor {

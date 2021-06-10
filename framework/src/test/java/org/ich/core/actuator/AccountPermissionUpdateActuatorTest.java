@@ -15,7 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.Constant;
@@ -27,14 +27,14 @@ import org.ich.core.config.args.Args;
 import org.ich.core.db.Manager;
 import org.ich.core.exception.ContractExeException;
 import org.ich.core.exception.ContractValidateException;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Key;
-import org.ich.protos.Protocol.Permission;
-import org.ich.protos.Protocol.Permission.PermissionType;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.AccountContract.AccountCreateContract;
-import org.ich.protos.contract.AccountContract.AccountPermissionUpdateContract;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Key;
+import org.ich.core.Protocol.Permission;
+import org.ich.core.Protocol.Permission.PermissionType;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.AccountContract.AccountCreateContract;
+import org.ich.core.contract.AccountContract.AccountPermissionUpdateContract;
 
 @Slf4j
 public class AccountPermissionUpdateActuatorTest {
@@ -60,11 +60,11 @@ public class AccountPermissionUpdateActuatorTest {
   private static final String KEY_ADDRESS_INVALID = "bbbb";
   public static Application AppT;
   private static Manager dbManager;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     AppT = ApplicationFactory.create(context);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049abc";
     WITNESS_ADDRESS = Wallet.getAddressPreFixString() + "8CFC572CC20CA18B636BDD93B4FB15EA84CC2B4E";
@@ -973,7 +973,7 @@ public class AccountPermissionUpdateActuatorTest {
 
     byte[] availableContractType = new byte[32];
     for (ContractType contractType : ContractType.values()) {
-      if (contractType == org.ich.protos.Protocol.Transaction.Contract.ContractType.UNRECOGNIZED
+      if (contractType == org.ich.core.Protocol.Transaction.Contract.ContractType.UNRECOGNIZED
           || contractType == ContractType.ClearABIContract
           || contractType == ContractType.UpdateBrokerageContract) {
         continue;
@@ -1000,7 +1000,7 @@ public class AccountPermissionUpdateActuatorTest {
 
     byte[] availableContractType = new byte[32];
     for (ContractType contractType : ContractType.values()) {
-      if (contractType == org.ich.protos.Protocol.Transaction.Contract.ContractType.UNRECOGNIZED
+      if (contractType == org.ich.core.Protocol.Transaction.Contract.ContractType.UNRECOGNIZED
           || contractType == ContractType.AccountPermissionUpdateContract
           || contractType == ContractType.ClearABIContract
           || contractType == ContractType.UpdateBrokerageContract) {
@@ -1023,7 +1023,7 @@ public class AccountPermissionUpdateActuatorTest {
 
     byte[] availableContractType = new byte[32];
     for (ContractType contractType : ContractType.values()) {
-      if (contractType == org.ich.protos.Protocol.Transaction.Contract.ContractType.UNRECOGNIZED
+      if (contractType == org.ich.core.Protocol.Transaction.Contract.ContractType.UNRECOGNIZED
           || contractType == ContractType.UpdateBrokerageContract) {
         continue;
       }
@@ -1044,7 +1044,7 @@ public class AccountPermissionUpdateActuatorTest {
 
     byte[] availableContractType = new byte[32];
     for (ContractType contractType : ContractType.values()) {
-      if (contractType == org.ich.protos.Protocol.Transaction.Contract.ContractType.UNRECOGNIZED
+      if (contractType == org.ich.core.Protocol.Transaction.Contract.ContractType.UNRECOGNIZED
           || contractType == ContractType.AccountPermissionUpdateContract
           || contractType == ContractType.UpdateBrokerageContract) {
         continue;

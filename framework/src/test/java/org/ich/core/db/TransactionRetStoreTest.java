@@ -5,7 +5,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.Constant;
@@ -16,7 +16,7 @@ import org.ich.core.config.DefaultConfig;
 import org.ich.core.config.args.Args;
 import org.ich.core.exception.BadItemException;
 import org.ich.core.store.TransactionRetStore;
-import org.ich.protos.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction;
 
 public class TransactionRetStoreTest {
 
@@ -25,7 +25,7 @@ public class TransactionRetStoreTest {
   private static String dbPath = "output_TransactionRetStore_test";
   private static String dbDirectory = "db_TransactionRetStore_test";
   private static String indexDirectory = "index_TransactionRetStore_test";
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static TransactionRetStore transactionRetStore;
   private static Transaction transaction;
   private static TransactionStore transactionStore;
@@ -33,7 +33,7 @@ public class TransactionRetStoreTest {
   static {
     Args.setParam(new String[]{"--output-directory", dbPath, "--storage-db-directory", dbDirectory,
         "--storage-index-directory", indexDirectory}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
   }
 
   @AfterClass

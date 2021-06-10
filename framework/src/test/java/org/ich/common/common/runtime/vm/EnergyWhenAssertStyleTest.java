@@ -4,7 +4,7 @@ import java.io.File;
 import lombok.extern.slf4j.Slf4j;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.storage.DepositImpl;
 import org.ich.common.common.utils.FileUtil;
 import org.junit.After;
@@ -27,7 +27,7 @@ import org.ich.core.exception.VMIllegalException;
 import org.ich.core.vm.program.Program.IllegalOperationException;
 import org.ich.core.vm.program.Program.OutOfMemoryException;
 import org.ich.core.vm.program.Program.PrecompiledContractException;
-import org.ich.protos.Protocol.AccountType;
+import org.ich.core.Protocol.AccountType;
 
 
 @Slf4j
@@ -35,7 +35,7 @@ import org.ich.protos.Protocol.AccountType;
 public class EnergyWhenAssertStyleTest {
 
   private Manager dbManager;
-  private TronApplicationContext context;
+  private IchApplicationContext context;
   private DepositImpl deposit;
   private String dbPath = "output_EnergyWhenAssertStyleTest";
   private String OWNER_ADDRESS;
@@ -49,7 +49,7 @@ public class EnergyWhenAssertStyleTest {
   @Before
   public void init() {
     Args.setParam(new String[]{"--output-directory", dbPath, "--debug"}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     AppT = ApplicationFactory.create(context);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049abc";
     dbManager = context.getBean(Manager.class);
@@ -457,7 +457,7 @@ public class EnergyWhenAssertStyleTest {
 
   // pragma solidity ^0.4.0;
   //
-  // contract TronNative{
+  // contract IchNative{
   //
   //   address public voteContractAddress= 0x10001;
   //

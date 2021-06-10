@@ -25,8 +25,8 @@ import org.ich.common.common.overlay.discover.node.Node;
 import org.ich.core.db.ByteArrayWrapper;
 import org.ich.core.exception.P2pException;
 import org.ich.core.net.PbftHandler;
-import org.ich.core.net.TronNetHandler;
-import org.ich.protos.Protocol.ReasonCode;
+import org.ich.core.net.IchNetHandler;
+import org.ich.core.Protocol.ReasonCode;
 
 @Slf4j(topic = "net")
 @Component
@@ -49,7 +49,7 @@ public class Channel {
   @Autowired
   private P2pHandler p2pHandler;
   @Autowired
-  private TronNetHandler tronNetHandler;
+  private IchNetHandler tronNetHandler;
   @Autowired
   private PbftHandler pbftHandler;
   private ChannelManager channelManager;
@@ -57,7 +57,7 @@ public class Channel {
   private InetSocketAddress inetSocketAddress;
   private Node node;
   private long startTime;
-  private TronState tronState = TronState.INIT;
+  private IchState tronState = IchState.INIT;
   private boolean isActive;
 
   private volatile boolean isDisconnect;
@@ -106,7 +106,7 @@ public class Channel {
     ctx.pipeline().addLast("data", tronNetHandler);
     ctx.pipeline().addLast("pbft", pbftHandler);
     setStartTime(msg.getTimestamp());
-    setTronState(TronState.HANDSHAKE_FINISHED);
+    setIchState(IchState.HANDSHAKE_FINISHED);
     getNodeStatistics().p2pHandShake.add();
     logger.info("Finish handshake with {}.", ctx.channel().remoteAddress());
   }
@@ -196,7 +196,7 @@ public class Channel {
     this.startTime = startTime;
   }
 
-  public void setTronState(TronState tronState) {
+  public void setIchState(IchState tronState) {
     this.tronState = tronState;
     logger.info("Peer {} status change to {}.", inetSocketAddress, tronState);
   }
@@ -249,7 +249,7 @@ public class Channel {
     return String.format("%s | %s", inetSocketAddress, getPeerId());
   }
 
-  public enum TronState {
+  public enum IchState {
     INIT,
     HANDSHAKE_FINISHED,
     START_TO_SYNC,

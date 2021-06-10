@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import org.ich.api.GrpcAPI.NumberMessage;
 import org.ich.api.GrpcAPI.TransactionInfoList;
 import org.ich.core.Wallet;
-import org.ich.protos.Protocol.TransactionInfo;
-import org.ich.protos.Protocol.TransactionInfo.Log;
+import org.ich.core.Protocol.TransactionInfo;
+import org.ich.core.Protocol.TransactionInfo.Log;
 
 @Component
 @Slf4j(topic = "API")
@@ -22,10 +22,10 @@ public class GetTransactionInfoByBlockNumServlet extends RateLimiterServlet {
   @Autowired
   private Wallet wallet;
 
-  private JSONObject convertLogAddressToTronAddress(TransactionInfo transactionInfo,
+  private JSONObject convertLogAddressToIchAddress(TransactionInfo transactionInfo,
       boolean visible) {
     if (visible) {
-      List<Log> newLogList = Util.convertLogAddressToTronAddress(transactionInfo);
+      List<Log> newLogList = Util.convertLogAddressToIchAddress(transactionInfo);
       transactionInfo = transactionInfo.toBuilder().clearLog().addAllLog(newLogList).build();
     }
 
@@ -35,7 +35,7 @@ public class GetTransactionInfoByBlockNumServlet extends RateLimiterServlet {
   private String printTransactionInfoList(TransactionInfoList list, boolean selfType) {
     JSONArray jsonArray = new JSONArray();
     for (TransactionInfo transactionInfo : list.getTransactionInfoList()) {
-      jsonArray.add(convertLogAddressToTronAddress(transactionInfo, selfType));
+      jsonArray.add(convertLogAddressToIchAddress(transactionInfo, selfType));
     }
     return jsonArray.toJSONString();
   }

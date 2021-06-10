@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.Constant;
 import org.ich.core.config.DefaultConfig;
@@ -15,12 +15,12 @@ import org.ich.core.config.args.Args;
 public class BlockStoreTest {
 
   private static final String dbPath = "output-blockStore-test";
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath},
         Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
   }
 
   BlockStore blockStore;

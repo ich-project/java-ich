@@ -3,7 +3,7 @@
 contract TRON_ERC721 {
   //name
   function name() view public returns (string memory name){
-    return "Tron ERC721 Token";
+    return "Ich ERC721 Token";
   }
   //symbol
   function symbol() view public returns (string memory symbol){

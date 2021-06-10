@@ -12,7 +12,7 @@ import org.ich.common.common.utils.ByteUtil;
 import org.ich.core.capsule.IncrementalMerkleTreeCapsule;
 import org.ich.core.capsule.PedersenHashCapsule;
 import org.ich.core.exception.ZksnarkException;
-import org.ich.protos.contract.ShieldContract.PedersenHash;
+import org.ich.core.contract.ShieldContract.PedersenHash;
 
 @Slf4j
 public class IncrementalMerkleTreeContainer {

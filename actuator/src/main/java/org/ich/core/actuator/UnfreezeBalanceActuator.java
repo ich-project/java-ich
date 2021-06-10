@@ -28,12 +28,12 @@ import org.ich.core.store.DelegatedResourceAccountIndexStore;
 import org.ich.core.store.DelegatedResourceStore;
 import org.ich.core.store.DynamicPropertiesStore;
 import org.ich.core.store.VotesStore;
-import org.ich.protos.Protocol.Account.AccountResource;
-import org.ich.protos.Protocol.Account.Frozen;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.BalanceContract.UnfreezeBalanceContract;
+import org.ich.core.Protocol.Account.AccountResource;
+import org.ich.core.Protocol.Account.Frozen;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.BalanceContract.UnfreezeBalanceContract;
 
 @Slf4j(topic = "actuator")
 public class UnfreezeBalanceActuator extends AbstractActuator {
@@ -76,8 +76,8 @@ public class UnfreezeBalanceActuator extends AbstractActuator {
     long unfreezeBalance = 0L;
 
     if (dynamicStore.supportAllowNewResourceModel()
-        && accountCapsule.oldTronPowerIsNotInitialized()) {
-      accountCapsule.initializeOldTronPower();
+        && accountCapsule.oldIchPowerIsNotInitialized()) {
+      accountCapsule.initializeOldIchPower();
     }
 
     byte[] receiverAddress = unfreezeBalanceContract.getReceiverAddress().toByteArray();
@@ -201,11 +201,11 @@ public class UnfreezeBalanceActuator extends AbstractActuator {
               .setBalance(oldBalance + unfreezeBalance)
               .setAccountResource(newAccountResource).build());
           break;
-        case TRON_POWER:
-          unfreezeBalance = accountCapsule.getTronPowerFrozenBalance();
+        case ICH_POWER:
+          unfreezeBalance = accountCapsule.getIchPowerFrozenBalance();
           accountCapsule.setInstance(accountCapsule.getInstance().toBuilder()
               .setBalance(oldBalance + unfreezeBalance)
-              .clearTronPower().build());
+              .clearIchPower().build());
           break;
         default:
           //this should never happen
@@ -223,9 +223,9 @@ public class UnfreezeBalanceActuator extends AbstractActuator {
         dynamicStore
             .addTotalEnergyWeight(-unfreezeBalance / TRX_PRECISION);
         break;
-      case TRON_POWER:
+      case ICH_POWER:
         dynamicStore
-            .addTotalTronPowerWeight(-unfreezeBalance / TRX_PRECISION);
+            .addTotalIchPowerWeight(-unfreezeBalance / TRX_PRECISION);
         break;
       default:
         //this should never happen
@@ -234,7 +234,7 @@ public class UnfreezeBalanceActuator extends AbstractActuator {
 
     boolean needToClearVote = true;
     if (dynamicStore.supportAllowNewResourceModel()
-        && accountCapsule.oldTronPowerIsInvalid()) {
+        && accountCapsule.oldIchPowerIsInvalid()) {
       switch (unfreezeBalanceContract.getResource()) {
         case BANDWIDTH:
         case ENERGY:
@@ -259,8 +259,8 @@ public class UnfreezeBalanceActuator extends AbstractActuator {
     }
 
     if (dynamicStore.supportAllowNewResourceModel()
-        && !accountCapsule.oldTronPowerIsInvalid()) {
-      accountCapsule.invalidateOldTronPower();
+        && !accountCapsule.oldIchPowerIsInvalid()) {
+      accountCapsule.invalidateOldIchPower();
     }
 
     accountStore.put(ownerAddress, accountCapsule);
@@ -430,14 +430,14 @@ public class UnfreezeBalanceActuator extends AbstractActuator {
           }
 
           break;
-        case TRON_POWER:
+        case ICH_POWER:
           if (dynamicStore.supportAllowNewResourceModel()) {
-            Frozen frozenBalanceForTronPower = accountCapsule.getInstance().getTronPower();
-            if (frozenBalanceForTronPower.getFrozenBalance() <= 0) {
-              throw new ContractValidateException("no frozenBalance(TronPower)");
+            Frozen frozenBalanceForIchPower = accountCapsule.getInstance().getIchPower();
+            if (frozenBalanceForIchPower.getFrozenBalance() <= 0) {
+              throw new ContractValidateException("no frozenBalance(IchPower)");
             }
-            if (frozenBalanceForTronPower.getExpireTime() > now) {
-              throw new ContractValidateException("It's not time to unfreeze(TronPower).");
+            if (frozenBalanceForIchPower.getExpireTime() > now) {
+              throw new ContractValidateException("It's not time to unfreeze(IchPower).");
             }
           } else {
             throw new ContractValidateException(
@@ -447,7 +447,7 @@ public class UnfreezeBalanceActuator extends AbstractActuator {
         default:
           if (dynamicStore.supportAllowNewResourceModel()) {
             throw new ContractValidateException(
-                "ResourceCode error.valid ResourceCode[BANDWIDTH、Energy、TRON_POWER]");
+                "ResourceCode error.valid ResourceCode[BANDWIDTH、Energy、ICH_POWER]");
           } else {
             throw new ContractValidateException(
                 "ResourceCode error.valid ResourceCode[BANDWIDTH、Energy]");

@@ -41,21 +41,21 @@ import org.ich.core.config.args.Args;
 import org.ich.core.services.RpcApiService;
 import org.ich.core.services.filter.LiteFnQueryGrpcInterceptor;
 import org.ich.core.services.ratelimiter.RateLimiterInterceptor;
-import org.ich.protos.Protocol.Account;
-import org.ich.protos.Protocol.Block;
-import org.ich.protos.Protocol.DynamicProperties;
-import org.ich.protos.Protocol.Exchange;
-import org.ich.protos.Protocol.MarketOrder;
-import org.ich.protos.Protocol.MarketOrderList;
-import org.ich.protos.Protocol.MarketOrderPair;
-import org.ich.protos.Protocol.MarketOrderPairList;
-import org.ich.protos.Protocol.MarketPriceList;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.TransactionInfo;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
-import org.ich.protos.contract.ShieldContract.IncrementalMerkleVoucherInfo;
-import org.ich.protos.contract.ShieldContract.OutputPointInfo;
-import org.ich.protos.contract.SmartContractOuterClass.TriggerSmartContract;
+import org.ich.core.Protocol.Account;
+import org.ich.core.Protocol.Block;
+import org.ich.core.Protocol.DynamicProperties;
+import org.ich.core.Protocol.Exchange;
+import org.ich.core.Protocol.MarketOrder;
+import org.ich.core.Protocol.MarketOrderList;
+import org.ich.core.Protocol.MarketOrderPair;
+import org.ich.core.Protocol.MarketOrderPairList;
+import org.ich.core.Protocol.MarketPriceList;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.TransactionInfo;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.contract.ShieldContract.IncrementalMerkleVoucherInfo;
+import org.ich.core.contract.ShieldContract.OutputPointInfo;
+import org.ich.core.contract.SmartContractOuterClass.TriggerSmartContract;
 
 @Slf4j(topic = "API")
 public class RpcApiServiceOnPBFT implements Service {
@@ -293,7 +293,7 @@ public class RpcApiServiceOnPBFT implements Service {
 
     @Override
     public void getDelegatedResourceAccountIndex(BytesMessage request,
-        StreamObserver<org.ich.protos.Protocol.DelegatedResourceAccountIndex> responseObserver) {
+        StreamObserver<org.ich.core.Protocol.DelegatedResourceAccountIndex> responseObserver) {
       walletOnPBFT.futureGet(
           () -> rpcApiService.getWalletSolidityApi()
               .getDelegatedResourceAccountIndex(request, responseObserver)

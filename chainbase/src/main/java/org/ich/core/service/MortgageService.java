@@ -19,7 +19,7 @@ import org.ich.core.store.AccountStore;
 import org.ich.core.store.DelegationStore;
 import org.ich.core.store.DynamicPropertiesStore;
 import org.ich.core.store.WitnessStore;
-import org.ich.protos.Protocol.Vote;
+import org.ich.core.Protocol.Vote;
 
 @Slf4j(topic = "mortgage")
 @Component

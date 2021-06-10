@@ -15,9 +15,9 @@ import org.ich.core.store.AccountStore;
 import org.ich.core.store.DelegationStore;
 import org.ich.core.store.DynamicPropertiesStore;
 import org.ich.core.store.WitnessStore;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.StorageContract.UpdateBrokerageContract;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.StorageContract.UpdateBrokerageContract;
 
 @Slf4j(topic = "actuator")
 public class UpdateBrokerageActuator extends AbstractActuator {

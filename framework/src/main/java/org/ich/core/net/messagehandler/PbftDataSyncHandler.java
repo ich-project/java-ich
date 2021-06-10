@@ -27,14 +27,14 @@ import org.ich.core.capsule.TransactionCapsule;
 import org.ich.core.db.PbftSignDataStore;
 import org.ich.core.exception.P2pException;
 import org.ich.core.net.message.PbftCommitMessage;
-import org.ich.core.net.message.TronMessage;
+import org.ich.core.net.message.IchMessage;
 import org.ich.core.net.peer.PeerConnection;
-import org.ich.protos.Protocol.PBFTMessage.DataType;
-import org.ich.protos.Protocol.PBFTMessage.Raw;
+import org.ich.core.Protocol.PBFTMessage.DataType;
+import org.ich.core.Protocol.PBFTMessage.Raw;
 
 @Slf4j(topic = "pbft-data-sync")
 @Service
-public class PbftDataSyncHandler implements TronMsgHandler {
+public class PbftDataSyncHandler implements IchMsgHandler {
 
   private Map<Long, PbftCommitMessage> pbftCommitMessageCache = new ConcurrentHashMap<>();
 
@@ -45,7 +45,7 @@ public class PbftDataSyncHandler implements TronMsgHandler {
   private ChainBaseManager chainBaseManager;
 
   @Override
-  public void processMessage(PeerConnection peer, TronMessage msg) throws P2pException {
+  public void processMessage(PeerConnection peer, IchMessage msg) throws P2pException {
     PbftCommitMessage pbftCommitMessage = (PbftCommitMessage) msg;
     try {
       Raw raw = Raw.parseFrom(pbftCommitMessage.getPBFTCommitResult().getData());

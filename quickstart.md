@@ -4,7 +4,7 @@
 
 This guide provides two ways for TRON quickstart:
 - Set up a FullNode using the official tools: providing a wealth of configurable parameters to startup a FullNode
-- Set up a complete private network for Tron development using a third-party tool: [docker-tron-quickstart](https://github.com/TRON-US/docker-tron-quickstart)
+- Set up a complete private network for Ich development using a third-party tool: [docker-tron-quickstart](https://github.com/TRON-US/docker-tron-quickstart)
 
 ## Dependencies
 
@@ -18,33 +18,33 @@ Please download and install the latest Docker from Docker official website:
 
 ### Build the docker image from source
 
-#### Clone the java-tron repo
+#### Clone the java-ich repo
 
-Clone the java-tron repo from github and enter the directory `java-tron`:
+Clone the java-ich repo from github and enter the directory `java-ich`:
 ```
-git clone https://github.com/tronprotocol/java-tron.git
-cd java-tron
+git clone https://github.com/tronprotocol/java-ich.git
+cd java-ich
 ```
 
 #### Build the docker image
 
 Use below command to start the build:
 ```
-docker build -t tronprotocol/java-tron .
+docker build -t tronprotocol/java-ich .
 ```
 
 #### Using the official Docker images
 
 Download the official docker image from the Dockerhub with below command if you'd like to use the official images:
 ```
-docker pull tronprotocol/java-tron
+docker pull tronprotocol/java-ich
 ```
 
 ### Run the container
 
-You can run the command below to start the java-tron:
+You can run the command below to start the java-ich:
 ```
-docker run -it -d -p 8090:8090 -p 8091:8091 -p 18888:18888 -p 50051:50051 --restart always tronprotocol/java-tron 
+docker run -it -d -p 8090:8090 -p 8091:8091 -p 18888:18888 -p 50051:50051 --restart always tronprotocol/java-ich 
 ```
 
 The `-p` flag defines the ports that the container needs to be mapped on the host machine. By default the container will start and join in the mainnet
@@ -52,23 +52,23 @@ using the built-in configuration file, you can specify other configuration file 
 This image also supports customizing some startup parameters，here is an example for running a FullNode as an SR in production env:
 ```
 docker run -it -d -p 8080:8080 -p 8090:8090 -p 18888:18888 -p 50051:50051 \
-           -v /Users/quan/tron/docker/conf:/java-tron/conf \
-           -v /Users/quan/tron/docker/datadir:/java-tron/data \
-           tronprotocol/java-tron \
+           -v /Users/quan/tron/docker/conf:/java-ich/conf \
+           -v /Users/quan/tron/docker/datadir:/java-ich/data \
+           tronprotocol/java-ich \
            -jvm "{-Xmx10g -Xms10g}" \
-           -c /java-tron/conf/config-localtest.conf \
-           -d /java-tron/data \
+           -c /java-ich/conf/config-localtest.conf \
+           -d /java-ich/data \
            -w 
 ```
 Note: The directory `/Users/tron/docker/conf` must contain the file `config-localtest.conf`. The jvm parameters must be enclosed in double quotes and braces.
 
 ## Quickstart for using docker-tron-quickstart
 
-The image exposes a Full Node, Solidity Node, and Event Server. Through TRON Quickstart, users can deploy DApps, smart contracts, and interact with the TronWeb library.
+The image exposes a Full Node, Solidity Node, and Event Server. Through TRON Quickstart, users can deploy DApps, smart contracts, and interact with the IchWeb library.
 Check more information at [Quickstart:](https://github.com/TRON-US/docker-tron-quickstart)
 
 ### Node.JS Console
-  Node.JS is used to interact with the Full and Solidity Nodes via Tron-Web.  
+  Node.JS is used to interact with the Full and Solidity Nodes via Ich-Web.  
   [Node.JS](https://nodejs.org/en/) Console Download
   
 ### Clone TRON Quickstart  
@@ -117,7 +117,7 @@ If everything goes well, your terminal console output will look like following :
     [HPM] Proxy created: /  ->  http://127.0.0.1:18190
     [HPM] Proxy created: /  ->  http://127.0.0.1:8060
 
-    Tron Quickstart listening on http://127.0.0.1:9090
+    Ich Quickstart listening on http://127.0.0.1:9090
 
 
 
@@ -194,7 +194,7 @@ If everything goes well, your terminal console output will look like following :
 3. there will be a response JSON data: 
 
 ```
- {"Welcome to":"TronGrid v2.2.8"}
+ {"Welcome to":"IchGrid v2.2.8"}
 ```
 
 ## Docker Commands 

@@ -5,9 +5,9 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.ich.core.exception.BadItemException;
-import org.ich.protos.Protocol.TransactionInfo;
-import org.ich.protos.Protocol.TransactionInfo.Log;
-import org.ich.protos.Protocol.TransactionInfo.code;
+import org.ich.core.Protocol.TransactionInfo;
+import org.ich.core.Protocol.TransactionInfo.Log;
+import org.ich.core.Protocol.TransactionInfo.code;
 
 @Slf4j(topic = "capsule")
 public class TransactionInfoCapsule implements ProtoCapsule<TransactionInfo> {

@@ -13,7 +13,7 @@ import org.ich.common.common.logsfilter.capsule.ContractEventTriggerCapsule;
 import org.ich.common.common.runtime.LogEventWrapper;
 import org.junit.Assert;
 import org.junit.Test;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract.ABI.Entry;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract.ABI.Entry;
 
 public class FilterQueryTest {
 

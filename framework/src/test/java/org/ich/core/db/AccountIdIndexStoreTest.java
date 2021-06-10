@@ -7,7 +7,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.Constant;
 import org.ich.core.Wallet;
@@ -15,7 +15,7 @@ import org.ich.core.capsule.AccountCapsule;
 import org.ich.core.config.DefaultConfig;
 import org.ich.core.config.args.Args;
 import org.ich.core.store.AccountIdIndexStore;
-import org.ich.protos.Protocol.AccountType;
+import org.ich.core.Protocol.AccountType;
 
 public class AccountIdIndexStoreTest {
 
@@ -29,7 +29,7 @@ public class AccountIdIndexStoreTest {
   private static final byte[] ACCOUNT_NAME_FOUR = randomBytes(6);
   private static final byte[] ACCOUNT_NAME_FIVE = randomBytes(6);
   private static String dbPath = "output_AccountIndexStore_test";
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static AccountIdIndexStore accountIdIndexStore;
   private static AccountCapsule accountCapsule1;
   private static AccountCapsule accountCapsule2;
@@ -39,7 +39,7 @@ public class AccountIdIndexStoreTest {
   static {
     Args.setParam(new String[]{"--output-directory", dbPath},
         Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
   }
 
   @AfterClass

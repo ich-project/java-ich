@@ -25,7 +25,7 @@ import org.ich.api.GrpcAPI.PrivateShieldedTRC20ParametersWithoutAsk;
 import org.ich.api.GrpcAPI.ShieldedTRC20Parameters;
 import org.ich.api.GrpcAPI.ShieldedTRC20TriggerContractParameters;
 import org.ich.api.GrpcAPI.SpendAuthSigParameters;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.ByteUtil;
 import org.ich.common.common.utils.FileUtil;
@@ -54,8 +54,8 @@ import org.ich.core.zen.address.KeyIo;
 import org.ich.core.zen.address.PaymentAddress;
 import org.ich.core.zen.address.SpendingKey;
 import org.ich.core.zen.note.Note;
-import org.ich.protos.contract.ShieldContract;
-import org.ich.protos.contract.ShieldContract.SpendDescription;
+import org.ich.core.contract.ShieldContract;
+import org.ich.core.contract.ShieldContract.SpendDescription;
 import stest.ich.wallet.common.client.WalletClient;
 
 @Slf4j
@@ -75,7 +75,7 @@ public class ShieldedTRC20BuilderTest extends BlockGenerate {
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, "config-test-mainnet.conf");
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     SHIELDED_CONTRACT_ADDRESS = WalletClient.decodeFromBase58Check(SHIELDED_CONTRACT_ADDRESS_STR);
     DEFAULT_OVK = ByteArray
         .fromHexString("030c8c2bc59fb3eb8afb047a8ea4b028743d23e7d38c6fa30908358431e2314d");

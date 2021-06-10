@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.Pair;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.crypto.ECKey;
 import org.ich.common.common.crypto.Hash;
 import org.ich.common.common.parameter.CommonParameter;
@@ -28,7 +28,7 @@ import org.ich.core.store.StoreFactory;
 import org.ich.core.vm.PrecompiledContracts.ValidateMultiSign;
 import org.ich.core.vm.repository.Repository;
 import org.ich.core.vm.repository.RepositoryImpl;
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 import stest.ich.wallet.common.client.utils.AbiUtil;
 
 @Slf4j
@@ -37,13 +37,13 @@ public class ValidateMultiSignContractTest {
   private static final String dbPath = "output_PrecompiledContracts_test";
   private static final String METHOD_SIGN = "validatemultisign(address,uint256,bytes32,bytes[])";
   private static final byte[] longData;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static Application appT;
   private static Manager dbManager;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath, "--debug"}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     appT = ApplicationFactory.create(context);
     dbManager = context.getBean(Manager.class);
     dbManager.getDynamicPropertiesStore().saveAllowMultiSign(1);

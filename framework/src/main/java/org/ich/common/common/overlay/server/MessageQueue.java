@@ -21,8 +21,8 @@ import org.ich.core.metrics.MetricsKey;
 import org.ich.core.metrics.MetricsUtil;
 import org.ich.core.net.message.InventoryMessage;
 import org.ich.core.net.message.TransactionsMessage;
-import org.ich.protos.Protocol.Inventory.InventoryType;
-import org.ich.protos.Protocol.ReasonCode;
+import org.ich.core.Protocol.Inventory.InventoryType;
+import org.ich.core.Protocol.ReasonCode;
 
 @Slf4j(topic = "net")
 @Component

@@ -13,14 +13,14 @@ import org.ich.core.capsule.ContractCapsule;
 import org.ich.core.capsule.TransactionCapsule;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.exception.PermissionException;
-import org.ich.protos.Protocol.Permission;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Contract;
-import org.ich.protos.contract.SmartContractOuterClass.CreateSmartContract;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract.ABI;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract.ABI.Entry.StateMutabilityType;
-import org.ich.protos.contract.SmartContractOuterClass.TriggerSmartContract;
+import org.ich.core.Protocol.Permission;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Contract;
+import org.ich.core.contract.SmartContractOuterClass.CreateSmartContract;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract.ABI;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract.ABI.Entry.StateMutabilityType;
+import org.ich.core.contract.SmartContractOuterClass.TriggerSmartContract;
 
 public class WalletUtil {
 

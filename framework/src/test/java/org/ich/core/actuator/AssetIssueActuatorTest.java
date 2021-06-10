@@ -16,7 +16,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.ChainBaseManager;
@@ -31,11 +31,11 @@ import org.ich.core.config.args.Args;
 import org.ich.core.db.Manager;
 import org.ich.core.exception.ContractExeException;
 import org.ich.core.exception.ContractValidateException;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.AccountContract.AccountCreateContract;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract.FrozenSupply;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.AccountContract.AccountCreateContract;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract.FrozenSupply;
 
 @Slf4j
 public class AssetIssueActuatorTest {
@@ -50,7 +50,7 @@ public class AssetIssueActuatorTest {
   private static final String DESCRIPTION = "myCoin";
   private static final String URL = "tron-my.com";
   private static final String ASSET_NAME_SECOND = "asset_name2";
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static Manager dbManager;
   private static ChainBaseManager chainBaseManager;
   private static long now = 0;
@@ -59,7 +59,7 @@ public class AssetIssueActuatorTest {
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049150";
     OWNER_ADDRESS_SECOND = Wallet
         .getAddressPreFixString() + "548794500882809695a8a687866e76d4271a1abc";

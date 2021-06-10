@@ -18,10 +18,10 @@ import org.ich.core.exception.ContractValidateException;
 import org.ich.core.store.AccountStore;
 import org.ich.core.store.AssetIssueStore;
 import org.ich.core.store.DynamicPropertiesStore;
-import org.ich.protos.Protocol.Account.Frozen;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.AssetIssueContractOuterClass.UnfreezeAssetContract;
+import org.ich.core.Protocol.Account.Frozen;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.AssetIssueContractOuterClass.UnfreezeAssetContract;
 
 @Slf4j(topic = "actuator")
 public class UnfreezeAssetActuator extends AbstractActuator {

@@ -9,7 +9,7 @@ import org.ich.common.common.logsfilter.ContractEventParserAbi;
 import org.ich.common.common.logsfilter.EventPluginLoader;
 import org.ich.common.common.logsfilter.trigger.ContractEventTrigger;
 import org.ich.common.common.runtime.LogEventWrapper;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract.ABI.Entry;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract.ABI.Entry;
 
 public class ContractEventTriggerCapsule extends TriggerCapsule {
 

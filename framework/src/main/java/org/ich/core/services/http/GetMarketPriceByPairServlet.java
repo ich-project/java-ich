@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.core.Wallet;
-import org.ich.protos.Protocol.MarketOrderPair;
-import org.ich.protos.Protocol.MarketPriceList;
+import org.ich.core.Protocol.MarketOrderPair;
+import org.ich.core.Protocol.MarketPriceList;
 
 
 @Component

@@ -9,7 +9,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.ByteUtil;
 import org.ich.common.common.utils.FileUtil;
@@ -27,14 +27,14 @@ import org.ich.core.exception.ItemNotFoundException;
 public class MarketPairPriceToOrderStoreWithCacheOldValueTest {
 
   private AbstractRevokingStore revokingDatabase;
-  private TronApplicationContext context;
+  private IchApplicationContext context;
 
   @Before
   public void init() {
     Args.setParam(new String[]{"-d", "output_market_revokingStore_test"}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     ApplicationFactory.create(context);
-    revokingDatabase = new TestRevokingTronDatabase();
+    revokingDatabase = new TestRevokingIchDatabase();
     revokingDatabase.enable();
   }
 
@@ -55,7 +55,7 @@ public class MarketPairPriceToOrderStoreWithCacheOldValueTest {
     String dbName = "testrevokingtronstore-testGetKeysNext";
     Options options = StorageUtils.getOptionsByDbName(dbName);
     options.comparator(new MarketOrderPriceComparatorForLevelDB());
-    TestRevokingTronStore tronDatabase = new TestRevokingTronStore(dbName, options,
+    TestRevokingIchStore tronDatabase = new TestRevokingIchStore(dbName, options,
         revokingDatabase);
 
     // put order: 2 1 3 0
@@ -173,16 +173,16 @@ public class MarketPairPriceToOrderStoreWithCacheOldValueTest {
     tronDatabase.close();
   }
 
-  private static class TestRevokingTronStore extends
-      TronStoreWithRevoking<MarketOrderIdListCapsule> {
+  private static class TestRevokingIchStore extends
+      IchStoreWithRevoking<MarketOrderIdListCapsule> {
 
-    private TestRevokingTronStore(String dbName, Options options,
+    private TestRevokingIchStore(String dbName, Options options,
         RevokingDatabase revokingDatabase) {
       super(dbName, options, revokingDatabase);
     }
   }
 
-  private static class TestRevokingTronDatabase extends AbstractRevokingStore {
+  private static class TestRevokingIchDatabase extends AbstractRevokingStore {
 
   }
 }

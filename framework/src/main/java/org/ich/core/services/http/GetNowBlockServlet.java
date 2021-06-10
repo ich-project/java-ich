@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.ich.core.Wallet;
-import org.ich.protos.Protocol.Block;
+import org.ich.core.Protocol.Block;
 
 
 @Component

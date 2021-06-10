@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.ich.api.GrpcAPI.AssetIssueList;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.core.Wallet;
-import org.ich.protos.Protocol.Account;
+import org.ich.core.Protocol.Account;
 
 
 @Component

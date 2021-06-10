@@ -14,8 +14,8 @@ import org.ich.core.db.EnergyProcessor;
 import org.ich.core.exception.BalanceInsufficientException;
 import org.ich.core.store.AccountStore;
 import org.ich.core.store.DynamicPropertiesStore;
-import org.ich.protos.Protocol.ResourceReceipt;
-import org.ich.protos.Protocol.Transaction.Result.contractResult;
+import org.ich.core.Protocol.ResourceReceipt;
+import org.ich.core.Protocol.Transaction.Result.contractResult;
 
 public class ReceiptCapsule {
 

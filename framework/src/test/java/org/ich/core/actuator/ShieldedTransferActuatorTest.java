@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.common.common.zksnark.IncrementalMerkleTreeContainer;
@@ -39,12 +39,12 @@ import org.ich.core.zen.address.IncomingViewingKey;
 import org.ich.core.zen.address.PaymentAddress;
 import org.ich.core.zen.address.SpendingKey;
 import org.ich.core.zen.note.Note;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Transaction.Contract;
-import org.ich.protos.Protocol.TransactionSign;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
-import org.ich.protos.contract.ShieldContract.PedersenHash;
-import org.ich.protos.contract.ShieldContract.ShieldedTransferContract;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Transaction.Contract;
+import org.ich.core.Protocol.TransactionSign;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.contract.ShieldContract.PedersenHash;
+import org.ich.core.contract.ShieldContract.ShieldedTransferContract;
 
 @Slf4j
 public class ShieldedTransferActuatorTest {
@@ -71,12 +71,12 @@ public class ShieldedTransferActuatorTest {
   private static final String URL = "https://tron.network";
   private static Wallet wallet;
   private static Manager dbManager;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static TransactionUtil transactionUtil;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     PUBLIC_ADDRESS_ONE =
         Wallet.getAddressPreFixString() + "a7d8a35b260395c14aa456297662092ba3b76fc0";
     ADDRESS_ONE_PRIVATE_KEY = "7f7f701e94d4f1dd60ee5205e7ea8ee31121427210417b608a6b2e96433549a7";

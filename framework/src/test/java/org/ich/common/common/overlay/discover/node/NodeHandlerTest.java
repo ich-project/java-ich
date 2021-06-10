@@ -1,32 +1,32 @@
 package org.ich.common.common.overlay.discover.node;
 
-import java.io.File;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.parameter.CommonParameter;
 import org.ich.common.common.utils.FileUtil;
+import org.ich.core.ChainBaseManager;
+import org.ich.core.Constant;
+import org.ich.core.config.DefaultConfig;
+import org.ich.core.config.args.Args;
+import org.ich.core.db.Manager;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.ich.core.ChainBaseManager;
-import org.ich.core.Constant;
-import org.ich.core.config.DefaultConfig;
-import org.ich.core.config.args.Args;
-import org.ich.core.db.Manager;
+
+import java.io.File;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 
 
 public class NodeHandlerTest {
 
   private static final Logger logger = LoggerFactory.getLogger("Test");
   private Manager dbManager;
-  private TronApplicationContext context;
+  private IchApplicationContext context;
   private Application appTest;
   private CommonParameter argsTest;
   private Node currNode;
@@ -45,7 +45,7 @@ public class NodeHandlerTest {
     argsTest = Args.getInstance();
     Args.setParam(new String[]{"--output-directory", "output-directory", "--debug"},
         Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     appTest = ApplicationFactory.create(context);
     appTest.initServices(argsTest);
     appTest.startServices();

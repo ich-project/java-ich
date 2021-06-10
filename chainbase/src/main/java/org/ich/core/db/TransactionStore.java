@@ -16,7 +16,7 @@ import org.ich.core.exception.BadItemException;
 
 @Slf4j(topic = "DB")
 @Component
-public class TransactionStore extends TronStoreWithRevoking<TransactionCapsule> {
+public class TransactionStore extends IchStoreWithRevoking<TransactionCapsule> {
 
   @Autowired
   private BlockStore blockStore;

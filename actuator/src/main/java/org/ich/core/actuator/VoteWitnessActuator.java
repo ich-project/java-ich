@@ -25,10 +25,10 @@ import org.ich.core.store.AccountStore;
 import org.ich.core.store.DynamicPropertiesStore;
 import org.ich.core.store.VotesStore;
 import org.ich.core.store.WitnessStore;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.WitnessContract.VoteWitnessContract;
-import org.ich.protos.contract.WitnessContract.VoteWitnessContract.Vote;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.WitnessContract.VoteWitnessContract;
+import org.ich.core.contract.WitnessContract.VoteWitnessContract.Vote;
 
 @Slf4j(topic = "actuator")
 public class VoteWitnessActuator extends AbstractActuator {
@@ -129,9 +129,9 @@ public class VoteWitnessActuator extends AbstractActuator {
       long tronPower;
       DynamicPropertiesStore dynamicStore = chainBaseManager.getDynamicPropertiesStore();
       if (dynamicStore.supportAllowNewResourceModel()) {
-        tronPower = accountCapsule.getAllTronPower();
+        tronPower = accountCapsule.getAllIchPower();
       } else {
-        tronPower = accountCapsule.getTronPower();
+        tronPower = accountCapsule.getIchPower();
       }
 
       sum = LongMath
@@ -164,8 +164,8 @@ public class VoteWitnessActuator extends AbstractActuator {
 
     DynamicPropertiesStore dynamicStore = chainBaseManager.getDynamicPropertiesStore();
     if (dynamicStore.supportAllowNewResourceModel()
-        && accountCapsule.oldTronPowerIsNotInitialized()) {
-      accountCapsule.initializeOldTronPower();
+        && accountCapsule.oldIchPowerIsNotInitialized()) {
+      accountCapsule.initializeOldIchPower();
     }
 
     if (!votesStore.has(ownerAddress)) {

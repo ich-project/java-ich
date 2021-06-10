@@ -9,7 +9,7 @@ import org.ich.consensus.base.Param;
 import org.ich.consensus.base.Param.Miner;
 import org.ich.consensus.pbft.message.PbftMessage;
 import org.ich.core.capsule.BlockCapsule;
-import org.ich.protos.Protocol.Block;
+import org.ich.core.Protocol.Block;
 
 public class PbftTest {
 

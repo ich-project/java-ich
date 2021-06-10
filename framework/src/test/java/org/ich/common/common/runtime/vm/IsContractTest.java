@@ -15,7 +15,7 @@ import org.ich.core.exception.ReceiptCheckErrException;
 import org.ich.core.exception.VMIllegalException;
 import org.ich.core.vm.config.ConfigLoader;
 import org.ich.core.vm.config.VMConfig;
-import org.ich.protos.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction;
 import stest.ich.wallet.common.client.utils.AbiUtil;
 
 @Slf4j

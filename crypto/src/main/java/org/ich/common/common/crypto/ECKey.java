@@ -35,7 +35,7 @@ import javax.annotation.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.ich.common.common.crypto.jce.ECKeyFactory;
 import org.ich.common.common.crypto.jce.ECKeyPairGenerator;
-import org.ich.common.common.crypto.jce.TronCastleProvider;
+import org.ich.common.common.crypto.jce.IchCastleProvider;
 import org.spongycastle.asn1.sec.SECNamedCurves;
 import org.spongycastle.asn1.x9.X9ECParameters;
 import org.spongycastle.asn1.x9.X9IntegerConverter;
@@ -151,7 +151,7 @@ public class ECKey implements Serializable, SignInterface {
    * @param secureRandom -
    */
   public ECKey(SecureRandom secureRandom) {
-    this(TronCastleProvider.getInstance(), secureRandom);
+    this(IchCastleProvider.getInstance(), secureRandom);
   }
 
   /**
@@ -169,7 +169,7 @@ public class ECKey implements Serializable, SignInterface {
       this.privKey = null;
       this.pub = CURVE.getCurve().decodePoint(key);
     }
-    this.provider = TronCastleProvider.getInstance();
+    this.provider = IchCastleProvider.getInstance();
   }
 
   public ECKey(Provider provider, @Nullable PrivateKey privKey, ECPoint pub) {
@@ -199,7 +199,7 @@ public class ECKey implements Serializable, SignInterface {
    */
   public ECKey(@Nullable BigInteger priv, ECPoint pub) {
     this(
-        TronCastleProvider.getInstance(),
+        IchCastleProvider.getInstance(),
         privateKeyFromBigInteger(priv),
         pub
     );
@@ -234,7 +234,7 @@ public class ECKey implements Serializable, SignInterface {
     } else {
       try {
         return ECKeyFactory
-            .getInstance(TronCastleProvider.getInstance())
+            .getInstance(IchCastleProvider.getInstance())
             .generatePrivate(new ECPrivateKeySpec(priv,
                 CURVE_SPEC));
       } catch (InvalidKeySpecException ex) {

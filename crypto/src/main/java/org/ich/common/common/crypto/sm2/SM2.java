@@ -39,7 +39,7 @@ import org.ich.common.common.crypto.ECKey;
 import org.ich.common.common.crypto.SignInterface;
 import org.ich.common.common.crypto.SignatureInterface;
 import org.ich.common.common.crypto.jce.ECKeyFactory;
-import org.ich.common.common.crypto.jce.TronCastleProvider;
+import org.ich.common.common.crypto.jce.IchCastleProvider;
 import org.ich.common.common.utils.ByteUtil;
 
 /**
@@ -174,7 +174,7 @@ public class SM2 implements Serializable, SignInterface {
     } else {
       try {
         return ECKeyFactory
-            .getInstance(TronCastleProvider.getInstance())
+            .getInstance(IchCastleProvider.getInstance())
             .generatePrivate(new ECPrivateKeySpec(priv,
                 ecc_spec));
       } catch (InvalidKeySpecException ex) {

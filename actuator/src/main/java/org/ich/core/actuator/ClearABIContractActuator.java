@@ -15,9 +15,9 @@ import org.ich.core.exception.ContractValidateException;
 import org.ich.core.store.AccountStore;
 import org.ich.core.store.ContractStore;
 import org.ich.core.vm.config.VMConfig;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.SmartContractOuterClass.ClearABIContract;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.SmartContractOuterClass.ClearABIContract;
 
 import static org.ich.core.actuator.ActuatorConstant.NOT_EXIST_STR;
 

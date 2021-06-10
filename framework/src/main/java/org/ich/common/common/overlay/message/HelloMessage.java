@@ -7,9 +7,9 @@ import org.ich.common.common.utils.ByteArray;
 import org.ich.core.capsule.BlockCapsule;
 import org.ich.core.config.args.Args;
 import org.ich.core.net.message.MessageTypes;
-import org.ich.protos.Discover.Endpoint;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.HelloMessage.Builder;
+import org.ich.core.Discover.Endpoint;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.HelloMessage.Builder;
 
 public class HelloMessage extends P2pMessage {
 

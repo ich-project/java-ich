@@ -14,7 +14,7 @@ import org.ich.common.common.utils.StringUtil;
 import org.ich.core.capsule.ContractCapsule;
 import org.ich.core.db.TransactionTrace;
 import org.ich.core.vm.repository.Repository;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract.ABI;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract.ABI;
 
 @Slf4j
 public class LogInfoTriggerParser {
@@ -61,7 +61,7 @@ public class LogInfoTriggerParser {
 
     for (LogInfo logInfo : logInfos) {
 
-      byte[] contractAddress = TransactionTrace.convertToTronAddress(logInfo.getAddress());
+      byte[] contractAddress = TransactionTrace.convertToIchAddress(logInfo.getAddress());
       String strContractAddr =
           ArrayUtils.isEmpty(contractAddress) ? "" : StringUtil.encode58Check(contractAddress);
       if (addrMap.get(strContractAddr) != null) {
@@ -77,7 +77,7 @@ public class LogInfoTriggerParser {
       ABI abi = contract.getInstance().getAbi();
       String creatorAddr = StringUtil.encode58Check(
           TransactionTrace
-              .convertToTronAddress(contract.getInstance().getOriginAddress().toByteArray()));
+              .convertToIchAddress(contract.getInstance().getOriginAddress().toByteArray()));
       addrMap.put(strContractAddr, creatorAddr);
       abiMap.put(strContractAddr, abi);
     }
@@ -85,7 +85,7 @@ public class LogInfoTriggerParser {
     int index = 1;
     for (LogInfo logInfo : logInfos) {
 
-      byte[] contractAddress = TransactionTrace.convertToTronAddress(logInfo.getAddress());
+      byte[] contractAddress = TransactionTrace.convertToIchAddress(logInfo.getAddress());
       String strContractAddr =
           ArrayUtils.isEmpty(contractAddress) ? "" : StringUtil.encode58Check(contractAddress);
       ABI abi = abiMap.get(strContractAddr);

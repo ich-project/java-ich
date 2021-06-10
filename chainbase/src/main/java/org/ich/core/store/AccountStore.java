@@ -15,14 +15,14 @@ import org.ich.common.common.parameter.CommonParameter;
 import org.ich.common.common.utils.Commons;
 import org.ich.core.capsule.AccountCapsule;
 import org.ich.core.capsule.BlockCapsule;
-import org.ich.core.db.TronStoreWithRevoking;
+import org.ich.core.db.IchStoreWithRevoking;
 import org.ich.core.db.accountstate.AccountStateCallBackUtils;
-import org.ich.protos.contract.BalanceContract.TransactionBalanceTrace;
-import org.ich.protos.contract.BalanceContract.TransactionBalanceTrace.Operation;
+import org.ich.core.contract.BalanceContract.TransactionBalanceTrace;
+import org.ich.core.contract.BalanceContract.TransactionBalanceTrace.Operation;
 
 @Slf4j(topic = "DB")
 @Component
-public class AccountStore extends TronStoreWithRevoking<AccountCapsule> {
+public class AccountStore extends IchStoreWithRevoking<AccountCapsule> {
 
   private static Map<String, byte[]> assertsAddress = new HashMap<>(); // key = name , value = address
 

@@ -10,7 +10,7 @@ import org.ich.api.GrpcAPI;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.core.Wallet;
 import org.ich.core.capsule.TransactionCapsule;
-import org.ich.protos.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction;
 
 
 @Component

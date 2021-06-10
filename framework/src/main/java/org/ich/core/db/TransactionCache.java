@@ -7,7 +7,7 @@ import org.ich.core.capsule.BytesCapsule;
 import org.ich.core.db2.common.TxCacheDB;
 
 @Slf4j
-public class TransactionCache extends TronStoreWithRevoking<BytesCapsule> {
+public class TransactionCache extends IchStoreWithRevoking<BytesCapsule> {
 
   @Autowired
   public TransactionCache(@Value("trans-cache") String dbName) {

@@ -6,8 +6,8 @@ import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.ich.core.ChainBaseManager;
 import org.ich.core.capsule.TransactionCapsule;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.Transaction.Contract;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.Transaction.Contract;
 
 @Slf4j(topic = "actuator")
 public class ActuatorFactory {

@@ -1,7 +1,7 @@
 package org.ich.common.common.utils;
 
 import org.ich.core.capsule.utils.MarketUtils;
-import org.ich.protos.Protocol.MarketPrice;
+import org.ich.core.Protocol.MarketPrice;
 
 public class MarketOrderPriceComparatorForLevelDB implements org.iq80.leveldb.DBComparator {
 

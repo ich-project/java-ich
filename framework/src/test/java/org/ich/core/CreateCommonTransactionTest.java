@@ -8,11 +8,11 @@ import io.grpc.ManagedChannelBuilder;
 import org.ich.api.GrpcAPI.TransactionExtention;
 import org.ich.api.WalletGrpc;
 import org.ich.api.WalletGrpc.WalletBlockingStub;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Contract;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.raw;
-import org.ich.protos.contract.StorageContract.UpdateBrokerageContract;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Contract;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.raw;
+import org.ich.core.contract.StorageContract.UpdateBrokerageContract;
 
 public class CreateCommonTransactionTest {
 

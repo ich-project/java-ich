@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import org.ich.common.common.parameter.CommonParameter;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.contract.SmartContractOuterClass.CreateSmartContract;
-import org.ich.protos.contract.SmartContractOuterClass.TriggerSmartContract;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.contract.SmartContractOuterClass.CreateSmartContract;
+import org.ich.core.contract.SmartContractOuterClass.TriggerSmartContract;
 
 public class TransactionFactory {
 

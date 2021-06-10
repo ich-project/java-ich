@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.ich.core.capsule.ContractCapsule;
-import org.ich.core.db.TronStoreWithRevoking;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract;
+import org.ich.core.db.IchStoreWithRevoking;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract;
 
 @Slf4j(topic = "DB")
 @Component
-public class ContractStore extends TronStoreWithRevoking<ContractCapsule> {
+public class ContractStore extends IchStoreWithRevoking<ContractCapsule> {
 
   @Autowired
   private ContractStore(@Value("contract") String dbName) {

@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.Constant;
 import org.ich.core.capsule.ProposalCapsule;
@@ -18,18 +18,18 @@ import org.ich.core.config.args.Args;
 import org.ich.core.consensus.ProposalService;
 import org.ich.core.db.Manager;
 import org.ich.core.utils.ProposalUtil.ProposalType;
-import org.ich.protos.Protocol.Proposal;
+import org.ich.core.Protocol.Proposal;
 
 public class ProposalServiceTest {
 
-  private TronApplicationContext context;
+  private IchApplicationContext context;
   private Manager manager;
   private String dbPath = "output_proposal_test";
 
   @Before
   public void init() {
     Args.setParam(new String[]{"-d", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     manager = context.getBean(Manager.class);
     manager.getDynamicPropertiesStore().saveLatestBlockHeaderNumber(5);
   }

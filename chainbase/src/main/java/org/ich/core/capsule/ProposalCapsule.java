@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.ich.common.common.utils.ByteArray;
-import org.ich.protos.Protocol.Proposal;
-import org.ich.protos.Protocol.Proposal.State;
+import org.ich.core.Protocol.Proposal;
+import org.ich.core.Protocol.Proposal.State;
 
 @Slf4j(topic = "capsule")
 public class ProposalCapsule implements ProtoCapsule<Proposal> {

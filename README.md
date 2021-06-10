@@ -70,7 +70,7 @@ This guide walks the user through the ICH Quickstart (v2.0.0) image setup.
 
 # Deployment
 [Deployment Guide](https://ich-project.github.io/documentation-en/developers/deployment/)
- walks the user through how to deploy a FullNode and an SR node.
+walks the user through how to deploy a FullNode and an SR node.
 
 # Channel
 [ICH Developers & SRs](https://discord.gg/hqKvyAM) is Tron's official Discord channel. Feel free to join this channel if you have any questions.

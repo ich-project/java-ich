@@ -6,7 +6,7 @@ public class Constant {
   public static final String TESTNET_CONF = "config.conf";
 
   //config for junit test
-  public static final String TEST_CONF = "config-test.conf";
+  public static final String TEST_CONF = "config-test-net.conf";
 
   // locate in storageDbDirectory, store the db infos,
   // now only has the split block number

@@ -1,6 +1,6 @@
 package org.ich.core.metrics.net;
 
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 
 public class RateInfo {
 

@@ -6,10 +6,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.ich.core.capsule.BlockCapsule.BlockId;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.ChainInventory;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.ChainInventory;
 
-public class ChainInventoryMessage extends TronMessage {
+public class ChainInventoryMessage extends IchMessage {
 
   protected ChainInventory chainInventory;
 

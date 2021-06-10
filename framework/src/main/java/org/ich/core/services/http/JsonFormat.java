@@ -58,7 +58,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.Commons;
 import org.ich.common.common.utils.StringUtil;
-import org.ich.protos.contract.BalanceContract;
+import org.ich.core.contract.BalanceContract;
 
 /**
  * Provide ascii text parsing and formatting support for proto2 instances. The implementation

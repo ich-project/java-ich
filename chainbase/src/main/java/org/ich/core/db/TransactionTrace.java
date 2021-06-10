@@ -30,11 +30,11 @@ import org.ich.core.exception.ContractValidateException;
 import org.ich.core.exception.ReceiptCheckErrException;
 import org.ich.core.exception.VMIllegalException;
 import org.ich.core.store.*;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.contractResult;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract.ABI;
-import org.ich.protos.contract.SmartContractOuterClass.TriggerSmartContract;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.contractResult;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract.ABI;
+import org.ich.core.contract.SmartContractOuterClass.TriggerSmartContract;
 
 @Slf4j(topic = "TransactionTrace")
 public class TransactionTrace {
@@ -201,7 +201,7 @@ public class TransactionTrace {
     }
     if (StringUtils.isEmpty(transactionContext.getProgramResult().getRuntimeError())) {
       for (DataWord contract : transactionContext.getProgramResult().getDeleteAccounts()) {
-        deleteContract(convertToTronAddress((contract.getLast20Bytes())));
+        deleteContract(convertToIchAddress((contract.getLast20Bytes())));
       }
     }
   }
@@ -301,7 +301,7 @@ public class TransactionTrace {
     contractStore.delete(address);
   }
 
-  public static byte[] convertToTronAddress(byte[] address) {
+  public static byte[] convertToIchAddress(byte[] address) {
     if (address.length == 20) {
       byte[] newAddress = new byte[21];
       byte[] temp = new byte[]{DecodeUtil.addressPreFixByte};

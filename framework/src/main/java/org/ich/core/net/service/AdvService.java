@@ -27,14 +27,14 @@ import org.ich.common.common.utils.Sha256Hash;
 import org.ich.common.common.utils.Time;
 import org.ich.core.capsule.BlockCapsule.BlockId;
 import org.ich.core.config.args.Args;
-import org.ich.core.net.TronNetDelegate;
+import org.ich.core.net.IchNetDelegate;
 import org.ich.core.net.message.BlockMessage;
 import org.ich.core.net.message.FetchInvDataMessage;
 import org.ich.core.net.message.InventoryMessage;
 import org.ich.core.net.message.TransactionMessage;
 import org.ich.core.net.peer.Item;
 import org.ich.core.net.peer.PeerConnection;
-import org.ich.protos.Protocol.Inventory.InventoryType;
+import org.ich.core.Protocol.Inventory.InventoryType;
 
 @Slf4j(topic = "net")
 @Component
@@ -46,7 +46,7 @@ public class AdvService {
   private final int MAX_SPREAD_SIZE = 1_000;
 
   @Autowired
-  private TronNetDelegate tronNetDelegate;
+  private IchNetDelegate ichNetDelegate;
 
   private ConcurrentHashMap<Item, Long> invToFetch = new ConcurrentHashMap<>();
 
@@ -183,7 +183,7 @@ public class AdvService {
 
   public void fastForward(BlockMessage msg) {
     Item item = new Item(msg.getBlockId(), InventoryType.BLOCK);
-    List<PeerConnection> peers = tronNetDelegate.getActivePeer().stream()
+    List<PeerConnection> peers = ichNetDelegate.getActivePeer().stream()
         .filter(peer -> !peer.isNeedSyncFromPeer() && !peer.isNeedSyncFromUs())
         .filter(peer -> peer.getAdvInvReceive().getIfPresent(item) == null
             && peer.getAdvInvSpread().getIfPresent(item) == null)
@@ -204,7 +204,7 @@ public class AdvService {
   public void onDisconnect(PeerConnection peer) {
     if (!peer.getAdvInvRequest().isEmpty()) {
       peer.getAdvInvRequest().keySet().forEach(item -> {
-        if (tronNetDelegate.getActivePeer().stream()
+        if (ichNetDelegate.getActivePeer().stream()
             .anyMatch(p -> !p.equals(peer) && p.getAdvInvReceive().getIfPresent(item) != null)) {
           invToFetch.put(item, System.currentTimeMillis());
         } else {
@@ -219,7 +219,7 @@ public class AdvService {
   }
 
   private void consumerInvToFetch() {
-    Collection<PeerConnection> peers = tronNetDelegate.getActivePeer().stream()
+    Collection<PeerConnection> peers = ichNetDelegate.getActivePeer().stream()
         .filter(peer -> peer.isIdle())
         .collect(Collectors.toList());
 
@@ -253,7 +253,7 @@ public class AdvService {
 
   private synchronized void consumerInvToSpread() {
 
-    List<PeerConnection> peers = tronNetDelegate.getActivePeer().stream()
+    List<PeerConnection> peers = ichNetDelegate.getActivePeer().stream()
         .filter(peer -> !peer.isNeedSyncFromPeer() && !peer.isNeedSyncFromUs())
         .collect(Collectors.toList());
 

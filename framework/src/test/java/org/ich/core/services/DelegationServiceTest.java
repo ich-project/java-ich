@@ -11,12 +11,12 @@ import org.ich.api.GrpcAPI.BytesMessage;
 import org.ich.api.GrpcAPI.TransactionExtention;
 import org.ich.api.WalletGrpc;
 import org.ich.api.WalletGrpc.WalletBlockingStub;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.core.Wallet;
 import org.ich.core.capsule.AccountCapsule;
 import org.ich.core.db.Manager;
 import org.ich.core.service.MortgageService;
-import org.ich.protos.contract.StorageContract.UpdateBrokerageContract;
+import org.ich.core.contract.StorageContract.UpdateBrokerageContract;
 
 @Slf4j
 public class DelegationServiceTest {
@@ -25,7 +25,7 @@ public class DelegationServiceTest {
   private MortgageService mortgageService;
   private Manager manager;
 
-  public DelegationServiceTest(TronApplicationContext context) {
+  public DelegationServiceTest(IchApplicationContext context) {
     mortgageService = context.getBean(MortgageService.class);
     manager = context.getBean(Manager.class);
   }

@@ -6,7 +6,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.List;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.ich.protos.Protocol.PBFTCommitResult;
+import org.ich.core.Protocol.PBFTCommitResult;
 
 @Slf4j(topic = "pbft")
 public class PbftSignCapsule implements ProtoCapsule<PBFTCommitResult> {

@@ -9,8 +9,8 @@ import org.ich.consensus.base.Param;
 import org.ich.consensus.base.Param.Miner;
 import org.ich.core.ChainBaseManager;
 import org.ich.core.capsule.BlockCapsule;
-import org.ich.protos.Protocol.Block;
-import org.ich.protos.Protocol.BlockHeader;
+import org.ich.core.Protocol.Block;
+import org.ich.core.Protocol.BlockHeader;
 
 public class BlockGenerate {
 

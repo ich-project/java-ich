@@ -16,11 +16,11 @@ import org.ich.common.common.utils.Sha256Hash;
 import org.ich.core.capsule.BytesCapsule;
 import org.ich.core.config.Parameter;
 import org.ich.core.config.Parameter.ChainConstant;
-import org.ich.core.db.TronStoreWithRevoking;
+import org.ich.core.db.IchStoreWithRevoking;
 
 @Slf4j(topic = "DB")
 @Component
-public class DynamicPropertiesStore extends TronStoreWithRevoking<BytesCapsule> {
+public class DynamicPropertiesStore extends IchStoreWithRevoking<BytesCapsule> {
 
   private static final byte[] LATEST_BLOCK_HEADER_TIMESTAMP = "latest_block_header_timestamp"
       .getBytes();
@@ -343,9 +343,9 @@ public class DynamicPropertiesStore extends TronStoreWithRevoking<BytesCapsule> 
     }
 
     try {
-      this.getTotalTronPowerWeight();
+      this.getTotalIchPowerWeight();
     } catch (IllegalArgumentException e) {
-      this.saveTotalTronPowerWeight(0L);
+      this.saveTotalIchPowerWeight(0L);
     }
 
 
@@ -1054,17 +1054,17 @@ public class DynamicPropertiesStore extends TronStoreWithRevoking<BytesCapsule> 
             () -> new IllegalArgumentException("not found TOTAL_ENERGY_WEIGHT"));
   }
 
-  public void saveTotalTronPowerWeight(long totalEnergyWeight) {
-    this.put(DynamicResourceProperties.TOTAL_TRON_POWER_WEIGHT,
+  public void saveTotalIchPowerWeight(long totalEnergyWeight) {
+    this.put(DynamicResourceProperties.TOTAL_ICH_POWER_WEIGHT,
         new BytesCapsule(ByteArray.fromLong(totalEnergyWeight)));
   }
 
-  public long getTotalTronPowerWeight() {
-    return Optional.ofNullable(getUnchecked(DynamicResourceProperties.TOTAL_TRON_POWER_WEIGHT))
+  public long getTotalIchPowerWeight() {
+    return Optional.ofNullable(getUnchecked(DynamicResourceProperties.TOTAL_ICH_POWER_WEIGHT))
         .map(BytesCapsule::getData)
         .map(ByteArray::toLong)
         .orElseThrow(
-            () -> new IllegalArgumentException("not found TOTAL_TRON_POWER_WEIGHT"));
+            () -> new IllegalArgumentException("not found TOTAL_ICH_POWER_WEIGHT"));
   }
 
   public void saveTotalNetLimit(long totalNetLimit) {
@@ -2041,10 +2041,10 @@ public class DynamicPropertiesStore extends TronStoreWithRevoking<BytesCapsule> 
   }
 
   //The unit is trx
-  public void addTotalTronPowerWeight(long amount) {
-    long totalWeight = getTotalTronPowerWeight();
+  public void addTotalIchPowerWeight(long amount) {
+    long totalWeight = getTotalIchPowerWeight();
     totalWeight += amount;
-    saveTotalTronPowerWeight(totalWeight);
+    saveTotalIchPowerWeight(totalWeight);
   }
 
   public void addTotalCreateAccountCost(long fee) {
@@ -2258,7 +2258,7 @@ public class DynamicPropertiesStore extends TronStoreWithRevoking<BytesCapsule> 
         .getBytes();
     private static final byte[] TOTAL_ENERGY_AVERAGE_TIME = "TOTAL_ENERGY_AVERAGE_TIME".getBytes();
     private static final byte[] TOTAL_ENERGY_WEIGHT = "TOTAL_ENERGY_WEIGHT".getBytes();
-    private static final byte[] TOTAL_TRON_POWER_WEIGHT = "TOTAL_TRON_POWER_WEIGHT".getBytes();
+    private static final byte[] TOTAL_ICH_POWER_WEIGHT = "TOTAL_ICH_POWER_WEIGHT".getBytes();
     private static final byte[] TOTAL_ENERGY_LIMIT = "TOTAL_ENERGY_LIMIT".getBytes();
     private static final byte[] BLOCK_ENERGY_USAGE = "BLOCK_ENERGY_USAGE".getBytes();
     private static final byte[] ADAPTIVE_RESOURCE_LIMIT_MULTIPLIER =

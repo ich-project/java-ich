@@ -25,7 +25,7 @@ import org.ich.core.db.KhaosDatabase;
 import org.ich.core.db.PbftSignDataStore;
 import org.ich.core.db.RecentBlockStore;
 import org.ich.core.db.TransactionStore;
-import org.ich.core.db2.core.ITronChainBase;
+import org.ich.core.db2.core.IIchChainBase;
 import org.ich.core.exception.BadItemException;
 import org.ich.core.exception.HeaderNotFound;
 import org.ich.core.exception.ItemNotFoundException;
@@ -207,7 +207,7 @@ public class ChainBaseManager {
   @Setter
   private TreeBlockIndexStore merkleTreeIndexStore;
 
-  public void closeOneStore(ITronChainBase database) {
+  public void closeOneStore(IIchChainBase database) {
     logger.info("******** begin to close " + database.getName() + " ********");
     try {
       database.close();

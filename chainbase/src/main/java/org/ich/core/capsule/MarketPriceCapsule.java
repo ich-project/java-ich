@@ -3,7 +3,7 @@ package org.ich.core.capsule;
 import com.google.protobuf.InvalidProtocolBufferException;
 import lombok.extern.slf4j.Slf4j;
 import org.ich.core.capsule.utils.MarketUtils;
-import org.ich.protos.Protocol.MarketPrice;
+import org.ich.core.Protocol.MarketPrice;
 
 @Slf4j(topic = "capsule")
 public class MarketPriceCapsule implements ProtoCapsule<MarketPrice> {

@@ -12,9 +12,9 @@ import org.ich.common.common.utils.Sha256Hash;
 import org.ich.common.common.utils.StringUtil;
 import org.ich.core.capsule.TransactionCapsule;
 import org.ich.core.exception.P2pException;
-import org.ich.protos.Protocol.PBFTMessage;
-import org.ich.protos.Protocol.PBFTMessage.DataType;
-import org.ich.protos.Protocol.SRL;
+import org.ich.core.Protocol.PBFTMessage;
+import org.ich.core.Protocol.PBFTMessage.DataType;
+import org.ich.core.Protocol.SRL;
 
 public abstract class PbftBaseMessage extends Message {
 

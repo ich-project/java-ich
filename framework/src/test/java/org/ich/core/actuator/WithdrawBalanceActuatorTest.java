@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.args.Witness;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
@@ -27,10 +27,10 @@ import org.ich.core.db.Manager;
 import org.ich.core.exception.BalanceInsufficientException;
 import org.ich.core.exception.ContractExeException;
 import org.ich.core.exception.ContractValidateException;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.AssetIssueContractOuterClass;
-import org.ich.protos.contract.BalanceContract.WithdrawBalanceContract;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.AssetIssueContractOuterClass;
+import org.ich.core.contract.BalanceContract.WithdrawBalanceContract;
 
 @Slf4j
 public class WithdrawBalanceActuatorTest {
@@ -42,11 +42,11 @@ public class WithdrawBalanceActuatorTest {
   private static final long initBalance = 10_000_000_000L;
   private static final long allowance = 32_000_000L;
   private static Manager dbManager;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a1abc";
     OWNER_ACCOUNT_INVALID =
         Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a3456";

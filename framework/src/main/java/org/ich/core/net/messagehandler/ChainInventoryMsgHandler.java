@@ -1,37 +1,38 @@
 package org.ich.core.net.messagehandler;
 
-import static org.ich.core.config.Parameter.ChainConstant.BLOCK_PRODUCED_INTERVAL;
-
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.ich.core.capsule.BlockCapsule.BlockId;
 import org.ich.core.config.Parameter.ChainConstant;
 import org.ich.core.config.Parameter.NetConstants;
 import org.ich.core.exception.P2pException;
 import org.ich.core.exception.P2pException.TypeEnum;
-import org.ich.core.net.TronNetDelegate;
+import org.ich.core.net.IchNetDelegate;
 import org.ich.core.net.message.ChainInventoryMessage;
-import org.ich.core.net.message.TronMessage;
+import org.ich.core.net.message.IchMessage;
 import org.ich.core.net.peer.PeerConnection;
 import org.ich.core.net.service.SyncService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
+
+import static org.ich.core.config.Parameter.ChainConstant.BLOCK_PRODUCED_INTERVAL;
 
 @Slf4j(topic = "net")
 @Component
-public class ChainInventoryMsgHandler implements TronMsgHandler {
+public class ChainInventoryMsgHandler implements IchMsgHandler {
 
   @Autowired
-  private TronNetDelegate tronNetDelegate;
+  private IchNetDelegate ichNetDelegate;
 
   @Autowired
   private SyncService syncService;
 
   @Override
-  public void processMessage(PeerConnection peer, TronMessage msg) throws P2pException {
+  public void processMessage(PeerConnection peer, IchMessage msg) throws P2pException {
 
     ChainInventoryMessage chainInventoryMessage = (ChainInventoryMessage) msg;
 
@@ -43,7 +44,7 @@ public class ChainInventoryMsgHandler implements TronMsgHandler {
 
     Deque<BlockId> blockIdWeGet = new LinkedList<>(chainInventoryMessage.getBlockIds());
 
-    if (blockIdWeGet.size() == 1 && tronNetDelegate.containBlock(blockIdWeGet.peek())) {
+    if (blockIdWeGet.size() == 1 && ichNetDelegate.containBlock(blockIdWeGet.peek())) {
       peer.setNeedSyncFromPeer(false);
       return;
     }
@@ -60,8 +61,8 @@ public class ChainInventoryMsgHandler implements TronMsgHandler {
     peer.setRemainNum(chainInventoryMessage.getRemainNum());
     peer.getSyncBlockToFetch().addAll(blockIdWeGet);
 
-    synchronized (tronNetDelegate.getBlockLock()) {
-      while (!peer.getSyncBlockToFetch().isEmpty() && tronNetDelegate
+    synchronized (ichNetDelegate.getBlockLock()) {
+      while (!peer.getSyncBlockToFetch().isEmpty() && ichNetDelegate
           .containBlock(peer.getSyncBlockToFetch().peek())) {
         BlockId blockId = peer.getSyncBlockToFetch().pop();
         peer.setBlockBothHave(blockId);
@@ -110,12 +111,12 @@ public class ChainInventoryMsgHandler implements TronMsgHandler {
           + ", peer: " + blockIds.get(0).getString());
     }
 
-    if (tronNetDelegate.getHeadBlockId().getNum() > 0) {
+    if (ichNetDelegate.getHeadBlockId().getNum() > 0) {
       long maxRemainTime =
-          ChainConstant.CLOCK_MAX_DELAY + System.currentTimeMillis() - tronNetDelegate
-              .getBlockTime(tronNetDelegate.getSolidBlockId());
+          ChainConstant.CLOCK_MAX_DELAY + System.currentTimeMillis() - ichNetDelegate
+              .getBlockTime(ichNetDelegate.getSolidBlockId());
       long maxFutureNum =
-          maxRemainTime / BLOCK_PRODUCED_INTERVAL + tronNetDelegate.getSolidBlockId().getNum();
+          maxRemainTime / BLOCK_PRODUCED_INTERVAL + ichNetDelegate.getSolidBlockId().getNum();
       long lastNum = blockIds.get(blockIds.size() - 1).getNum();
       if (lastNum + msg.getRemainNum() > maxFutureNum) {
         throw new P2pException(TypeEnum.BAD_MESSAGE, "lastNum: " + lastNum + " + remainNum: "

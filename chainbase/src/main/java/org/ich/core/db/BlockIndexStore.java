@@ -12,7 +12,7 @@ import org.ich.core.capsule.BytesCapsule;
 import org.ich.core.exception.ItemNotFoundException;
 
 @Component
-public class BlockIndexStore extends TronStoreWithRevoking<BytesCapsule> {
+public class BlockIndexStore extends IchStoreWithRevoking<BytesCapsule> {
 
 
   @Autowired

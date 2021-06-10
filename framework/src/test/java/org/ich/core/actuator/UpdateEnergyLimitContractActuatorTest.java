@@ -13,7 +13,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.parameter.CommonParameter;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
@@ -29,12 +29,12 @@ import org.ich.core.config.args.Args;
 import org.ich.core.db.Manager;
 import org.ich.core.exception.ContractExeException;
 import org.ich.core.exception.ContractValidateException;
-import org.ich.core.exception.TronException;
+import org.ich.core.exception.IchException;
 import org.ich.core.vm.config.VMConfig;
-import org.ich.protos.Protocol;
-import org.ich.protos.contract.AssetIssueContractOuterClass;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract;
-import org.ich.protos.contract.SmartContractOuterClass.UpdateEnergyLimitContract;
+import org.ich.core.Protocol;
+import org.ich.core.contract.AssetIssueContractOuterClass;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract;
+import org.ich.core.contract.SmartContractOuterClass.UpdateEnergyLimitContract;
 
 
 @Slf4j
@@ -50,7 +50,7 @@ public class UpdateEnergyLimitContractActuatorTest {
   private static final long SOURCE_ENERGY_LIMIT = 10L;
   private static final long TARGET_ENERGY_LIMIT = 30L;
   private static final long INVALID_ENERGY_LIMIT = -200L;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static Manager dbManager;
   private static String OWNER_ADDRESS;
   private static String SECOND_ACCOUNT_ADDRESS;
@@ -58,7 +58,7 @@ public class UpdateEnergyLimitContractActuatorTest {
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
   }
 
   /**
@@ -174,7 +174,7 @@ public class UpdateEnergyLimitContractActuatorTest {
       actuator.execute(ret);
 
       fail("Invalid address");
-    } catch (TronException e) {
+    } catch (IchException e) {
       Assert.assertTrue(e instanceof ContractValidateException);
       Assert.assertEquals("Invalid address", e.getMessage());
     }
@@ -192,7 +192,7 @@ public class UpdateEnergyLimitContractActuatorTest {
       actuator.execute(ret);
 
       fail("Account[" + OWNER_ADDRESS_NOTEXIST + "] not exists");
-    } catch (TronException e) {
+    } catch (IchException e) {
       Assert.assertTrue(e instanceof ContractValidateException);
       Assert.assertEquals("Account[" + OWNER_ADDRESS_NOTEXIST + "] does not exist", e.getMessage());
     }
@@ -210,7 +210,7 @@ public class UpdateEnergyLimitContractActuatorTest {
       actuator.execute(ret);
 
       fail("origin energy limit less than 0");
-    } catch (TronException e) {
+    } catch (IchException e) {
       Assert.assertTrue(e instanceof ContractValidateException);
       Assert.assertEquals("origin energy limit must be > 0", e.getMessage());
     }
@@ -228,7 +228,7 @@ public class UpdateEnergyLimitContractActuatorTest {
       actuator.execute(ret);
 
       fail("Contract not exists");
-    } catch (TronException e) {
+    } catch (IchException e) {
       Assert.assertTrue(e instanceof ContractValidateException);
       Assert.assertEquals("Contract does not exist", e.getMessage());
     }
@@ -246,7 +246,7 @@ public class UpdateEnergyLimitContractActuatorTest {
       actuator.execute(ret);
 
       fail("Account[" + SECOND_ACCOUNT_ADDRESS + "] is not the owner of the contract");
-    } catch (TronException e) {
+    } catch (IchException e) {
       Assert.assertTrue(e instanceof ContractValidateException);
       Assert.assertEquals(
           "Account[" + SECOND_ACCOUNT_ADDRESS + "] is not the owner of the contract",

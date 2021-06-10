@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.testng.Assert;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.common.common.utils.StringUtil;
 import org.ich.core.Constant;
@@ -19,16 +19,16 @@ import org.ich.core.Wallet;
 import org.ich.core.config.DefaultConfig;
 import org.ich.core.config.args.Args;
 import org.ich.core.db.Manager;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Result;
-import org.ich.protos.Protocol.Transaction.Result.contractResult;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Result;
+import org.ich.core.Protocol.Transaction.Result.contractResult;
 
 @Slf4j
 public class TransactionCapsuleTest {
 
   private static Manager dbManager;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static Application AppT;
   private static String dbPath = "output_transactioncapsule_test";
   private static String OWNER_ADDRESS;
@@ -59,7 +59,7 @@ public class TransactionCapsuleTest {
   @BeforeClass
   public static void init() {
     Args.setParam(new String[]{"-d", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     AppT = ApplicationFactory.create(context);
     dbManager = context.getBean(Manager.class);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "03702350064AD5C1A8AA6B4D74B051199CFF8EA7";

@@ -8,7 +8,7 @@ import org.ich.common.common.parameter.CommonParameter;
 import org.ich.core.ChainBaseManager;
 import org.ich.core.config.args.Args;
 import org.ich.program.Version;
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 
 
 @Component

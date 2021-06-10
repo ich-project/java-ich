@@ -30,7 +30,7 @@ import org.ich.consensus.dpos.MaintenanceManager;
 import org.ich.consensus.pbft.message.PbftBaseMessage;
 import org.ich.consensus.pbft.message.PbftMessage;
 import org.ich.core.ChainBaseManager;
-import org.ich.protos.Protocol.PBFTMessage.DataType;
+import org.ich.core.Protocol.PBFTMessage.DataType;
 
 @Slf4j(topic = "pbft")
 @Component

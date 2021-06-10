@@ -2,19 +2,9 @@ package org.ich.core.net.peer;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedDeque;
-import java.util.concurrent.TimeUnit;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import org.ich.common.common.overlay.message.HelloMessage;
 import org.ich.common.common.overlay.message.Message;
 import org.ich.common.common.overlay.server.Channel;
@@ -23,9 +13,20 @@ import org.ich.common.common.utils.Sha256Hash;
 import org.ich.core.Constant;
 import org.ich.core.capsule.BlockCapsule.BlockId;
 import org.ich.core.config.Parameter.NetConstants;
-import org.ich.core.net.TronNetDelegate;
+import org.ich.core.net.IchNetDelegate;
 import org.ich.core.net.service.AdvService;
 import org.ich.core.net.service.SyncService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j(topic = "net")
 @Component
@@ -33,7 +34,7 @@ import org.ich.core.net.service.SyncService;
 public class PeerConnection extends Channel {
 
   @Autowired
-  private TronNetDelegate tronNetDelegate;
+  private IchNetDelegate ichNetDelegate;
 
   @Autowired
   private SyncService syncService;
@@ -114,19 +115,19 @@ public class PeerConnection extends Channel {
   }
 
   public void onConnect() {
-    long headBlockNum = tronNetDelegate.getHeadBlockId().getNum();
+    long headBlockNum = ichNetDelegate.getHeadBlockId().getNum();
     long peerHeadBlockNum = getHelloMessage().getHeadBlockId().getNum();
 
     if (peerHeadBlockNum > headBlockNum) {
       needSyncFromUs = false;
-      setTronState(TronState.SYNCING);
+      setIchState(IchState.SYNCING);
       syncService.startSync(this);
     } else {
       needSyncFromPeer = false;
       if (peerHeadBlockNum == headBlockNum) {
         needSyncFromUs = false;
       }
-      setTronState(TronState.SYNC_COMPLETED);
+      setIchState(IchState.SYNC_COMPLETED);
     }
   }
 

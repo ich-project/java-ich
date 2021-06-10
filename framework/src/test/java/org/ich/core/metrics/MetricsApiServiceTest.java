@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.parameter.CommonParameter;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.Constant;
@@ -16,7 +16,7 @@ import org.ich.core.config.DefaultConfig;
 import org.ich.core.config.args.Args;
 import org.ich.core.services.RpcApiService;
 import org.ich.program.Version;
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 
 @Slf4j
 public class MetricsApiServiceTest {
@@ -25,7 +25,7 @@ public class MetricsApiServiceTest {
   private static String dbDirectory = "metrics-database";
   private static String indexDirectory = "metrics-index";
   private static int port = 10001;
-  private TronApplicationContext context;
+  private IchApplicationContext context;
   private MetricsApiService metricsApiService;
   private RpcApiService rpcApiService;
   private Application appT;
@@ -47,7 +47,7 @@ public class MetricsApiServiceTest {
     parameter.setNodeListenPort(port);
     parameter.getSeedNode().getIpList().clear();
     parameter.setNodeExternalIp("127.0.0.1");
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     appT = ApplicationFactory.create(context);
     rpcApiService = context.getBean(RpcApiService.class);
     metricsApiService = context.getBean(MetricsApiService.class);

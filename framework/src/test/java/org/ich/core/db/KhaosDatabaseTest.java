@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.testng.collections.Lists;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.parameter.CommonParameter;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
@@ -24,20 +24,20 @@ import org.ich.core.config.args.Args;
 import org.ich.core.exception.BadNumberBlockException;
 import org.ich.core.exception.NonCommonBlockException;
 import org.ich.core.exception.UnLinkedBlockException;
-import org.ich.protos.Protocol.Block;
-import org.ich.protos.Protocol.BlockHeader;
-import org.ich.protos.Protocol.BlockHeader.raw;
+import org.ich.core.Protocol.Block;
+import org.ich.core.Protocol.BlockHeader;
+import org.ich.core.Protocol.BlockHeader.raw;
 
 @Slf4j
 public class KhaosDatabaseTest {
 
   private static final String dbPath = "output-khaosDatabase-test";
   private static KhaosDatabase khaosDatabase;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
   }
 
   @BeforeClass

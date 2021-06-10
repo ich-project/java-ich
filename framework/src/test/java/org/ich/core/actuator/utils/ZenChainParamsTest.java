@@ -8,7 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.Constant;
 import org.ich.core.config.DefaultConfig;
@@ -21,7 +21,7 @@ public class ZenChainParamsTest {
 
   private static final String dbPath = "output_zenchainparams_test";
   public static Application AppT;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
 
   /**
    * Init .
@@ -29,7 +29,7 @@ public class ZenChainParamsTest {
   @BeforeClass
   public static void init() {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     AppT = ApplicationFactory.create(context);
   }
 

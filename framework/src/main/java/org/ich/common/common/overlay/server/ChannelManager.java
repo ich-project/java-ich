@@ -1,9 +1,9 @@
 package org.ich.common.common.overlay.server;
 
-import static org.ich.protos.Protocol.ReasonCode.DUPLICATE_PEER;
-import static org.ich.protos.Protocol.ReasonCode.TOO_MANY_PEERS;
-import static org.ich.protos.Protocol.ReasonCode.TOO_MANY_PEERS_WITH_SAME_IP;
-import static org.ich.protos.Protocol.ReasonCode.UNKNOWN;
+import static org.ich.core.Protocol.ReasonCode.DUPLICATE_PEER;
+import static org.ich.core.Protocol.ReasonCode.TOO_MANY_PEERS;
+import static org.ich.core.Protocol.ReasonCode.TOO_MANY_PEERS_WITH_SAME_IP;
+import static org.ich.core.Protocol.ReasonCode.UNKNOWN;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
@@ -24,7 +24,7 @@ import org.ich.core.config.args.Args;
 import org.ich.core.db.ByteArrayWrapper;
 import org.ich.core.metrics.MetricsKey;
 import org.ich.core.metrics.MetricsUtil;
-import org.ich.protos.Protocol.ReasonCode;
+import org.ich.core.Protocol.ReasonCode;
 
 @Slf4j(topic = "net")
 @Component

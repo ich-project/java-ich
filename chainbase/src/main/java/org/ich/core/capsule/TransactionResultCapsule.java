@@ -5,9 +5,9 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.ich.core.exception.BadItemException;
-import org.ich.protos.Protocol.MarketOrderDetail;
-import org.ich.protos.Protocol.Transaction.Result;
-import org.ich.protos.Protocol.Transaction.Result.contractResult;
+import org.ich.core.Protocol.MarketOrderDetail;
+import org.ich.core.Protocol.Transaction.Result;
+import org.ich.core.Protocol.Transaction.Result.contractResult;
 
 @Slf4j(topic = "capsule")
 public class TransactionResultCapsule implements ProtoCapsule<Result> {

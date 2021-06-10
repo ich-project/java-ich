@@ -15,11 +15,11 @@ import org.ich.common.common.utils.MarketOrderPriceComparatorForRockDB;
 import org.ich.common.common.utils.StorageUtils;
 import org.ich.core.capsule.MarketOrderIdListCapsule;
 import org.ich.core.capsule.utils.MarketUtils;
-import org.ich.core.db.TronStoreWithRevoking;
+import org.ich.core.db.IchStoreWithRevoking;
 import org.ich.core.exception.ItemNotFoundException;
 
 @Component
-public class MarketPairPriceToOrderStore extends TronStoreWithRevoking<MarketOrderIdListCapsule> {
+public class MarketPairPriceToOrderStore extends IchStoreWithRevoking<MarketOrderIdListCapsule> {
 
   @Autowired
   protected MarketPairPriceToOrderStore(@Value("market_pair_price_to_order") String dbName) {

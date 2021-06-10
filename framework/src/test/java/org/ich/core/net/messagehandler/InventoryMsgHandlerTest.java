@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 import org.ich.core.net.message.InventoryMessage;
 import org.ich.core.net.peer.PeerConnection;
-import org.ich.protos.Protocol.Inventory.InventoryType;
+import org.ich.core.Protocol.Inventory.InventoryType;
 
 public class InventoryMsgHandlerTest {
 

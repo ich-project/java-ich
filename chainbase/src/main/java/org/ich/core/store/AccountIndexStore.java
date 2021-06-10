@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.ich.core.capsule.AccountCapsule;
 import org.ich.core.capsule.BytesCapsule;
-import org.ich.core.db.TronStoreWithRevoking;
+import org.ich.core.db.IchStoreWithRevoking;
 
 @Component
-public class AccountIndexStore extends TronStoreWithRevoking<BytesCapsule> {
+public class AccountIndexStore extends IchStoreWithRevoking<BytesCapsule> {
 
   @Autowired
   public AccountIndexStore(@Value("account-index") String dbName) {

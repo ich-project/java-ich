@@ -5,20 +5,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.ich.common.common.utils.Sha256Hash;
 import org.ich.core.config.args.Args;
-import org.ich.core.net.TronNetDelegate;
+import org.ich.core.net.IchNetDelegate;
 import org.ich.core.net.message.InventoryMessage;
-import org.ich.core.net.message.TronMessage;
+import org.ich.core.net.message.IchMessage;
 import org.ich.core.net.peer.Item;
 import org.ich.core.net.peer.PeerConnection;
 import org.ich.core.net.service.AdvService;
-import org.ich.protos.Protocol.Inventory.InventoryType;
+import org.ich.core.Protocol.Inventory.InventoryType;
 
 @Slf4j(topic = "net")
 @Component
-public class InventoryMsgHandler implements TronMsgHandler {
+public class InventoryMsgHandler implements IchMsgHandler {
 
   @Autowired
-  private TronNetDelegate tronNetDelegate;
+  private IchNetDelegate ichNetDelegate;
 
   @Autowired
   private AdvService advService;
@@ -29,7 +29,7 @@ public class InventoryMsgHandler implements TronMsgHandler {
   private int maxCountIn10s = 10_000;
 
   @Override
-  public void processMessage(PeerConnection peer, TronMessage msg) {
+  public void processMessage(PeerConnection peer, IchMessage msg) {
     InventoryMessage inventoryMessage = (InventoryMessage) msg;
     InventoryType type = inventoryMessage.getInventoryType();
 
@@ -55,7 +55,7 @@ public class InventoryMsgHandler implements TronMsgHandler {
     }
 
     if (type.equals(InventoryType.TRX)) {
-      int count = peer.getNodeStatistics().messageStatistics.tronInTrxInventoryElement.getCount(10);
+      int count = peer.getNodeStatistics().messageStatistics.ichInTrxInventoryElement.getCount(10);
       if (count > maxCountIn10s) {
         logger.warn("Drop inv: {} size: {} from Peer {}, Inv count: {} is overload.",
             type, size, peer.getInetAddress(), count);

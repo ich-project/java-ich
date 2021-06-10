@@ -16,7 +16,7 @@ import org.ich.consensus.ConsensusDelegate;
 import org.ich.consensus.base.Param.Miner;
 import org.ich.consensus.base.State;
 import org.ich.core.capsule.BlockCapsule;
-import org.ich.protos.Protocol.BlockHeader;
+import org.ich.core.Protocol.BlockHeader;
 
 @Slf4j(topic = "consensus")
 @Component

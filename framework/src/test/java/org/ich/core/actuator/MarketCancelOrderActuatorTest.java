@@ -12,7 +12,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.ChainBaseManager;
@@ -36,13 +36,13 @@ import org.ich.core.store.MarketAccountStore;
 import org.ich.core.store.MarketOrderStore;
 import org.ich.core.store.MarketPairPriceToOrderStore;
 import org.ich.core.store.MarketPairToPriceStore;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.MarketOrder.State;
-import org.ich.protos.Protocol.MarketOrderPair;
-import org.ich.protos.Protocol.MarketPrice;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
-import org.ich.protos.contract.MarketContract.MarketCancelOrderContract;
-import org.ich.protos.contract.MarketContract.MarketSellAssetContract;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.MarketOrder.State;
+import org.ich.core.Protocol.MarketOrderPair;
+import org.ich.core.Protocol.MarketPrice;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.contract.MarketContract.MarketCancelOrderContract;
+import org.ich.core.contract.MarketContract.MarketSellAssetContract;
 
 @Slf4j
 
@@ -58,12 +58,12 @@ public class MarketCancelOrderActuatorTest {
   private static final String TOKEN_ID_ONE = String.valueOf(1L);
   private static final String TOKEN_ID_TWO = String.valueOf(2L);
   private static final String TRX = "_";
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static Manager dbManager;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     OWNER_ADDRESS_FIRST =
         Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049abc";
     OWNER_ADDRESS_SECOND =

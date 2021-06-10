@@ -8,8 +8,8 @@ import org.ich.core.ChainBaseManager;
 import org.ich.core.capsule.TransactionCapsule;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.store.StoreFactory;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.Transaction.Contract;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.Transaction.Contract;
 
 @Slf4j(topic = "actuator")
 public class ActuatorCreator {

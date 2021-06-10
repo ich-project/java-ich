@@ -13,7 +13,7 @@ import org.ich.common.common.overlay.message.P2pMessage;
 import org.ich.common.common.overlay.message.StaticMessages;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.ich.protos.Protocol.ReasonCode;
+import org.ich.core.Protocol.ReasonCode;
 
 @Slf4j(topic = "net")
 @Component

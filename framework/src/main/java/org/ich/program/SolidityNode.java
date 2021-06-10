@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.util.StringUtils;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.overlay.client.DatabaseGrpcClient;
 import org.ich.common.common.overlay.discover.DiscoverServer;
 import org.ich.common.common.overlay.discover.node.NodeManager;
@@ -21,10 +21,10 @@ import org.ich.core.capsule.BlockCapsule;
 import org.ich.core.config.DefaultConfig;
 import org.ich.core.config.args.Args;
 import org.ich.core.db.Manager;
-import org.ich.core.net.TronNetService;
+import org.ich.core.net.IchNetService;
 import org.ich.core.services.RpcApiService;
 import org.ich.core.services.http.solidity.SolidityNodeHttpApiService;
-import org.ich.protos.Protocol.Block;
+import org.ich.core.Protocol.Block;
 
 @Slf4j(topic = "app")
 public class SolidityNode {
@@ -72,7 +72,7 @@ public class SolidityNode {
     }
     parameter.setSolidityNode(true);
 
-    ApplicationContext context = new TronApplicationContext(DefaultConfig.class);
+    ApplicationContext context = new IchApplicationContext(DefaultConfig.class);
 
     if (parameter.isHelp()) {
       logger.info("Here is the help message.");
@@ -98,8 +98,8 @@ public class SolidityNode {
     discoverServer.close();
     NodeManager nodeManager = context.getBean(NodeManager.class);
     nodeManager.close();
-    TronNetService tronNetService = context.getBean(TronNetService.class);
-    tronNetService.stop();
+    IchNetService ichNetService = context.getBean(IchNetService.class);
+    ichNetService.stop();
 
     SolidityNode node = new SolidityNode(appT.getDbManager());
     node.start();

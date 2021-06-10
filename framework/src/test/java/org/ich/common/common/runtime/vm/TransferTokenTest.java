@@ -5,7 +5,7 @@ import java.io.File;
 import lombok.extern.slf4j.Slf4j;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.storage.DepositImpl;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
@@ -26,9 +26,9 @@ import org.ich.core.exception.ContractExeException;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.exception.ReceiptCheckErrException;
 import org.ich.core.exception.VMIllegalException;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
 
 @Slf4j
 public class TransferTokenTest {
@@ -46,14 +46,14 @@ public class TransferTokenTest {
   private static final String URL = "https://tron.network";
   private static Runtime runtime;
   private static Manager dbManager;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static Application appT;
   private static DepositImpl deposit;
   private static AccountCapsule ownerCapsule;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath, "--debug"}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     appT = ApplicationFactory.create(context);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049abc";
     TRANSFER_TO = Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a1abc";

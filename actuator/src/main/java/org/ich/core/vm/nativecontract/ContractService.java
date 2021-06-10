@@ -6,7 +6,7 @@ import org.spongycastle.util.encoders.Hex;
 import org.ich.core.capsule.AccountCapsule;
 import org.ich.core.store.DelegationStore;
 import org.ich.core.vm.repository.Repository;
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 
 @Slf4j(topic = "contractService")
 public class ContractService {

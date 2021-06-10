@@ -1,6 +1,6 @@
 package org.ich.common.common.runtime.vm;
 
-import static org.ich.core.db.TransactionTrace.convertToTronAddress;
+import static org.ich.core.db.TransactionTrace.convertToIchAddress;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
@@ -10,7 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 import lombok.extern.slf4j.Slf4j;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.ByteUtil;
 import org.ich.common.common.utils.FileUtil;
@@ -41,9 +41,9 @@ import org.ich.core.vm.PrecompiledContracts;
 import org.ich.core.vm.PrecompiledContracts.PrecompiledContract;
 import org.ich.core.vm.repository.Repository;
 import org.ich.core.vm.repository.RepositoryImpl;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Proposal.State;
-import org.ich.protos.contract.BalanceContract.FreezeBalanceContract;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Proposal.State;
+import org.ich.core.contract.BalanceContract.FreezeBalanceContract;
 
 @Slf4j
 public class PrecompiledContractsTest {
@@ -59,9 +59,9 @@ public class PrecompiledContractsTest {
       "0000000000000000000000000000000000000000000000000000000000010006");
   private static final DataWord proposalDeleteAddr = new DataWord(
       "0000000000000000000000000000000000000000000000000000000000010007");
-  private static final DataWord convertFromTronBytesAddressAddr = new DataWord(
+  private static final DataWord convertFromIchBytesAddressAddr = new DataWord(
       "0000000000000000000000000000000000000000000000000000000000010008");
-  private static final DataWord convertFromTronBase58AddressAddr = new DataWord(
+  private static final DataWord convertFromIchBase58AddressAddr = new DataWord(
       "0000000000000000000000000000000000000000000000000000000000010009");
   private static final String dbPath = "output_PrecompiledContracts_test";
   private static final String ACCOUNT_NAME = "account";
@@ -73,13 +73,13 @@ public class PrecompiledContractsTest {
   // withdraw
   private static final long initBalance = 10_000_000_000L;
   private static final long allowance = 32_000_000L;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static Application appT;
   private static Manager dbManager;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath, "--debug"}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     appT = ApplicationFactory.create(context);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049abc";
     WITNESS_ADDRESS = Wallet.getAddressPreFixString() + WITNESS_ADDRESS_BASE;
@@ -157,7 +157,7 @@ public class PrecompiledContractsTest {
 
   private PrecompiledContract createPrecompiledContract(DataWord addr, String ownerAddress) {
     PrecompiledContract contract = PrecompiledContracts.getContractForAddress(addr);
-    contract.setCallerAddress(convertToTronAddress(Hex.decode(ownerAddress)));
+    contract.setCallerAddress(convertToIchAddress(Hex.decode(ownerAddress)));
     contract.setRepository(RepositoryImpl.createRoot(StoreFactory.getInstance()));
     ProgramResult programResult = new ProgramResult();
     contract.setResult(programResult);
@@ -285,11 +285,11 @@ public class PrecompiledContractsTest {
   }
 
   @Test
-  public void convertFromTronBytesAddressNativeTest() {
+  public void convertFromIchBytesAddressNativeTest() {
   }
 
   //@Test
-  public void convertFromTronBase58AddressNative() {
+  public void convertFromIchBase58AddressNative() {
     // 27WnTihwXsqCqpiNedWvtKCZHsLjDt4Hfmf  TestNet address
     DataWord word1 = new DataWord(
         "3237576e54696877587371437170694e65645776744b435a48734c6a44743448");
@@ -300,7 +300,7 @@ public class PrecompiledContractsTest {
     System.arraycopy(word1.getData(), 0, data, 0, word1.getData().length);
     System.arraycopy(Arrays.copyOfRange(word2.getData(), 0, 3), 0,
         data, word1.getData().length, 3);
-    PrecompiledContract contract = createPrecompiledContract(convertFromTronBase58AddressAddr,
+    PrecompiledContract contract = createPrecompiledContract(convertFromIchBase58AddressAddr,
         WITNESS_ADDRESS);
 
     byte[] solidityAddress = contract.execute(data).getRight();

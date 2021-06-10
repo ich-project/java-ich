@@ -168,8 +168,8 @@ import org.ich.core.exception.TransactionExpirationException;
 import org.ich.core.exception.VMIllegalException;
 import org.ich.core.exception.ValidateSignatureException;
 import org.ich.core.exception.ZksnarkException;
-import org.ich.core.net.TronNetDelegate;
-import org.ich.core.net.TronNetService;
+import org.ich.core.net.IchNetDelegate;
+import org.ich.core.net.IchNetService;
 import org.ich.core.net.message.TransactionMessage;
 import org.ich.core.store.AccountIdIndexStore;
 import org.ich.core.store.AccountStore;
@@ -194,37 +194,37 @@ import org.ich.core.zen.note.Note;
 import org.ich.core.zen.note.NoteEncryption;
 import org.ich.core.zen.note.NoteEncryption.Encryption;
 import org.ich.core.zen.note.OutgoingPlaintext;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.Account;
-import org.ich.protos.Protocol.Block;
-import org.ich.protos.Protocol.DelegatedResourceAccountIndex;
-import org.ich.protos.Protocol.Exchange;
-import org.ich.protos.Protocol.MarketOrder;
-import org.ich.protos.Protocol.MarketOrderList;
-import org.ich.protos.Protocol.MarketOrderPairList;
-import org.ich.protos.Protocol.MarketPrice;
-import org.ich.protos.Protocol.MarketPriceList;
-import org.ich.protos.Protocol.Proposal;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Contract;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.Protocol.TransactionInfo;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
-import org.ich.protos.contract.BalanceContract;
-import org.ich.protos.contract.BalanceContract.BlockBalanceTrace;
-import org.ich.protos.contract.BalanceContract.TransferContract;
-import org.ich.protos.contract.ShieldContract.IncrementalMerkleTree;
-import org.ich.protos.contract.ShieldContract.IncrementalMerkleVoucherInfo;
-import org.ich.protos.contract.ShieldContract.OutputPoint;
-import org.ich.protos.contract.ShieldContract.OutputPointInfo;
-import org.ich.protos.contract.ShieldContract.PedersenHash;
-import org.ich.protos.contract.ShieldContract.ReceiveDescription;
-import org.ich.protos.contract.ShieldContract.ShieldedTransferContract;
-import org.ich.protos.contract.SmartContractOuterClass.CreateSmartContract;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContractDataWrapper;
-import org.ich.protos.contract.SmartContractOuterClass.TriggerSmartContract;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.Account;
+import org.ich.core.Protocol.Block;
+import org.ich.core.Protocol.DelegatedResourceAccountIndex;
+import org.ich.core.Protocol.Exchange;
+import org.ich.core.Protocol.MarketOrder;
+import org.ich.core.Protocol.MarketOrderList;
+import org.ich.core.Protocol.MarketOrderPairList;
+import org.ich.core.Protocol.MarketPrice;
+import org.ich.core.Protocol.MarketPriceList;
+import org.ich.core.Protocol.Proposal;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Contract;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.Protocol.TransactionInfo;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.contract.BalanceContract;
+import org.ich.core.contract.BalanceContract.BlockBalanceTrace;
+import org.ich.core.contract.BalanceContract.TransferContract;
+import org.ich.core.contract.ShieldContract.IncrementalMerkleTree;
+import org.ich.core.contract.ShieldContract.IncrementalMerkleVoucherInfo;
+import org.ich.core.contract.ShieldContract.OutputPoint;
+import org.ich.core.contract.ShieldContract.OutputPointInfo;
+import org.ich.core.contract.ShieldContract.PedersenHash;
+import org.ich.core.contract.ShieldContract.ReceiveDescription;
+import org.ich.core.contract.ShieldContract.ShieldedTransferContract;
+import org.ich.core.contract.SmartContractOuterClass.CreateSmartContract;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract;
+import org.ich.core.contract.SmartContractOuterClass.SmartContractDataWrapper;
+import org.ich.core.contract.SmartContractOuterClass.TriggerSmartContract;
 
 @Slf4j
 @Component
@@ -248,9 +248,9 @@ public class Wallet {
   @Getter
   private final SignInterface cryptoEngine;
   @Autowired
-  private TronNetService tronNetService;
+  private IchNetService ichNetService;
   @Autowired
-  private TronNetDelegate tronNetDelegate;
+  private IchNetDelegate ichNetDelegate;
   @Autowired
   private Manager dbManager;
   @Autowired
@@ -478,7 +478,7 @@ public class Wallet {
     try {
       Message message = new TransactionMessage(signedTransaction.toByteArray());
       if (minEffectiveConnection != 0) {
-        if (tronNetDelegate.getActivePeer().isEmpty()) {
+        if (ichNetDelegate.getActivePeer().isEmpty()) {
           logger
               .warn("Broadcast transaction {} has failed, no connection.", trx.getTransactionId());
           return builder.setResult(false).setCode(response_code.NO_CONNECTION)
@@ -486,7 +486,7 @@ public class Wallet {
               .build();
         }
 
-        int count = (int) tronNetDelegate.getActivePeer().stream()
+        int count = (int) ichNetDelegate.getActivePeer().stream()
             .filter(p -> !p.isNeedSyncFromUs() && !p.isNeedSyncFromPeer())
             .count();
 
@@ -517,7 +517,7 @@ public class Wallet {
         trx.resetResult();
       }
       dbManager.pushTransaction(trx);
-      tronNetService.broadcast(message);
+      ichNetService.broadcast(message);
       logger.info("Broadcast transaction {} successfully.", trx.getTransactionId());
       return builder.setResult(true).setCode(response_code.SUCCESS).build();
     } catch (ValidateSignatureException e) {
@@ -1135,8 +1135,8 @@ public class Wallet {
     long freeNetLimit = chainBaseManager.getDynamicPropertiesStore().getFreeNetLimit();
     long totalNetLimit = chainBaseManager.getDynamicPropertiesStore().getTotalNetLimit();
     long totalNetWeight = chainBaseManager.getDynamicPropertiesStore().getTotalNetWeight();
-    long totalTronPowerWeight = chainBaseManager.getDynamicPropertiesStore()
-        .getTotalTronPowerWeight();
+    long totalIchPowerWeight = chainBaseManager.getDynamicPropertiesStore()
+        .getTotalIchPowerWeight();
     long energyLimit = energyProcessor
         .calculateGlobalEnergyLimit(accountCapsule);
     long totalEnergyLimit =
@@ -1146,8 +1146,8 @@ public class Wallet {
 
     long storageLimit = accountCapsule.getAccountResource().getStorageLimit();
     long storageUsage = accountCapsule.getAccountResource().getStorageUsage();
-    long allTronPowerUsage = accountCapsule.getTronPowerUsage();
-    long allTronPower = accountCapsule.getAllTronPower() / TRX_PRECISION;
+    long allIchPowerUsage = accountCapsule.getIchPowerUsage();
+    long allIchPower = accountCapsule.getAllIchPower() / TRX_PRECISION;
 
     Map<String, Long> assetNetLimitMap = new HashMap<>();
     Map<String, Long> allFreeAssetNetUsage = setAssetNetLimit(assetNetLimitMap, accountCapsule);
@@ -1158,11 +1158,11 @@ public class Wallet {
         .setNetLimit(netLimit)
         .setTotalNetLimit(totalNetLimit)
         .setTotalNetWeight(totalNetWeight)
-        .setTotalTronPowerWeight(totalTronPowerWeight)
+        .setTotalIchPowerWeight(totalIchPowerWeight)
         .setEnergyLimit(energyLimit)
         .setEnergyUsed(accountCapsule.getAccountResource().getEnergyUsage())
-        .setTronPowerUsed(allTronPowerUsage)
-        .setTronPowerLimit(allTronPower)
+        .setIchPowerUsed(allIchPowerUsage)
+        .setIchPowerLimit(allIchPower)
         .setTotalEnergyLimit(totalEnergyLimit)
         .setTotalEnergyWeight(totalEnergyWeight)
         .setStorageLimit(storageLimit)

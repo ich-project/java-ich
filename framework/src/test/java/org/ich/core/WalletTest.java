@@ -38,7 +38,7 @@ import org.ich.api.GrpcAPI.AssetIssueList;
 import org.ich.api.GrpcAPI.BlockList;
 import org.ich.api.GrpcAPI.ExchangeList;
 import org.ich.api.GrpcAPI.ProposalList;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.crypto.ECKey;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
@@ -54,19 +54,19 @@ import org.ich.core.config.args.Args;
 import org.ich.core.store.DynamicPropertiesStore;
 import org.ich.core.utils.ProposalUtil.ProposalType;
 import org.ich.core.utils.TransactionUtil;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Block;
-import org.ich.protos.Protocol.BlockHeader;
-import org.ich.protos.Protocol.BlockHeader.raw;
-import org.ich.protos.Protocol.Exchange;
-import org.ich.protos.Protocol.Proposal;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Contract;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.TransactionInfo;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
-import org.ich.protos.contract.BalanceContract.TransferContract;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Block;
+import org.ich.core.Protocol.BlockHeader;
+import org.ich.core.Protocol.BlockHeader.raw;
+import org.ich.core.Protocol.Exchange;
+import org.ich.core.Protocol.Proposal;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Contract;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.TransactionInfo;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.contract.BalanceContract.TransferContract;
 
 
 @Slf4j
@@ -101,7 +101,7 @@ public class WalletTest {
   public static final long TRANSACTION_TIMESTAMP_THREE = DateTime.now().minusDays(2).getMillis();
   public static final long TRANSACTION_TIMESTAMP_FOUR = DateTime.now().minusDays(1).getMillis();
   public static final long TRANSACTION_TIMESTAMP_FIVE = DateTime.now().getMillis();
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static Wallet wallet;
   private static ChainBaseManager chainBaseManager;
   private static String dbPath = "output_wallet_test";
@@ -120,7 +120,7 @@ public class WalletTest {
 
   static {
     Args.setParam(new String[]{"-d", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
   }
 
   @BeforeClass

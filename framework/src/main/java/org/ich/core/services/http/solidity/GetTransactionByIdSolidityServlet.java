@@ -14,7 +14,7 @@ import org.ich.core.services.http.JsonFormat;
 import org.ich.core.services.http.PostParams;
 import org.ich.core.services.http.RateLimiterServlet;
 import org.ich.core.services.http.Util;
-import org.ich.protos.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction;
 
 
 @Component

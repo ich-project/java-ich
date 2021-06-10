@@ -1,8 +1,8 @@
 package org.ich.core.db;
 
 import static org.ich.core.config.Parameter.ChainConstant.TRX_PRECISION;
-import static org.ich.protos.Protocol.Transaction.Contract.ContractType.ShieldedTransferContract;
-import static org.ich.protos.Protocol.Transaction.Contract.ContractType.TransferAssetContract;
+import static org.ich.core.Protocol.Transaction.Contract.ContractType.ShieldedTransferContract;
+import static org.ich.core.Protocol.Transaction.Contract.ContractType.TransferAssetContract;
 
 import com.google.protobuf.ByteString;
 import java.util.List;
@@ -18,9 +18,9 @@ import org.ich.core.capsule.TransactionCapsule;
 import org.ich.core.exception.AccountResourceInsufficientException;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.exception.TooBigTransactionResultException;
-import org.ich.protos.Protocol.Transaction.Contract;
-import org.ich.protos.contract.AssetIssueContractOuterClass.TransferAssetContract;
-import org.ich.protos.contract.BalanceContract.TransferContract;
+import org.ich.core.Protocol.Transaction.Contract;
+import org.ich.core.contract.AssetIssueContractOuterClass.TransferAssetContract;
+import org.ich.core.contract.BalanceContract.TransferContract;
 
 @Slf4j(topic = "DB")
 public class BandwidthProcessor extends ResourceProcessor {

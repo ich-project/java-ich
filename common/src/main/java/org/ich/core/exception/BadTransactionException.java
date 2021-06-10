@@ -1,6 +1,6 @@
 package org.ich.core.exception;
 
-public class BadTransactionException extends TronException {
+public class BadTransactionException extends IchException {
 
   public BadTransactionException() {
     super();

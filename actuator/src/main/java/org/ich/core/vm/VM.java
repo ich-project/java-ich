@@ -2,7 +2,7 @@ package org.ich.core.vm;
 
 import static org.ich.common.common.crypto.Hash.sha3;
 import static org.ich.common.common.utils.ByteUtil.EMPTY_BYTE_ARRAY;
-import static org.ich.core.db.TransactionTrace.convertToTronAddress;
+import static org.ich.core.db.TransactionTrace.convertToIchAddress;
 import static org.ich.core.vm.OpCode.*;
 
 import java.math.BigInteger;
@@ -1283,7 +1283,7 @@ public class VM {
   }
 
   private boolean isDeadAccount(Program program, DataWord address) {
-    return program.getContractState().getAccount(convertToTronAddress(address.getLast20Bytes()))
+    return program.getContractState().getAccount(convertToIchAddress(address.getLast20Bytes()))
         == null;
   }
 }

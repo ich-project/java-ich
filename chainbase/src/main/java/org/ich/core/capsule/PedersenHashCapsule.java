@@ -7,7 +7,7 @@ import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.zksnark.JLibrustzcash;
 import org.ich.common.common.zksnark.LibrustzcashParam.MerkleHashParams;
 import org.ich.core.exception.ZksnarkException;
-import org.ich.protos.contract.ShieldContract.PedersenHash;
+import org.ich.core.contract.ShieldContract.PedersenHash;
 
 
 @Slf4j

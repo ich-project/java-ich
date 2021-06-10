@@ -11,7 +11,7 @@ import org.ich.consensus.base.Param.Miner;
 import org.ich.consensus.base.State;
 import org.ich.core.capsule.BlockCapsule;
 import org.ich.core.db.Manager;
-import org.ich.core.net.TronNetService;
+import org.ich.core.net.IchNetService;
 import org.ich.core.net.message.BlockMessage;
 
 @Slf4j(topic = "consensus")
@@ -25,7 +25,7 @@ public class BlockHandleImpl implements BlockHandle {
   private BackupManager backupManager;
 
   @Autowired
-  private TronNetService tronNetService;
+  private IchNetService ichNetService;
 
   @Autowired
   private Consensus consensus;
@@ -50,9 +50,9 @@ public class BlockHandleImpl implements BlockHandle {
     try {
       consensus.receiveBlock(blockCapsule);
       BlockMessage blockMessage = new BlockMessage(blockCapsule);
-      tronNetService.fastForward(blockMessage);
+      ichNetService.fastForward(blockMessage);
       manager.pushBlock(blockCapsule);
-      tronNetService.broadcast(blockMessage);
+      ichNetService.broadcast(blockMessage);
     } catch (Exception e) {
       logger.error("Handle block {} failed.", blockCapsule.getBlockId().getString(), e);
       return null;

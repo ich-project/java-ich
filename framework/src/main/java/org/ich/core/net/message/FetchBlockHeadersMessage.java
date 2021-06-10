@@ -1,6 +1,6 @@
 package org.ich.core.net.message;
 
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 
 public class FetchBlockHeadersMessage extends InventoryMessage {
 

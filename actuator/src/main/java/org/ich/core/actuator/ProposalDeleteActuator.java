@@ -19,10 +19,10 @@ import org.ich.core.exception.ItemNotFoundException;
 import org.ich.core.store.AccountStore;
 import org.ich.core.store.DynamicPropertiesStore;
 import org.ich.core.store.ProposalStore;
-import org.ich.protos.Protocol.Proposal.State;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.ProposalContract.ProposalDeleteContract;
+import org.ich.core.Protocol.Proposal.State;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.ProposalContract.ProposalDeleteContract;
 
 @Slf4j(topic = "actuator")
 public class ProposalDeleteActuator extends AbstractActuator {

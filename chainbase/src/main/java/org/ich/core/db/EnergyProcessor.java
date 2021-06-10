@@ -13,7 +13,7 @@ import org.ich.core.exception.AccountResourceInsufficientException;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.store.AccountStore;
 import org.ich.core.store.DynamicPropertiesStore;
-import org.ich.protos.Protocol.Account.AccountResource;
+import org.ich.core.Protocol.Account.AccountResource;
 
 @Slf4j(topic = "DB")
 public class EnergyProcessor extends ResourceProcessor {

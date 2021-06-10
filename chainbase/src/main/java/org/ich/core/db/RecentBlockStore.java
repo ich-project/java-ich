@@ -7,7 +7,7 @@ import org.ich.core.capsule.BytesCapsule;
 import org.ich.core.exception.ItemNotFoundException;
 
 @Component
-public class RecentBlockStore extends TronStoreWithRevoking<BytesCapsule> {
+public class RecentBlockStore extends IchStoreWithRevoking<BytesCapsule> {
 
   @Autowired
   private RecentBlockStore(@Value("recent-block") String dbName) {

@@ -1,10 +1,10 @@
 /*
- * java-tron is free software: you can redistribute it and/or modify
+ * java-ich is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * java-tron is distributed in the hope that it will be useful,
+ * java-ich is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -19,7 +19,7 @@ import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
 import java.io.File;
 
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.runtime.RuntimeImpl;
 import org.ich.common.common.storage.DepositImpl;
 import org.ich.common.common.utils.Commons;
@@ -43,17 +43,17 @@ import org.ich.core.exception.ContractExeException;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.exception.ReceiptCheckErrException;
 import org.ich.core.exception.TooBigTransactionResultException;
-import org.ich.core.exception.TronException;
+import org.ich.core.exception.IchException;
 import org.ich.core.exception.VMIllegalException;
 import org.ich.core.store.StoreFactory;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Contract;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.contractResult;
-import org.ich.protos.Protocol.Transaction.raw;
-import org.ich.protos.contract.SmartContractOuterClass.CreateSmartContract;
-import org.ich.protos.contract.SmartContractOuterClass.TriggerSmartContract;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Contract;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.contractResult;
+import org.ich.core.Protocol.Transaction.raw;
+import org.ich.core.contract.SmartContractOuterClass.CreateSmartContract;
+import org.ich.core.contract.SmartContractOuterClass.TriggerSmartContract;
 
 /**
  * pragma solidity ^0.4.2;
@@ -92,7 +92,7 @@ public class BandWidthRuntimeOutOfTimeWithCheckTest {
         },
         "config-test-mainnet.conf"
     );
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
   }
 
   private String trx2ContractAddress = "TPMBUANrTwwQAPwShn7ZZjTJz1f3F8jknj";
@@ -173,7 +173,7 @@ public class BandWidthRuntimeOutOfTimeWithCheckTest {
       Assert.assertEquals(990000000, balance);
       Assert.assertEquals(9950000 * Constant.SUN_PER_ENERGY,
           balance + energy * Constant.SUN_PER_ENERGY);
-    } catch (TronException e) {
+    } catch (IchException e) {
       Assert.assertNotNull(e);
     } catch (ReceiptCheckErrException e) {
       Assert.assertNotNull(e);

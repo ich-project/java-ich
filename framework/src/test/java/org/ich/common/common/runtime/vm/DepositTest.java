@@ -3,7 +3,7 @@ package org.ich.common.common.runtime.vm;
 import java.io.File;
 import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.parameter.CommonParameter;
 import org.ich.common.common.storage.Deposit;
 import org.ich.common.common.storage.DepositImpl;
@@ -28,14 +28,14 @@ import org.ich.core.exception.ContractExeException;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.exception.ReceiptCheckErrException;
 import org.ich.core.exception.VMIllegalException;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Transaction;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Transaction;
 
 @Slf4j
 public class DepositTest {
 
   private Manager manager;
-  private TronApplicationContext context;
+  private IchApplicationContext context;
   private String dbPath = "output_DepostitTest";
   private String OWNER_ADDRESS;
   private Deposit rootDeposit;
@@ -43,7 +43,7 @@ public class DepositTest {
   @Before
   public void init() {
     Args.setParam(new String[]{"--output-directory", dbPath, "--debug"}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049abc";
     manager = context.getBean(Manager.class);
     rootDeposit = DepositImpl.createRoot(manager);

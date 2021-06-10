@@ -1,6 +1,6 @@
 package org.ich.core.exception;
 
-public class DupTransactionException extends TronException {
+public class DupTransactionException extends IchException {
 
   public DupTransactionException() {
     super();

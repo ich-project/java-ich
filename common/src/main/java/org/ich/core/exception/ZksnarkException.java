@@ -1,6 +1,6 @@
 package org.ich.core.exception;
 
-public class ZksnarkException extends TronException {
+public class ZksnarkException extends IchException {
 
   public ZksnarkException() {
     super();

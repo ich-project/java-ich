@@ -20,33 +20,33 @@ import org.ich.core.capsule.PbftSignCapsule;
 import org.ich.core.config.Parameter.NetConstants;
 import org.ich.core.exception.P2pException;
 import org.ich.core.exception.P2pException.TypeEnum;
-import org.ich.core.net.TronNetDelegate;
+import org.ich.core.net.IchNetDelegate;
 import org.ich.core.net.message.BlockMessage;
 import org.ich.core.net.message.FetchInvDataMessage;
 import org.ich.core.net.message.MessageTypes;
 import org.ich.core.net.message.PbftCommitMessage;
 import org.ich.core.net.message.TransactionMessage;
 import org.ich.core.net.message.TransactionsMessage;
-import org.ich.core.net.message.TronMessage;
+import org.ich.core.net.message.IchMessage;
 import org.ich.core.net.peer.Item;
 import org.ich.core.net.peer.PeerConnection;
 import org.ich.core.net.service.AdvService;
 import org.ich.core.net.service.SyncService;
-import org.ich.protos.Protocol.Inventory.InventoryType;
-import org.ich.protos.Protocol.PBFTMessage.Raw;
-import org.ich.protos.Protocol.ReasonCode;
-import org.ich.protos.Protocol.Transaction;
+import org.ich.core.Protocol.Inventory.InventoryType;
+import org.ich.core.Protocol.PBFTMessage.Raw;
+import org.ich.core.Protocol.ReasonCode;
+import org.ich.core.Protocol.Transaction;
 
 @Slf4j(topic = "net")
 @Component
-public class FetchInvDataMsgHandler implements TronMsgHandler {
+public class FetchInvDataMsgHandler implements IchMsgHandler {
 
   private volatile Cache<Long, Boolean> epochCache = CacheBuilder.newBuilder().initialCapacity(100)
       .maximumSize(1000).expireAfterWrite(1, TimeUnit.HOURS).build();
 
   private static final int MAX_SIZE = 1_000_000;
   @Autowired
-  private TronNetDelegate tronNetDelegate;
+  private IchNetDelegate ichNetDelegate;
   @Autowired
   private SyncService syncService;
   @Autowired
@@ -55,7 +55,7 @@ public class FetchInvDataMsgHandler implements TronMsgHandler {
   private ConsensusDelegate consensusDelegate;
 
   @Override
-  public void processMessage(PeerConnection peer, TronMessage msg) throws P2pException {
+  public void processMessage(PeerConnection peer, IchMessage msg) throws P2pException {
 
     FetchInvDataMessage fetchInvDataMsg = (FetchInvDataMessage) msg;
 
@@ -71,7 +71,7 @@ public class FetchInvDataMsgHandler implements TronMsgHandler {
       Message message = advService.getMessage(item);
       if (message == null) {
         try {
-          message = tronNetDelegate.getData(hash, type);
+          message = ichNetDelegate.getData(hash, type);
         } catch (Exception e) {
           logger.error("Fetch item {} failed. reason: {}", item, hash, e.getMessage());
           peer.disconnect(ReasonCode.FETCH_FAIL);
@@ -104,11 +104,11 @@ public class FetchInvDataMsgHandler implements TronMsgHandler {
 
   private void sendPbftCommitMessage(PeerConnection peer, BlockCapsule blockCapsule) {
     try {
-      if (!tronNetDelegate.allowPBFT() || peer.isSyncFinish()) {
+      if (!ichNetDelegate.allowPBFT() || peer.isSyncFinish()) {
         return;
       }
       long epoch = 0;
-      PbftSignCapsule pbftSignCapsule = tronNetDelegate
+      PbftSignCapsule pbftSignCapsule = ichNetDelegate
           .getBlockPbftCommitData(blockCapsule.getNum());
       long maintenanceTimeInterval = consensusDelegate.getDynamicPropertiesStore()
           .getMaintenanceTimeInterval();
@@ -121,7 +121,7 @@ public class FetchInvDataMsgHandler implements TronMsgHandler {
             (blockCapsule.getTimeStamp() / maintenanceTimeInterval + 1) * maintenanceTimeInterval;
       }
       if (epochCache.getIfPresent(epoch) == null) {
-        PbftSignCapsule srl = tronNetDelegate.getSRLPbftCommitData(epoch);
+        PbftSignCapsule srl = ichNetDelegate.getSRLPbftCommitData(epoch);
         if (srl != null) {
           epochCache.put(epoch, true);
           peer.sendMessage(new PbftCommitMessage(srl));
@@ -141,7 +141,7 @@ public class FetchInvDataMsgHandler implements TronMsgHandler {
           throw new P2pException(TypeEnum.BAD_MESSAGE, "not spread inv: {}" + hash);
         }
       }
-      int fetchCount = peer.getNodeStatistics().messageStatistics.tronInTrxFetchInvDataElement
+      int fetchCount = peer.getNodeStatistics().messageStatistics.ichInTrxFetchInvDataElement
           .getCount(10);
       int maxCount = advService.getTrxCount().getCount(60);
       if (fetchCount > maxCount) {
@@ -158,9 +158,9 @@ public class FetchInvDataMsgHandler implements TronMsgHandler {
         }
       }
       if (isAdv) {
-        MessageCount tronOutAdvBlock = peer.getNodeStatistics().messageStatistics.tronOutAdvBlock;
-        tronOutAdvBlock.add(fetchInvDataMsg.getHashList().size());
-        int outBlockCountIn1min = tronOutAdvBlock.getCount(60);
+        MessageCount ichOutAdvBlock = peer.getNodeStatistics().messageStatistics.ichOutAdvBlock;
+        ichOutAdvBlock.add(fetchInvDataMsg.getHashList().size());
+        int outBlockCountIn1min = ichOutAdvBlock.getCount(60);
         int producedBlockIn2min = 120_000 / BLOCK_PRODUCED_INTERVAL;
         if (outBlockCountIn1min > producedBlockIn2min) {
           logger.error("producedBlockIn2min: " + producedBlockIn2min + ", outBlockCountIn1min: "

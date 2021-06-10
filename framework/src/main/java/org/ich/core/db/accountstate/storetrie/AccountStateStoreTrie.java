@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.ich.common.common.crypto.Hash;
 import org.ich.core.capsule.BytesCapsule;
-import org.ich.core.db.TronStoreWithRevoking;
+import org.ich.core.db.IchStoreWithRevoking;
 import org.ich.core.db.accountstate.AccountStateEntity;
 import org.ich.core.db.accountstate.TrieService;
 import org.ich.core.db2.common.DB;
@@ -16,7 +16,7 @@ import org.ich.core.trie.TrieImpl;
 
 @Slf4j(topic = "AccountState")
 @Component
-public class AccountStateStoreTrie extends TronStoreWithRevoking<BytesCapsule> implements
+public class AccountStateStoreTrie extends IchStoreWithRevoking<BytesCapsule> implements
     DB<byte[], BytesCapsule> {
 
   @Autowired

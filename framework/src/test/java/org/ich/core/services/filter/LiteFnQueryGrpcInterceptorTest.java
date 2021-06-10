@@ -18,7 +18,7 @@ import org.ich.api.WalletGrpc;
 import org.ich.api.WalletSolidityGrpc;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.Constant;
 import org.ich.core.config.DefaultConfig;
@@ -31,7 +31,7 @@ public class LiteFnQueryGrpcInterceptorTest {
 
   private static final Logger logger = LoggerFactory.getLogger("Test");
 
-  private TronApplicationContext context;
+  private IchApplicationContext context;
   private ManagedChannel channelFull = null;
   private ManagedChannel channelpBFT = null;
   private WalletGrpc.WalletBlockingStub blockingStubFull = null;
@@ -64,7 +64,7 @@ public class LiteFnQueryGrpcInterceptorTest {
     channelpBFT = ManagedChannelBuilder.forTarget(pBFTNode)
             .usePlaintext(true)
             .build();
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     blockingStubFull = WalletGrpc.newBlockingStub(channelFull);
     blockingStubSolidity = WalletSolidityGrpc.newBlockingStub(channelFull);
     blockingStubpBFT = WalletSolidityGrpc.newBlockingStub(channelpBFT);

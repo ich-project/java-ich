@@ -8,7 +8,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.parameter.CommonParameter;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
@@ -27,27 +27,27 @@ import org.ich.core.config.DefaultConfig;
 import org.ich.core.config.args.Args;
 import org.ich.core.db.Manager;
 import org.ich.core.exception.ZksnarkException;
-import org.ich.protos.Protocol.Block;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.contract.ShieldContract.IncrementalMerkleVoucherInfo;
-import org.ich.protos.contract.ShieldContract.OutputPoint;
-import org.ich.protos.contract.ShieldContract.OutputPointInfo;
-import org.ich.protos.contract.ShieldContract.PedersenHash;
-import org.ich.protos.contract.ShieldContract.ReceiveDescription;
-import org.ich.protos.contract.ShieldContract.ShieldedTransferContract;
+import org.ich.core.Protocol.Block;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.contract.ShieldContract.IncrementalMerkleVoucherInfo;
+import org.ich.core.contract.ShieldContract.OutputPoint;
+import org.ich.core.contract.ShieldContract.OutputPointInfo;
+import org.ich.core.contract.ShieldContract.PedersenHash;
+import org.ich.core.contract.ShieldContract.ReceiveDescription;
+import org.ich.core.contract.ShieldContract.ShieldedTransferContract;
 
 public class MerkleContainerTest {
 
   private static Manager dbManager = new Manager();
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static String dbPath = "MerkleContainerTest";
   private static MerkleContainer merkleContainer;
 
 
   static {
     Args.setParam(new String[]{"-d", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
   }
 
   @BeforeClass

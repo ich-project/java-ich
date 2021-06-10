@@ -12,7 +12,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.ChainBaseManager;
@@ -28,11 +28,11 @@ import org.ich.core.config.args.Args;
 import org.ich.core.db.Manager;
 import org.ich.core.exception.ContractExeException;
 import org.ich.core.exception.ContractValidateException;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.AssetIssueContractOuterClass;
-import org.ich.protos.contract.BalanceContract.FreezeBalanceContract;
-import org.ich.protos.contract.Common.ResourceCode;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.AssetIssueContractOuterClass;
+import org.ich.core.contract.BalanceContract.FreezeBalanceContract;
+import org.ich.core.contract.Common.ResourceCode;
 
 @Slf4j
 public class FreezeBalanceActuatorTest {
@@ -44,11 +44,11 @@ public class FreezeBalanceActuatorTest {
   private static final String OWNER_ACCOUNT_INVALID;
   private static final long initBalance = 10_000_000_000L;
   private static Manager dbManager;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
 
   static {
     Args.setParam(new String[]{"--output-directory", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "548794500882809695a8a687866e76d4271a1abc";
     RECEIVER_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049150";
     OWNER_ACCOUNT_INVALID =
@@ -123,13 +123,13 @@ public class FreezeBalanceActuatorTest {
   }
 
 
-  private Any getContractForTronPower(String ownerAddress, long frozenBalance, long duration) {
+  private Any getContractForIchPower(String ownerAddress, long frozenBalance, long duration) {
     return Any.pack(
         FreezeBalanceContract.newBuilder()
             .setOwnerAddress(ByteString.copyFrom(ByteArray.fromHexString(ownerAddress)))
             .setFrozenBalance(frozenBalance)
             .setFrozenDuration(duration)
-            .setResource(ResourceCode.TRON_POWER)
+            .setResource(ResourceCode.ICH_POWER)
             .build());
   }
 
@@ -176,7 +176,7 @@ public class FreezeBalanceActuatorTest {
       Assert.assertEquals(owner.getBalance(), initBalance - frozenBalance
           - TRANSFER_FEE);
       Assert.assertEquals(owner.getFrozenBalance(), frozenBalance);
-      Assert.assertEquals(frozenBalance, owner.getTronPower());
+      Assert.assertEquals(frozenBalance, owner.getIchPower());
     } catch (ContractValidateException e) {
       Assert.assertFalse(e instanceof ContractValidateException);
     } catch (ContractExeException e) {
@@ -204,7 +204,7 @@ public class FreezeBalanceActuatorTest {
           - TRANSFER_FEE);
       Assert.assertEquals(0L, owner.getFrozenBalance());
       Assert.assertEquals(frozenBalance, owner.getEnergyFrozenBalance());
-      Assert.assertEquals(frozenBalance, owner.getTronPower());
+      Assert.assertEquals(frozenBalance, owner.getIchPower());
     } catch (ContractValidateException e) {
       Assert.assertFalse(e instanceof ContractValidateException);
     } catch (ContractExeException e) {
@@ -267,13 +267,13 @@ public class FreezeBalanceActuatorTest {
           - TRANSFER_FEE);
       Assert.assertEquals(0L, owner.getFrozenBalance());
       Assert.assertEquals(frozenBalance, owner.getDelegatedFrozenBalanceForBandwidth());
-      Assert.assertEquals(frozenBalance, owner.getTronPower());
+      Assert.assertEquals(frozenBalance, owner.getIchPower());
 
       AccountCapsule receiver =
           dbManager.getAccountStore().get(ByteArray.fromHexString(RECEIVER_ADDRESS));
       Assert.assertEquals(frozenBalance, receiver.getAcquiredDelegatedFrozenBalanceForBandwidth());
       Assert.assertEquals(0L, receiver.getAcquiredDelegatedFrozenBalanceForEnergy());
-      Assert.assertEquals(0L, receiver.getTronPower());
+      Assert.assertEquals(0L, receiver.getIchPower());
 
       DelegatedResourceCapsule delegatedResourceCapsule = dbManager.getDelegatedResourceStore()
           .get(DelegatedResourceCapsule
@@ -336,13 +336,13 @@ public class FreezeBalanceActuatorTest {
       Assert.assertEquals(0L, owner.getFrozenBalance());
       Assert.assertEquals(0L, owner.getDelegatedFrozenBalanceForBandwidth());
       Assert.assertEquals(frozenBalance, owner.getDelegatedFrozenBalanceForEnergy());
-      Assert.assertEquals(frozenBalance, owner.getTronPower());
+      Assert.assertEquals(frozenBalance, owner.getIchPower());
 
       AccountCapsule receiver =
           dbManager.getAccountStore().get(ByteArray.fromHexString(RECEIVER_ADDRESS));
       Assert.assertEquals(0L, receiver.getAcquiredDelegatedFrozenBalanceForBandwidth());
       Assert.assertEquals(frozenBalance, receiver.getAcquiredDelegatedFrozenBalanceForEnergy());
-      Assert.assertEquals(0L, receiver.getTronPower());
+      Assert.assertEquals(0L, receiver.getIchPower());
 
       DelegatedResourceCapsule delegatedResourceCapsule = dbManager.getDelegatedResourceStore()
           .get(DelegatedResourceCapsule
@@ -412,7 +412,7 @@ public class FreezeBalanceActuatorTest {
           dbManager.getAccountStore().get(ByteArray.fromHexString(RECEIVER_ADDRESS));
       Assert.assertEquals(0L, receiver.getAcquiredDelegatedFrozenBalanceForBandwidth());
       Assert.assertEquals(0L, receiver.getAcquiredDelegatedFrozenBalanceForEnergy());
-      Assert.assertEquals(0L, receiver.getTronPower());
+      Assert.assertEquals(0L, receiver.getIchPower());
 
       long totalEnergyWeightAfter = dbManager.getDynamicPropertiesStore().getTotalEnergyWeight();
       Assert.assertEquals(totalEnergyWeightBefore + frozenBalance / 1000_000L,
@@ -667,7 +667,7 @@ public class FreezeBalanceActuatorTest {
 
 
   @Test
-  public void testFreezeBalanceForEnergyWithoutOldTronPowerAfterNewResourceModel() {
+  public void testFreezeBalanceForEnergyWithoutOldIchPowerAfterNewResourceModel() {
     long frozenBalance = 1_000_000_000L;
     long duration = 3;
     FreezeBalanceActuator actuator = new FreezeBalanceActuator();
@@ -683,8 +683,8 @@ public class FreezeBalanceActuatorTest {
       AccountCapsule owner =
           dbManager.getAccountStore().get(ByteArray.fromHexString(OWNER_ADDRESS));
 
-      Assert.assertEquals(-1L, owner.getInstance().getOldTronPower());
-      Assert.assertEquals(0L, owner.getAllTronPower());
+      Assert.assertEquals(-1L, owner.getInstance().getOldIchPower());
+      Assert.assertEquals(0L, owner.getAllIchPower());
     } catch (ContractValidateException e) {
       Assert.assertFalse(e instanceof ContractValidateException);
     } catch (ContractExeException e) {
@@ -694,7 +694,7 @@ public class FreezeBalanceActuatorTest {
 
 
   @Test
-  public void testFreezeBalanceForEnergyWithOldTronPowerAfterNewResourceModel() {
+  public void testFreezeBalanceForEnergyWithOldIchPowerAfterNewResourceModel() {
     long frozenBalance = 1_000_000_000L;
     long duration = 3;
     FreezeBalanceActuator actuator = new FreezeBalanceActuator();
@@ -716,8 +716,8 @@ public class FreezeBalanceActuatorTest {
       owner =
           dbManager.getAccountStore().get(ByteArray.fromHexString(OWNER_ADDRESS));
 
-      Assert.assertEquals(100L, owner.getInstance().getOldTronPower());
-      Assert.assertEquals(100L, owner.getAllTronPower());
+      Assert.assertEquals(100L, owner.getInstance().getOldIchPower());
+      Assert.assertEquals(100L, owner.getAllIchPower());
     } catch (ContractValidateException e) {
       Assert.assertFalse(e instanceof ContractValidateException);
     } catch (ContractExeException e) {
@@ -727,14 +727,14 @@ public class FreezeBalanceActuatorTest {
 
 
   @Test
-  public void testFreezeBalanceForTronPowerWithOldTronPowerAfterNewResourceModel() {
+  public void testFreezeBalanceForIchPowerWithOldIchPowerAfterNewResourceModel() {
     long frozenBalance = 1_000_000_000L;
     long duration = 3;
     FreezeBalanceActuator actuator = new FreezeBalanceActuator();
     ChainBaseManager chainBaseManager = dbManager.getChainBaseManager();
     chainBaseManager.getDynamicPropertiesStore().saveAllowNewResourceModel(1L);
     actuator.setChainBaseManager(chainBaseManager)
-        .setAny(getContractForTronPower(OWNER_ADDRESS, frozenBalance, duration));
+        .setAny(getContractForIchPower(OWNER_ADDRESS, frozenBalance, duration));
     TransactionResultCapsule ret = new TransactionResultCapsule();
 
     AccountCapsule owner =
@@ -749,8 +749,8 @@ public class FreezeBalanceActuatorTest {
       owner =
           dbManager.getAccountStore().get(ByteArray.fromHexString(OWNER_ADDRESS));
 
-      Assert.assertEquals(100L, owner.getInstance().getOldTronPower());
-      Assert.assertEquals(frozenBalance + 100L, owner.getAllTronPower());
+      Assert.assertEquals(100L, owner.getInstance().getOldIchPower());
+      Assert.assertEquals(frozenBalance + 100L, owner.getAllIchPower());
     } catch (ContractValidateException e) {
       Assert.assertFalse(e instanceof ContractValidateException);
     } catch (ContractExeException e) {

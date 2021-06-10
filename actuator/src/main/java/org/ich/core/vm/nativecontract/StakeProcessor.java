@@ -15,7 +15,7 @@ import org.ich.core.exception.ContractValidateException;
 import org.ich.core.store.WitnessStore;
 import org.ich.core.vm.nativecontract.param.StakeParam;
 import org.ich.core.vm.repository.Repository;
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 
 import static org.ich.core.actuator.ActuatorConstant.*;
 
@@ -27,7 +27,7 @@ public class StakeProcessor {
       throws ContractValidateException, ContractExeException {
     selfValidate(stakeParam, repository);
     AccountCapsule accountCapsule = repository.getAccount(stakeParam.getOwnerAddress());
-    long tronPower = accountCapsule.getTronPower();
+    long tronPower = accountCapsule.getIchPower();
     long freezeBalance = stakeParam.getStakeAmount() - tronPower;
     // if need freeze balance
     if (freezeBalance > 0) {
@@ -116,7 +116,7 @@ public class StakeProcessor {
         }
         sum = vote.getVoteCount();
       }
-      long tronPower = accountCapsule.getTronPower();
+      long tronPower = accountCapsule.getIchPower();
 
       // trx -> drop. The vote count is based on TRX
       sum = LongMath.checkedMultiply(sum, ChainConstant.TRX_PRECISION);

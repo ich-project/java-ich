@@ -2,8 +2,8 @@ package org.ich.common.common.runtime.vm;
 
 import static org.ich.core.config.Parameter.ChainConstant.FROZEN_PERIOD;
 import static org.ich.core.config.Parameter.ChainConstant.TRX_PRECISION;
-import static org.ich.protos.Protocol.Transaction.Result.contractResult.REVERT;
-import static org.ich.protos.Protocol.Transaction.Result.contractResult.SUCCESS;
+import static org.ich.core.Protocol.Transaction.Result.contractResult.REVERT;
+import static org.ich.core.Protocol.Transaction.Result.contractResult.SUCCESS;
 
 import com.google.protobuf.ByteString;
 
@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.function.Consumer;
 
 import lombok.extern.slf4j.Slf4j;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.runtime.RuntimeImpl;
 import org.ich.common.common.storage.Deposit;
 import org.ich.common.common.storage.DepositImpl;
@@ -45,8 +45,8 @@ import org.ich.core.store.StoreFactory;
 import org.ich.core.vm.EnergyCost;
 import org.ich.core.vm.config.ConfigLoader;
 import org.ich.core.vm.config.VMConfig;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.Transaction.Result.contractResult;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.Transaction.Result.contractResult;
 import stest.ich.wallet.common.client.utils.AbiUtil;
 
 @Slf4j
@@ -123,7 +123,7 @@ public class FreezeTest {
   private static final byte[] userC = Commons.decode58Check(userCStr);
 
   private static String dbPath;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static Manager manager;
   private static byte[] owner;
   private static Deposit rootDeposit;
@@ -132,7 +132,7 @@ public class FreezeTest {
   public void init() throws Exception {
     dbPath = "output_" + FreezeTest.class.getName();
     Args.setParam(new String[]{"--output-directory", dbPath, "--debug"}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     manager = context.getBean(Manager.class);
     owner = Hex.decode(Wallet.getAddressPreFixString()
         + "abd4b9367799eaa3197fecb144eb71de1e049abc");
@@ -261,7 +261,7 @@ public class FreezeTest {
                                 long salt) throws Exception {
     TVMTestResult result = triggerContract(
         owner, factoryAddr, fee, SUCCESS, null, "getCreate2Addr(uint256)", salt);
-    return TransactionTrace.convertToTronAddress(
+    return TransactionTrace.convertToIchAddress(
         new DataWord(result.getRuntime().getResult().getHReturn()).getLast20Bytes());
   }
 
@@ -269,7 +269,7 @@ public class FreezeTest {
                                        long salt) throws Exception {
     TVMTestResult result = triggerContract(
         owner, factoryAddr, fee, SUCCESS, null, "deployCreate2Contract(uint256)", salt);
-    return TransactionTrace.convertToTronAddress(
+    return TransactionTrace.convertToIchAddress(
         new DataWord(result.getRuntime().getResult().getHReturn()).getLast20Bytes());
   }
 
@@ -996,10 +996,10 @@ public class FreezeTest {
     Assert.assertNotNull(newInheritor);
     if (FastByteComparisons.isEqual(inheritorAddr,
         manager.getAccountStore().getBlackholeAddress())) {
-      Assert.assertEquals(contract.getBalance() + contract.getTronPower(),
+      Assert.assertEquals(contract.getBalance() + contract.getIchPower(),
           newInheritor.getBalance() - oldBalanceOfInheritor - result.getReceipt().getEnergyFee());
     } else {
-      Assert.assertEquals(contract.getBalance() + contract.getTronPower(),
+      Assert.assertEquals(contract.getBalance() + contract.getIchPower(),
           newInheritor.getBalance() - oldBalanceOfInheritor);
     }
 

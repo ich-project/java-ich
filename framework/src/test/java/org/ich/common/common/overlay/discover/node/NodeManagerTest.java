@@ -1,5 +1,22 @@
 package org.ich.common.common.overlay.discover.node;
 
+import org.ich.common.common.application.Application;
+import org.ich.common.common.application.ApplicationFactory;
+import org.ich.common.common.application.IchApplicationContext;
+import org.ich.common.common.parameter.CommonParameter;
+import org.ich.common.common.utils.FileUtil;
+import org.ich.core.ChainBaseManager;
+import org.ich.core.Constant;
+import org.ich.core.config.DefaultConfig;
+import org.ich.core.config.args.Args;
+import org.ich.core.db.Manager;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -7,30 +24,13 @@ import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.ich.common.common.application.Application;
-import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
-import org.ich.common.common.parameter.CommonParameter;
-import org.ich.common.common.utils.FileUtil;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.ich.core.ChainBaseManager;
-import org.ich.core.Constant;
-import org.ich.core.config.DefaultConfig;
-import org.ich.core.config.args.Args;
-import org.ich.core.db.Manager;
-
 
 public class NodeManagerTest {
 
   private static final Logger logger = LoggerFactory.getLogger("Test");
   private Manager manager;
   private NodeManager nodeManager;
-  private TronApplicationContext context;
+  private IchApplicationContext context;
   private CommonParameter argsTest;
   private Application appTest;
   private Class nodeManagerClazz;
@@ -44,7 +44,7 @@ public class NodeManagerTest {
     argsTest = Args.getInstance();
     Args.setParam(new String[]{"--output-directory", "output-directory", "--debug"},
         Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     appTest = ApplicationFactory.create(context);
     appTest.initServices(argsTest);
     appTest.startServices();

@@ -6,9 +6,9 @@ import com.google.protobuf.ByteString;
 import org.ich.common.common.net.udp.message.Message;
 import org.ich.common.common.overlay.discover.node.Node;
 import org.ich.common.common.utils.ByteArray;
-import org.ich.protos.Discover;
-import org.ich.protos.Discover.Endpoint;
-import org.ich.protos.Discover.FindNeighbours;
+import org.ich.core.Discover;
+import org.ich.core.Discover.Endpoint;
+import org.ich.core.Discover.FindNeighbours;
 
 public class FindNodeMessage extends Message {
 

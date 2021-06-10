@@ -2,7 +2,7 @@ package org.ich.common.common.runtime.vm;
 
 import java.io.File;
 import lombok.extern.slf4j.Slf4j;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.FileUtil;
 import org.junit.After;
 import org.junit.Before;
@@ -22,7 +22,7 @@ import org.ich.core.store.StoreFactory;
 import org.ich.core.store.WitnessStore;
 import org.ich.core.vm.repository.Repository;
 import org.ich.core.vm.repository.RepositoryImpl;
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 
 @Slf4j
 public class VMContractTestBase {
@@ -31,7 +31,7 @@ public class VMContractTestBase {
   protected Runtime runtime;
   protected Manager manager;
   protected Repository rootRepository;
-  protected TronApplicationContext context;
+  protected IchApplicationContext context;
   protected ConsensusService consensusService;
   protected ChainBaseManager chainBaseManager;
   protected MaintenanceManager maintenanceManager;
@@ -53,7 +53,7 @@ public class VMContractTestBase {
   public void init() {
     dbPath = "output_" + this.getClass().getName();
     Args.setParam(new String[]{"--output-directory", dbPath, "--debug"}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
 
     // TRdmP9bYvML7dGUX9Rbw2kZrE2TayPZmZX - 41abd4b9367799eaa3197fecb144eb71de1e049abc
     OWNER_ADDRESS = Wallet.getAddressPreFixString() + "abd4b9367799eaa3197fecb144eb71de1e049abc";

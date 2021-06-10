@@ -10,7 +10,7 @@ import org.ich.core.metrics.net.NetInfo;
 import org.ich.core.metrics.net.NetMetricManager;
 import org.ich.core.metrics.node.NodeInfo;
 import org.ich.core.metrics.node.NodeMetricManager;
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 
 @Slf4j(topic = "metrics")
 @Component

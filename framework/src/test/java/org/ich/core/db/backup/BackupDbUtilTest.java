@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.rocksdb.RocksDB;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.parameter.CommonParameter;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.common.common.utils.PropUtil;
@@ -30,7 +30,7 @@ public class BackupDbUtilTest {
     RocksDB.loadLibrary();
   }
 
-  public TronApplicationContext context;
+  public IchApplicationContext context;
   public Application AppT = null;
   public BackupDbUtil dbBackupUtil;
   public Manager dbManager;
@@ -55,7 +55,7 @@ public class BackupDbUtilTest {
         "config-test-dbbackup.conf"
     );
 
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     AppT = ApplicationFactory.create(context);
     dbManager = context.getBean(Manager.class);
     dposSlot = context.getBean(DposSlot.class);

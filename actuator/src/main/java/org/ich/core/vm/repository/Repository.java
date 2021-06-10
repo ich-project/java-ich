@@ -4,7 +4,7 @@ import org.ich.common.common.runtime.vm.DataWord;
 import org.ich.core.capsule.*;
 import org.ich.core.store.*;
 import org.ich.core.vm.program.Storage;
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 
 public interface Repository {
 

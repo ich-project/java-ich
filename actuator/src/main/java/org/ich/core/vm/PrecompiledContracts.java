@@ -29,7 +29,7 @@ import static org.ich.common.common.utils.ByteUtil.numberOfLeadingZeros;
 import static org.ich.common.common.utils.ByteUtil.parseBytes;
 import static org.ich.common.common.utils.ByteUtil.parseWord;
 import static org.ich.common.common.utils.ByteUtil.stripLeadingZeroes;
-import static org.ich.core.db.TransactionTrace.convertToTronAddress;
+import static org.ich.core.db.TransactionTrace.convertToIchAddress;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -72,7 +72,7 @@ import org.ich.core.exception.ZksnarkException;
 import org.ich.core.vm.config.VMConfig;
 import org.ich.core.vm.program.Program;
 import org.ich.core.vm.repository.Repository;
-import org.ich.protos.Protocol.Permission;
+import org.ich.core.Protocol.Permission;
 
 /**
  * @author Roman Mandeleil
@@ -782,7 +782,7 @@ public class PrecompiledContracts {
       byte[] data = words[2].getData();
 
       byte[] combine = ByteUtil
-          .merge(convertToTronAddress(addr), ByteArray.fromInt(permissionId), data);
+          .merge(convertToIchAddress(addr), ByteArray.fromInt(permissionId), data);
       byte[] hash = Sha256Hash.hash(CommonParameter
           .getInstance().isECKeyCryptoEngine(), combine);
 
@@ -793,7 +793,7 @@ public class PrecompiledContracts {
         return Pair.of(true, DATA_FALSE);
       }
 
-      AccountCapsule account = this.getDeposit().getAccount(convertToTronAddress(addr));
+      AccountCapsule account = this.getDeposit().getAccount(convertToIchAddress(addr));
       if (account != null) {
         try {
           Permission permission = account.getPermissionById(permissionId);

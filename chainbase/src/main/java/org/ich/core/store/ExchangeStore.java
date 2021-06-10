@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.ich.core.capsule.ExchangeCapsule;
-import org.ich.core.db.TronStoreWithRevoking;
+import org.ich.core.db.IchStoreWithRevoking;
 import org.ich.core.exception.ItemNotFoundException;
 
 @Component
-public class ExchangeStore extends TronStoreWithRevoking<ExchangeCapsule> {
+public class ExchangeStore extends IchStoreWithRevoking<ExchangeCapsule> {
 
   @Autowired
   protected ExchangeStore(@Value("exchange") String dbName) {

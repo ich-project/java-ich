@@ -18,7 +18,7 @@ import org.ich.core.exception.ContractValidateException;
 import org.ich.core.exception.ReceiptCheckErrException;
 import org.ich.core.exception.VMIllegalException;
 import org.ich.core.vm.config.VMConfig;
-import org.ich.protos.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction;
 
 @Slf4j
 public class StorageTest extends VMTestBase {

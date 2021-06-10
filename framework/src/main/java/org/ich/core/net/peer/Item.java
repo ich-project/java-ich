@@ -2,7 +2,7 @@ package org.ich.core.net.peer;
 
 import lombok.Getter;
 import org.ich.common.common.utils.Sha256Hash;
-import org.ich.protos.Protocol.Inventory.InventoryType;
+import org.ich.core.Protocol.Inventory.InventoryType;
 
 @Getter
 public class Item {

@@ -5,7 +5,7 @@ import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.ich.protos.Protocol.MarketAccountOrder;
+import org.ich.core.Protocol.MarketAccountOrder;
 
 @Slf4j(topic = "capsule")
 public class MarketAccountOrderCapsule implements ProtoCapsule<MarketAccountOrder> {

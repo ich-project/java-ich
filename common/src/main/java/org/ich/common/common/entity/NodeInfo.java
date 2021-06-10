@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import org.ich.common.common.entity.NodeInfo.MachineInfo.DeadLockThreadInfo;
 import org.ich.common.common.entity.NodeInfo.MachineInfo.MemoryDescInfo;
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 
 public class NodeInfo {
 

@@ -11,16 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.ich.core.metrics.MetricsKey;
 import org.ich.core.metrics.MetricsUtil;
-import org.ich.core.net.TronNetDelegate;
+import org.ich.core.net.IchNetDelegate;
 import org.ich.core.net.peer.PeerConnection;
-import org.ich.protos.Protocol;
+import org.ich.core.Protocol;
 
 
 @Component
 public class NetMetricManager {
 
   @Autowired
-  private TronNetDelegate tronNetDelegate;
+  private IchNetDelegate ichNetDelegate;
 
   /**
    * get net info.
@@ -35,9 +35,9 @@ public class NetMetricManager {
 
   private void setNetInfo(NetInfo netInfo) {
     //set connection info
-    netInfo.setConnectionCount(tronNetDelegate.getActivePeer().size());
+    netInfo.setConnectionCount(ichNetDelegate.getActivePeer().size());
     int validConnectionCount = 0;
-    for (PeerConnection peerConnection : tronNetDelegate.getActivePeer()) {
+    for (PeerConnection peerConnection : ichNetDelegate.getActivePeer()) {
       if (!(peerConnection.isNeedSyncFromUs() || peerConnection.isNeedSyncFromPeer())) {
         validConnectionCount++;
       }

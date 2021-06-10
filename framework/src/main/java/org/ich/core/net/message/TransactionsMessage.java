@@ -2,10 +2,10 @@ package org.ich.core.net.message;
 
 import java.util.List;
 import org.ich.core.capsule.TransactionCapsule;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.Transaction;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.Transaction;
 
-public class TransactionsMessage extends TronMessage {
+public class TransactionsMessage extends IchMessage {
 
   private Protocol.Transactions transactions;
 

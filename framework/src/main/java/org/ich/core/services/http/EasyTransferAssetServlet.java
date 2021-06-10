@@ -19,8 +19,8 @@ import org.ich.core.capsule.TransactionCapsule;
 import org.ich.core.config.args.Args;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.services.http.JsonFormat.ParseException;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.contract.AssetIssueContractOuterClass.TransferAssetContract;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.contract.AssetIssueContractOuterClass.TransferAssetContract;
 
 
 @Component

@@ -10,7 +10,7 @@ import org.junit.BeforeClass;
 import org.testng.annotations.Test;
 import org.ich.common.common.application.Application;
 import org.ich.common.common.application.ApplicationFactory;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.common.common.utils.Sha256Hash;
@@ -22,15 +22,15 @@ import org.ich.core.capsule.ExchangeCapsule;
 import org.ich.core.capsule.TransactionCapsule;
 import org.ich.core.config.DefaultConfig;
 import org.ich.core.config.args.Args;
-import org.ich.protos.Protocol.Account;
-import org.ich.protos.Protocol.Exchange;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.contract.AssetIssueContractOuterClass.AssetIssueContract;
+import org.ich.core.Protocol.Account;
+import org.ich.core.Protocol.Exchange;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.contract.AssetIssueContractOuterClass.AssetIssueContract;
 
 public class AssetUpdateHelperTest {
 
   private static ChainBaseManager chainBaseManager;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static String dbPath = "output_AssetUpdateHelperTest_test";
   private static Application AppT;
 
@@ -39,7 +39,7 @@ public class AssetUpdateHelperTest {
   static {
     Args.setParam(new String[]{"-d", dbPath, "-w"}, "config-test-index.conf");
     Args.getInstance().setSolidityNode(true);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     AppT = ApplicationFactory.create(context);
   }
 

@@ -1,6 +1,6 @@
 package org.ich.common.common.storage;
 
-import static org.ich.core.db.TransactionTrace.convertToTronAddress;
+import static org.ich.core.db.TransactionTrace.convertToIchAddress;
 
 import com.google.common.primitives.Longs;
 import com.google.protobuf.ByteString;
@@ -42,8 +42,8 @@ import org.ich.core.vm.program.Storage;
 import org.ich.core.vm.repository.Key;
 import org.ich.core.vm.repository.Type;
 import org.ich.core.vm.repository.Value;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.AccountType;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.AccountType;
 
 @Slf4j(topic = "deposit")
 public class DepositImpl implements Deposit {
@@ -379,7 +379,7 @@ public class DepositImpl implements Deposit {
 
   @Override
   public synchronized void putStorageValue(byte[] address, DataWord key, DataWord value) {
-    address = convertToTronAddress(address);
+    address = convertToIchAddress(address);
     if (getAccount(address) == null) {
       return;
     }
@@ -396,7 +396,7 @@ public class DepositImpl implements Deposit {
 
   @Override
   public synchronized DataWord getStorageValue(byte[] address, DataWord key) {
-    address = convertToTronAddress(address);
+    address = convertToIchAddress(address);
     if (getAccount(address) == null) {
       return null;
     }

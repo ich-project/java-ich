@@ -10,7 +10,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.testng.collections.Lists;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.core.Constant;
@@ -22,20 +22,20 @@ import org.ich.core.consensus.ConsensusService;
 import org.ich.core.consensus.ProposalController;
 import org.ich.core.db.Manager;
 import org.ich.core.store.DynamicPropertiesStore;
-import org.ich.protos.Protocol.Proposal;
-import org.ich.protos.Protocol.Proposal.State;
+import org.ich.core.Protocol.Proposal;
+import org.ich.core.Protocol.Proposal.State;
 
 public class ProposalControllerTest {
 
   private static Manager dbManager;
   private static ConsensusService consensusService;
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static String dbPath = "output_proposal_controller_test";
   private static ProposalController proposalController;
 
   static {
     Args.setParam(new String[]{"-d", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
   }
 
   @BeforeClass

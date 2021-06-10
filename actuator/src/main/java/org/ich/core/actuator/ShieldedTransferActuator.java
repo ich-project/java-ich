@@ -35,12 +35,12 @@ import org.ich.core.store.AssetIssueStore;
 import org.ich.core.store.DynamicPropertiesStore;
 import org.ich.core.store.NullifierStore;
 import org.ich.core.store.ZKProofStore;
-import org.ich.protos.Protocol.AccountType;
-import org.ich.protos.Protocol.Transaction.Contract.ContractType;
-import org.ich.protos.Protocol.Transaction.Result.code;
-import org.ich.protos.contract.ShieldContract.ReceiveDescription;
-import org.ich.protos.contract.ShieldContract.ShieldedTransferContract;
-import org.ich.protos.contract.ShieldContract.SpendDescription;
+import org.ich.core.Protocol.AccountType;
+import org.ich.core.Protocol.Transaction.Contract.ContractType;
+import org.ich.core.Protocol.Transaction.Result.code;
+import org.ich.core.contract.ShieldContract.ReceiveDescription;
+import org.ich.core.contract.ShieldContract.ShieldedTransferContract;
+import org.ich.core.contract.ShieldContract.SpendDescription;
 
 
 @Slf4j(topic = "actuator")

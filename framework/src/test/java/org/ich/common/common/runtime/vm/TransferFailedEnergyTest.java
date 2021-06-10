@@ -18,8 +18,8 @@ import org.ich.core.exception.ContractValidateException;
 import org.ich.core.exception.ReceiptCheckErrException;
 import org.ich.core.exception.VMIllegalException;
 import org.ich.core.vm.config.ConfigLoader;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.Protocol.Transaction.Result.contractResult;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction.Result.contractResult;
 import stest.ich.wallet.common.client.utils.AbiUtil;
 
 public class TransferFailedEnergyTest extends VMTestBase {

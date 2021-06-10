@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.ich.core.capsule.BlockCapsule.BlockId;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.BlockInventory;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.BlockInventory;
 
-public class BlockInventoryMessage extends TronMessage {
+public class BlockInventoryMessage extends IchMessage {
 
   protected BlockInventory blockInventory;
 

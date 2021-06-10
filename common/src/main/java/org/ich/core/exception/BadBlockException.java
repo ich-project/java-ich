@@ -1,6 +1,6 @@
 package org.ich.core.exception;
 
-public class BadBlockException extends TronException {
+public class BadBlockException extends IchException {
 
   public BadBlockException() {
     super();

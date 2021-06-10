@@ -24,7 +24,7 @@ import java.util.LinkedList;
 import java.util.List;
 import org.spongycastle.util.encoders.Hex;
 import org.ich.common.common.utils.ByteUtil;
-import org.ich.protos.Protocol.TransactionInfo.Log;
+import org.ich.core.Protocol.TransactionInfo.Log;
 
 /**
  * @author Roman Mandeleil

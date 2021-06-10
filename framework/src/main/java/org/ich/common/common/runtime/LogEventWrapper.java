@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.ich.common.common.logsfilter.trigger.ContractTrigger;
 import org.ich.core.vm.utils.MUtil;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract.ABI.Entry.Param;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract.ABI.Entry.Param;
 
 public class LogEventWrapper extends ContractTrigger {
 

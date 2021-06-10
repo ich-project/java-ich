@@ -14,13 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.ich.core.capsule.AccountTraceCapsule;
-import org.ich.core.db.TronStoreWithRevoking;
+import org.ich.core.db.IchStoreWithRevoking;
 import org.ich.core.exception.BadItemException;
 
 
 @Component
 @Slf4j(topic = "DB")
-public class AccountTraceStore extends TronStoreWithRevoking<AccountTraceCapsule>  {
+public class AccountTraceStore extends IchStoreWithRevoking<AccountTraceCapsule>  {
 
   @Autowired
   protected AccountTraceStore(@Value("account-trace") String dbName) {

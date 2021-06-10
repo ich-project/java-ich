@@ -11,7 +11,7 @@ import org.ich.common.common.parameter.CommonParameter;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.Sha256Hash;
 import org.ich.core.exception.P2pException;
-import org.ich.protos.Discover.Endpoint;
+import org.ich.core.Discover.Endpoint;
 
 public abstract class Message {
 

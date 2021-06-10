@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.overlay.server.SyncPool;
 import org.ich.common.common.parameter.CommonParameter;
 import org.ich.common.common.utils.ReflectUtils;
@@ -20,13 +20,13 @@ import org.ich.core.net.message.TransactionMessage;
 import org.ich.core.net.peer.Item;
 import org.ich.core.net.peer.PeerConnection;
 import org.ich.core.net.service.AdvService;
-import org.ich.protos.Protocol;
-import org.ich.protos.Protocol.Inventory.InventoryType;
+import org.ich.core.Protocol;
+import org.ich.core.Protocol.Inventory.InventoryType;
 
 //@Ignore
 public class AdvServiceTest {
 
-  protected TronApplicationContext context;
+  protected IchApplicationContext context;
   private AdvService service;
   private PeerConnection peer;
   private SyncPool syncPool;
@@ -38,7 +38,7 @@ public class AdvServiceTest {
   public void init() {
     Args.setParam(new String[]{"--output-directory", "output-directory", "--debug"},
         Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
     service = context.getBean(AdvService.class);
   }
 

@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.ich.common.common.application.TronApplicationContext;
+import org.ich.common.common.application.IchApplicationContext;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.common.common.utils.FileUtil;
 import org.ich.consensus.dpos.DposSlot;
@@ -25,12 +25,12 @@ public class WitnessControllerTest {
   private static DposSlot dposSlot;
   private static ChainBaseManager chainBaseManager;
 
-  private static TronApplicationContext context;
+  private static IchApplicationContext context;
   private static String dbPath = "output_witness_controller_test";
 
   static {
     Args.setParam(new String[]{"-d", dbPath}, Constant.TEST_CONF);
-    context = new TronApplicationContext(DefaultConfig.class);
+    context = new IchApplicationContext(DefaultConfig.class);
   }
 
   ByteString blank = ByteString.copyFrom(new byte[1]);

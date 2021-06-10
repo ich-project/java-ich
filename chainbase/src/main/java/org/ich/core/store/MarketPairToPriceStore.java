@@ -8,7 +8,7 @@ import org.ich.common.common.utils.ByteArray;
 import org.ich.core.capsule.BytesCapsule;
 import org.ich.core.capsule.MarketOrderIdListCapsule;
 import org.ich.core.capsule.utils.MarketUtils;
-import org.ich.core.db.TronStoreWithRevoking;
+import org.ich.core.db.IchStoreWithRevoking;
 
 /**
  * This store is used to store the first price Key of specific token pair
@@ -16,7 +16,7 @@ import org.ich.core.db.TronStoreWithRevoking;
  * Value: sell_id + buy_id + sell_quantity + buy_quantity, use createPairPriceKey
  * */
 @Component
-public class MarketPairToPriceStore extends TronStoreWithRevoking<BytesCapsule> {
+public class MarketPairToPriceStore extends IchStoreWithRevoking<BytesCapsule> {
 
   @Autowired
   protected MarketPairToPriceStore(@Value("market_pair_to_price") String dbName) {

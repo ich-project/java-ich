@@ -1,6 +1,6 @@
 package org.ich.common.common.runtime.vm;
 
-import static org.ich.core.db.TransactionTrace.convertToTronAddress;
+import static org.ich.core.db.TransactionTrace.convertToIchAddress;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,7 +15,7 @@ import org.ich.core.exception.ContractExeException;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.exception.ReceiptCheckErrException;
 import org.ich.core.exception.VMIllegalException;
-import org.ich.protos.Protocol.Transaction;
+import org.ich.core.Protocol.Transaction;
 import stest.ich.wallet.common.client.utils.AbiUtil;
 import stest.ich.wallet.common.client.utils.DataWord;
 
@@ -154,7 +154,7 @@ public class Create2Test extends VMTestBase {
     Assert.assertNull(result.getRuntime().getRuntimeError());
 
     byte[] returnValue = result.getRuntime().getResult().getHReturn();
-    byte[] actualContract = convertToTronAddress(Arrays.copyOfRange(returnValue,
+    byte[] actualContract = convertToIchAddress(Arrays.copyOfRange(returnValue,
         12, 32));
     // bug here, but we should keep it so that we can check consistences before istanbul
     // should be factory address rather than address
@@ -269,7 +269,7 @@ contract A {
     Assert.assertNull(result.getRuntime().getRuntimeError());
 
     byte[] returnValue = result.getRuntime().getResult().getHReturn();
-    byte[] actualContract = convertToTronAddress(Arrays.copyOfRange(returnValue,
+    byte[] actualContract = convertToIchAddress(Arrays.copyOfRange(returnValue,
         12, 32));
     byte[] expectedContract =
         generateContractAddress2(factoryAddress,

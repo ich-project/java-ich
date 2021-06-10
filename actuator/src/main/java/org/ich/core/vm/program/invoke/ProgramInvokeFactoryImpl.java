@@ -31,10 +31,10 @@ import org.ich.core.capsule.ContractCapsule;
 import org.ich.core.exception.ContractValidateException;
 import org.ich.core.vm.program.Program;
 import org.ich.core.vm.repository.Repository;
-import org.ich.protos.Protocol.Block;
-import org.ich.protos.Protocol.Transaction;
-import org.ich.protos.contract.SmartContractOuterClass.CreateSmartContract;
-import org.ich.protos.contract.SmartContractOuterClass.TriggerSmartContract;
+import org.ich.core.Protocol.Block;
+import org.ich.core.Protocol.Transaction;
+import org.ich.core.contract.SmartContractOuterClass.CreateSmartContract;
+import org.ich.core.contract.SmartContractOuterClass.TriggerSmartContract;
 
 
 /**

@@ -13,7 +13,7 @@ import org.ich.common.common.runtime.TvmTestUtils;
 import org.ich.common.common.utils.ByteArray;
 import org.ich.core.Wallet;
 import org.ich.core.vm.LogInfoTriggerParser;
-import org.ich.protos.contract.SmartContractOuterClass.SmartContract.ABI;
+import org.ich.core.contract.SmartContractOuterClass.SmartContract.ABI;
 
 public class EventParserTest {
 
